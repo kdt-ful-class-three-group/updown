@@ -30,10 +30,10 @@ main {
 #play {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  width: 550px;
-  height: 550px;
+  width: 150px;
+  height: 150px;
 }
 
 a:nth-of-type(1) button {
@@ -92,7 +92,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #757575;
   cursor: pointer;
   transition: border-color 0.25s;
 }

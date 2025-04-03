@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './App.css'
 import { Main } from './components/Main'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { SelectMode } from './components/SelectMode';
