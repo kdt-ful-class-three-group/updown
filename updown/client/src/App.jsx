@@ -1,17 +1,19 @@
 import { useState } from 'react'
+import ReactDOM from 'react-dom/client';
 import './App.css'
 import { Button } from './components/Button.jsx';
-import {Input} from './components/Input.jsx';
-import {Main} from './components/Main.jsx';
 import {Heading} from './components/Tag.jsx';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import {root} from './main.jsx'
 
 const Easy = () => {
-    return (
-        <div>
-          <Heading number="1" children={"안녕하세요. Easy 모드입니다."}/>
-        </div>
-      );
+
+    // return (
+    //     <div>
+    //         <Heading number="1" children={"안녕하세요. Easy 모드입니다."}/>  
+    //     </div>
+    //   );
+    root.render(<Heading number="1" children={"안녕하세요. Easy 모드입니다."}/>)
 }
 
 const Normal = () => {
@@ -36,33 +38,37 @@ const Head = () => {
         )
 }
 
+// 첫 화면에서 모드를 고르는 페이지
 const MainPage = () => {
     return(
-        <>
-        <nav>
-            <Link to="/easy">
-                <Button btnName="easy"/>
-            </Link>
-            
-            <Link to="/normal">
-                <Button btnName="normal"/>
-            </Link>
-            
-            <Link to="/hard">
-                <Button btnName="hard"/>
-            </Link>
-        </nav>
-        {/* <Head />
-            <Link to="/easy"><Button btnName="easy" onClick={<Easy />} /></Link>
-            <Link to="/normal"><Button btnName="normal" onClick={<Normal />} /></Link>
-            <Link to="/hard"><Button btnName="hard" onClick={<Hard />} /></Link>
-        <Routes>
-          <Route path="/easy" element={<Easy />} />
-          <Route path="/normal" element={<Normal />} />
-          <Route path="/hard" element={<Hard />} />
-        </Routes> */}
 
-        </>
+        
+        <Router>
+            <Routes>
+                <Route path="/" element={
+                            <>
+                            <nav>
+                                <Link to="/easy">
+                                    <Button btnName="easy"/>
+                                </Link>
+                                
+                                <Link to="/normal">
+                                    <Button btnName="normal"/>
+                                </Link>
+                                
+                                <Link to="/hard">
+                                    <Button btnName="hard"/>
+                                </Link>
+                            </nav>
+                            </>
+                } />
+                <Route path="/easy" element={<Easy />} />
+                <Route path="/normal" element={<Normal />} />
+               <Route path="/hard" element={<Hard />} />
+            </Routes>
+
+            </Router>
+
     )
 }
 
@@ -72,28 +78,7 @@ function App() {
     return (
         <>
             <MainPage />
-            <Routes>
-                <Route path="/easy" element={<Easy />} />
-                <Route path="/normal" element={<Normal />} />
-               <Route path="/hard" element={<Hard />} />
-            </Routes>
         </>
-    //     <>
-        
-    // <Heading number="1" children="메인 화면에 오신 것을 환영합니다."/>
-
-    // <Router>
-    //         <Link to="/easy"><Button btnName="easy" onClick={<Easy />} /></Link>
-    //         <Link to="/normal"><Button btnName="normal" onClick={<Normal />} /></Link>
-    //         <Link to="/hard"><Button btnName="hard" onClick={<Hard />} /></Link>
-    //     <Routes>
-    //       <Route path="/easy" element={<Easy />} />
-    //       <Route path="/normal" element={<Normal />} />
-    //       <Route path="/hard" element={<Hard />} />
-    //     </Routes>
-    // </Router>
-
-    //     </>
     )
 }
 

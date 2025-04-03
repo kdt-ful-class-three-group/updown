@@ -1,5 +1,5 @@
 import React from "react";
 
-export const Button = ({ btnName, Click, type = "button" }) => {
-  return <button type={type} Click>{btnName}</button>
+export const Button = ({ btnName, type = "button" }) => {
+  return <button type={type}>{btnName}</button>
 }
