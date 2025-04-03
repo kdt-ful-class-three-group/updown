@@ -4,9 +4,9 @@ export const Paragraph = ({ children, className = ""}) => {
   return <p className={`${className}`}>{children}</p>;
 }
 
-export const Heading = ({ number=1, children }) => {
+export const Heading = ({ number=1, content }) => {
   const Tag = `h${number}`
-  return <Tag>{children}</Tag>
+  return <Tag>{content}</Tag>
 }
 
 export const Div = ({children, className = "",id}) => {
