@@ -1,0 +1,20 @@
+{
+  "name": "updown",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kdt-ful-class-three-group/updown.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kdt-ful-class-three-group/updown.issues"
+  },
+  "homepage": "https://github.com/kdt-ful-class-three-group/updown#readme",
+  "description": "프론트 ``` cd poopDb/ client/ npm install npm run dev ``` 포트 5137에서 열리는지 확인"
+}
