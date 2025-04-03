@@ -1,3 +1,25 @@
+#root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5%;
+}
+
+main button:nth-of-type(1) {
+  background-color: rgb(134, 134, 134);
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -48,6 +70,7 @@ button {
 }
 button:hover {
   border-color: #646cff;
+  opacity: 0.5;
 }
 button:focus,
 button:focus-visible {
