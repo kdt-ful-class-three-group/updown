@@ -3,14 +3,16 @@ import React, { useMemo, useRef, useState, useEffect} from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useMessage } from '../context/MessageContext';
 
-// 태그 컴포넌트들
-import { Div, Heading, Paragraph } from '../components/Tag';
-import { Button } from '../components/Button';
-import { Input } from '../components/Input';
+// 레벨별 설정값.
+import { levelData } from '../config/levelData';
 
 // 정답 맞추는 로직 함수
 import { InputNum } from '../utils/InputNum';
 
+// 태그 컴포넌트들
+import { Div, Heading } from '../components/Tag';
+import { Button } from '../components/Button';
+import { Input } from '../components/Input';
 
 //*  이지,노말,하드 모두 한 템플릿(GamePage)에서 작동
 
@@ -25,15 +27,11 @@ export function GamePage() {
   // useMessage는 MessageContext에서 만든 커스텀 훅
   const { message, setMessage } = useMessage();
   // useMemo를 통해 level에 따라 maxNum을 설정
-  const maxNum = useMemo(() => {   
-    // level이 normal일 경우
-    if (level === 'normal') return 50;
-    // level이 hard일 경우
-    if (level === 'hard') return 100;
-    // easy일 경우 (default)
-    return 10;
-  }, [level]);
-
+  
+  // levelData에서 level에 해당하는 설정값을 가져옴
+  const setting = useMemo(() => levelData[level], [level]);
+  const maxNum = setting.max;
+  const [count, setCount] = useState(setting.count);
   
   //! randomNum을 한 번만 초기화
   const randomNum = useRef(null);
@@ -72,9 +70,10 @@ export function GamePage() {
               value: inputValue,
               max: maxNum,
               answer: randomNum.current,
-              // useMessage의 setMessage
               setMessage,
-              navigate
+              navigate,
+              count,
+              setCount
             })
           }
         />

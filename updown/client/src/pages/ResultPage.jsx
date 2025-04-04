@@ -1,16 +1,22 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { Div,Heading } from '../components/Tag';
 
 //* ResultPage 컴포넌트 - 결과 페이지
 //* 성공, 실패 결과에 따라 페이지 이동할 예정 - 지금은 성공일 때만 작동
 export function ResultPage() {
+  const location = useLocation();
   const navigate = useNavigate();
+
+  const queryParams = new URLSearchParams(location.search);
+  const status = queryParams.get('status'); 
+
+  const isSuccess = status === 'success';
 
   return (
       <Div>
-        <Heading number={1} content="성공" />
+        <Heading number={1} content={isSuccess ? '성공' : '실패'} />
         <Div>
           {/* 페이지 이동 버튼들 */}
           {/* navigate 경로를 '/' 직접설정할 수 있지만 -숫자 이렇게 쓰면 숫자만큼 뒤로 갈 수 있음.
