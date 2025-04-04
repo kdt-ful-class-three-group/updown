@@ -16,7 +16,7 @@ export function Provider({ children }) {
   );
 }
 
-//* 4. Context를 사용하기 위한 커스텀 훅
+//* 4. Context를 사용하기 위한 커스텀 훅 - useMessage
 export function useMessage() {
   return useContext(Context);
 }

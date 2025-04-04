@@ -5,7 +5,7 @@
 // * answer: 정답 숫자
 // * setMessage: 메시지를 설정하는 함수
 
-export function GuessNum({ guess, answer, setMessage }) {
+export function GuessNum({ guess, answer, setMessage, navigate }) {
   if (guess > answer) {
     // 사용자가 입력한 숫자가 정답보다 큰 경우
     console.log("DOWN!");
@@ -17,7 +17,7 @@ export function GuessNum({ guess, answer, setMessage }) {
     } else {
       // 정답 맞춘 경우
       console.log("OKAY!");
-      setMessage("OKAY!");
+    navigate('/result');
 
   }
 }

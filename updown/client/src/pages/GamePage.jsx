@@ -1,6 +1,6 @@
 // 리액트, 훅
 import React, { useMemo, useRef, useState, useEffect} from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useMessage } from '../context/MessageContext';
 
 // 태그 컴포넌트들
@@ -17,6 +17,8 @@ import { InputNum } from '../utils/InputNum';
 export function GamePage() {
   // useParams를 통해 url에서 level(easy, normal, hard) 가져오기
   const { level } = useParams();
+
+  const navigate = useNavigate();
   // useState를 통해 input값을 관리
   const [inputValue, setInputValue] = useState('');
   // useMessage를 통해 message값을 관리
@@ -35,7 +37,7 @@ export function GamePage() {
   
   //! randomNum을 한 번만 초기화
   const randomNum = useRef(null);
-  
+  // useEffect를 통해 randomNum을 초기화
   useEffect(() => {
     // 시작할 때 콘솔이 두번찍히는 이유는 main.jsx에  <StrictMode>가 있기 때문. 두번 렌더링되서 그런것
     // StrictMode를 제거하면 한 번만 렌더링됨 or if (randomNum.current === null) 조건을 추가해서 한 번만 렌더링되게 할 수 있음
@@ -55,8 +57,7 @@ export function GamePage() {
   return (
     <Div>
       <Div>
-        <Heading number={1} content="업다운 게임" />
-        <Paragraph>{level}</Paragraph>
+        <Heading number={1} content={level} />
       </Div>
       <Div>
         {/* UP,DOWN 메세지가 들어갈 컨테이너  */}
@@ -72,7 +73,8 @@ export function GamePage() {
               max: maxNum,
               answer: randomNum.current,
               // useMessage의 setMessage
-              setMessage
+              setMessage,
+              navigate
             })
           }
         />

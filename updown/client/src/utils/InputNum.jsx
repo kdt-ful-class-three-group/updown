@@ -5,7 +5,7 @@ import { GuessNum } from "./GuessNum";
 // * value: 사용자가 입력한 값
 // * max: 최대 숫자 (레벨에 따라 다름)
 // * answer: 정답 숫자 (랜덤으로 생성된 숫자)
-export function InputNum({ value, max, answer, setMessage }) {
+export function InputNum({ value, max, answer, setMessage, navigate }) {
   // trim() 메서드는 문자열의 양쪽 공백을 제거 , 사용자가 입력한 값이 공백일 경우를 방지.
   const num = value.trim();
 
@@ -27,6 +27,6 @@ export function InputNum({ value, max, answer, setMessage }) {
   }
   
   // guess는 사용자가 입력한 숫자, answer는 랜덤으로 생성된 숫자
-  GuessNum({ guess, answer, setMessage });
+  GuessNum({ guess, answer, setMessage, navigate });
 }
 
