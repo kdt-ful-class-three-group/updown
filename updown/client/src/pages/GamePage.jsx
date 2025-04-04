@@ -46,6 +46,11 @@ export function GamePage() {
     }
   }, [maxNum]);
 
+  // 다시하기를 했을 때 up,down 메세지가 그대로 남아있어 useEffect를 사용하여 message를 초기화
+    useEffect(() => {
+    setMessage('');
+    }, [])
+  
   // inputHandler는 input값을 관리하는 함수
   const inputHandler = (e) => {
     setInputValue(e.target.value);
