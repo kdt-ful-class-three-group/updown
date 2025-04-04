@@ -30,6 +30,11 @@ export function InputNum({
     alert("숫자만 입력해주세요");
     return;
   }
+  // 사용자가 입력한 값이 소수점인 경우를 체크
+  if (num.includes('.', 0)) {
+    alert("소수점은 입력할 수 없습니다");
+    return;
+  }
   // 사용자가 입력한 값이 숫자일 경우, Number() 메서드를 사용하여 숫자로 변환
   // guess는 1~max 사이의 숫자여야 함.
   const guess = Number(num);

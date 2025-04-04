@@ -7,6 +7,8 @@ import { ModePage } from "./pages/ModePage";
 import { GamePage } from "./pages/GamePage";
 import { ResultPage } from "./pages/ResultPage";
 
+import "./App.css";
+
 // 라우터 경로설정
 function App() {
   return (
