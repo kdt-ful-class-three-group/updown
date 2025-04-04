@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { Div,Heading } from '../components/Tag';
 
+//* ResultPage 컴포넌트 - 결과 페이지
+//* 성공, 실패 결과에 따라 페이지 이동할 예정 - 지금은 성공일 때만 작동
 export function ResultPage() {
-
   const navigate = useNavigate();
 
   return (
-    <Div>
       <Div>
         <Heading number={1} content="성공" />
         <Div>
@@ -20,6 +20,5 @@ export function ResultPage() {
           <Button btnName={'홈'} onClick={() => navigate(-3)}/>
         </Div>
       </Div>
-    </Div>
   )
 }
