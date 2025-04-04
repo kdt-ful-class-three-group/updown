@@ -37,9 +37,18 @@ export function InputNum({
     alert(`1~${max} 사이 숫자를 입력하세요`);
     return;
   }
-  
+
+
+  // 정답일 경우 조건은 원래 GuessNum에서 처리했지만 기회가 0이될때 정답일경우에도 실패처리가 되므로 카운트가 0이 되기전에 미리 처리해줌
+  if (guess === answer) {
+    // 사용자가 입력한 값이 정답인 경우
+    console.log("OKAY!");
+    navigate('/result?status=success');
+    return;
+  }
   // 사용자가 입력한 값이 유효한 경우, 남은 기회를 줄이고 GuessNum 함수를 호출
   const newCount = count - 1;
+
   setCount(newCount);
   console.log(`남은 기회: ${newCount}`);
 
@@ -49,6 +58,6 @@ export function InputNum({
   }
 
   // guess는 사용자가 입력한 숫자, answer는 랜덤으로 생성된 숫자
-  GuessNum({ guess, answer, setMessage, navigate });
+  GuessNum({ guess, answer, setMessage });
 }
 

@@ -4,15 +4,11 @@
 // * guess: 사용자가 입력한 숫자
 // * answer: 정답 숫자
 // * setMessage: 메시지를 설정하는 함수
-// * navigate: 페이지 이동을 위한 함수
-// * count: 남은 기회
-// * setCount: 남은 기회를 설정하는 함수
 
 export function GuessNum({
   guess,
   answer,
   setMessage,
-  navigate,
  }) {
   
   if (guess > answer) {
@@ -25,10 +21,5 @@ export function GuessNum({
       console.log("UP!");
     setMessage("UP");
     return;
-    } else {
-      // 정답 맞춘 경우
-      console.log("OKAY!");
-    navigate('/result?status=success');
-    return
+    } 
   }
-}
