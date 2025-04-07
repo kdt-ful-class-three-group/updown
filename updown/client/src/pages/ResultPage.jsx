@@ -19,14 +19,20 @@ export function ResultPage() {
 
   const successOrFail = status === 'success';
 
+  const moveEvent = 
+    <>
+      <Button btnName={'다시하기'} onClick={() => navigate(-1)}/>
+      <Button btnName={'모드선택'} onClick={() => navigate(-2)}/>
+      <Button btnName={'홈'} onClick={() => navigate(-3)}/>
+    </>    
+
+
   return (
       <Div>
         <Heading number={1} content={successOrFail ? '성공' : '실패'} />
         <Div children={successOrFail ? 
           <>
-          <Button btnName={'다시하기'} onClick={() => navigate(-1)}/>
-          <Button btnName={'모드선택'} onClick={() => navigate(-2)}/>
-          <Button btnName={'홈'} onClick={() => navigate(-3)}/>
+          {moveEvent}
           <Button btnName={'기록하기'} onClick={() => { 
               let nickName = prompt("닉네임을 입력하세요", setNickName(''));
               if(nickName) {
@@ -37,11 +43,7 @@ export function ResultPage() {
           </>
           
           : 
-          <>
-          <Button btnName={'다시하기'} onClick={() => navigate(-1)}/>
-          <Button btnName={'모드선택'} onClick={() => navigate(-2)}/>
-          <Button btnName={'홈'} onClick={() => navigate(-3)}/>
-          </>
+          moveEvent
           } />
           {/* 페이지 이동 버튼들 */}
           {/* navigate 경로를 '/' 직접설정할 수 있지만 -숫자 이렇게 쓰면 숫자만큼 뒤로 갈 수 있음.
@@ -51,3 +53,4 @@ export function ResultPage() {
       // </Div>
   )
 }
+
