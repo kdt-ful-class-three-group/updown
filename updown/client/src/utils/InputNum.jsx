@@ -47,14 +47,19 @@ export function InputNum({
     alert(`1~${max} 사이 숫자를 입력하세요`);
     return;
   }
-  
+
+
+  // * 위의 유효성 검사를 통과 하면, history에 guess값을 집어 넣어준다. (.push의 형태)
   setHistory((history) => [...history, guess]);
+
   // 정답일 경우 조건은 원래 GuessNum에서 처리했지만 기회가 0이될때 정답일경우에도 실패처리가 되므로 카운트가 0이 되기전에 미리 처리해줌
   if (guess === answer) {
     // 사용자가 입력한 값이 정답인 경우
     console.log("OKAY!");
     // setHistory((history) => [...history, guess]);
     // navigate(`/result?status=success&history=${history}`);
+
+    // * status의 값을 success로 변경
     setStatus("success");
     return;
   }
@@ -67,6 +72,8 @@ export function InputNum({
   if (newCount <= 0) {
     // setHistory((history) => [...history, guess]);
       // navigate(`/result?status=fail&history=${history}`);
+
+      // * status의 값을 fail로 변경
       setStatus("fail");
     return;
   }
