@@ -18,7 +18,7 @@ export function GuessNum({
     return;
     } else if (guess < answer) {
       // 사용자가 입력한 숫자가 정답보다 작은 경우
-      console.log("UP!");
+    console.log("UP!");
     setMessage("UP");
     return;
     } 

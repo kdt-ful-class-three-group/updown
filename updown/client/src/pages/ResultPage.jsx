@@ -15,6 +15,8 @@ export function ResultPage() {
   // location 뒤에 search는 ?status=success 이런식으로 쿼리스트링을 가져옴
   const queryParams = new URLSearchParams(location.search);
   const status = queryParams.get('status'); 
+  const history = queryParams.get('history').split(',').map(Number); // 문자열을 숫자로 변환 
+
   const [nickName, setNickName] = useState('');
 
   const successOrFail = status === 'success';
@@ -36,14 +38,30 @@ export function ResultPage() {
           <Button btnName={'기록하기'} onClick={() => { 
               let nickName = prompt("닉네임을 입력하세요", setNickName(''));
               if(nickName) {
-              console.log(nickName);
+              console.log(`닉네임 : ${nickName}`);
               navigate(-3);
               }
           }}/> 
+                <Div>
+                  <p>이전에 입력한 숫자</p>
+                  <p>{history[0]}</p>
+                  <p>{history[1]}</p>
+                  <p>{history[2]}</p>
+                  <p>{history[3]}</p>
+                </Div>
           </>
           
           : 
-          moveEvent
+          <>
+          {moveEvent}
+                <Div>
+                  <p>이전에 입력한 숫자</p>
+                  <p>{history[0]}</p>
+                  <p>{history[1]}</p>
+                  <p>{history[2]}</p>
+                  <p>{history[3]}</p>
+                </Div>
+          </>
           } />
           {/* 페이지 이동 버튼들 */}
           {/* navigate 경로를 '/' 직접설정할 수 있지만 -숫자 이렇게 쓰면 숫자만큼 뒤로 갈 수 있음.

@@ -32,7 +32,10 @@ export function GamePage() {
   const setting = useMemo(() => levelData[level], [level]);
   const maxNum = setting.max;
   const [count, setCount] = useState(setting.count);
-  
+  const [history, setHistory] = useState([]);
+  const [status, setStatus] = useState(null);
+
+
   //! randomNum을 한 번만 초기화
   const randomNum = useRef(null);
   // useEffect를 통해 randomNum을 초기화
@@ -50,7 +53,13 @@ export function GamePage() {
     useEffect(() => {
     setMessage('');
     }, [])
-  
+
+    useEffect(() => {
+      if(status !== null) {
+      navigate(`/result?status=${status}&history=${history}`);
+      }
+    }, [status, history])
+
   // inputHandler는 input값을 관리하는 함수
   const inputHandler = (e) => {
     setInputValue(e.target.value);
@@ -78,10 +87,21 @@ export function GamePage() {
               setMessage,
               navigate,
               count,
-              setCount
+              setCount,
+              history,
+              setHistory,
+              status,
+              setStatus
             })
           }
         />
+      </Div>
+      <Div>
+        <p>이전에 입력한 숫자</p>
+        <p>{history[0]}</p>
+        <p>{history[1]}</p>
+        <p>{history[2]}</p>
+        <p>{history[3]}</p>
       </Div>
       </Div>
       

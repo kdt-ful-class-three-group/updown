@@ -15,7 +15,11 @@ export function InputNum({
   setMessage,
   navigate,
   count,
-  setCount
+  setCount,
+  history, 
+  setHistory,
+  status,
+  setStatus
   }) {
   
   // trim() 메서드는 문자열의 양쪽 공백을 제거 , 사용자가 입력한 값이 공백일 경우를 방지.
@@ -37,28 +41,33 @@ export function InputNum({
   }
   // 사용자가 입력한 값이 숫자일 경우, Number() 메서드를 사용하여 숫자로 변환
   // guess는 1~max 사이의 숫자여야 함.
+
   const guess = Number(num);
   if (guess < 1 || guess > max) {
     alert(`1~${max} 사이 숫자를 입력하세요`);
     return;
   }
-
-
+  
+  setHistory((history) => [...history, guess]);
   // 정답일 경우 조건은 원래 GuessNum에서 처리했지만 기회가 0이될때 정답일경우에도 실패처리가 되므로 카운트가 0이 되기전에 미리 처리해줌
   if (guess === answer) {
     // 사용자가 입력한 값이 정답인 경우
     console.log("OKAY!");
-    navigate('/result?status=success');
+    // setHistory((history) => [...history, guess]);
+    // navigate(`/result?status=success&history=${history}`);
+    setStatus("success");
     return;
   }
   // 사용자가 입력한 값이 유효한 경우, 남은 기회를 줄이고 GuessNum 함수를 호출
   const newCount = count - 1;
 
   setCount(newCount);
+  
   console.log(`남은 기회: ${newCount}`);
-
   if (newCount <= 0) {
-    navigate('/result?status=fail');
+    // setHistory((history) => [...history, guess]);
+      // navigate(`/result?status=fail&history=${history}`);
+      setStatus("fail");
     return;
   }
 
