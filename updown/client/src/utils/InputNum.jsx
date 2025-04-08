@@ -39,12 +39,18 @@ export function InputNum({
     alert("소수점은 입력할 수 없습니다");
     return;
   }
+
   // 사용자가 입력한 값이 숫자일 경우, Number() 메서드를 사용하여 숫자로 변환
   // guess는 1~max 사이의 숫자여야 함.
 
   const guess = Number(num);
   if (guess < 1 || guess > max) {
     alert(`1~${max} 사이 숫자를 입력하세요`);
+    return;
+  }
+
+  if(num == history[0] || num == history[1] || num == history[2] || num == history[3]) {
+    alert("이미 입력한 숫자입니다.");
     return;
   }
 
