@@ -35,7 +35,6 @@ export function GamePage() {
   // * history와 status는 바뀔 값들이기에 useState를 통해 관리
   const [history, setHistory] = useState([]);
   const [status, setStatus] = useState(null);
-  const [countBox, setCountBox] = useState(document.querySelector(".countBox"));
 
 
   //! randomNum을 한 번만 초기화
