@@ -1,35 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 
+// 템플릿이 들어가있는 페이지들
+import { StartPage } from "./pages/StartPage";
+import { ModePage } from "./pages/ModePage";
+import { GamePage } from "./pages/GamePage";
+import { ResultPage } from "./pages/ResultPage";
+
+import "./App.css";
+
+// 라우터 경로설정
 function App() {
-    const [count, setCount] = useState(0)
-
-    return (
-        <>
-            <div>
-                <a href="https://vite.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://react.dev" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.jsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
-        </>
-    )
+  return (
+    // <Routes> 컴포넌트는 react-router-dom에서 제공하는 라우팅 기능을 사용하기 위한 컴포넌트 그리고 각 경로에 해당하는 컴포넌트를 지정
+    // path는 URL 경로를 지정
+    <Routes>
+      <Route path="/" element={<StartPage />} />
+      <Route path="/mode" element={<ModePage />} />
+      <Route path="/:level" element={<GamePage />} />
+      <Route path="/result" element={<ResultPage />} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
