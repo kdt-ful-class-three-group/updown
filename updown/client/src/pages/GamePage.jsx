@@ -35,6 +35,7 @@ export function GamePage() {
   // * history와 status는 바뀔 값들이기에 useState를 통해 관리
   const [history, setHistory] = useState([]);
   const [status, setStatus] = useState(null);
+  const [countBox, setCountBox] = useState(document.querySelector(".countBox"));
 
 
   //! randomNum을 한 번만 초기화
@@ -79,6 +80,7 @@ export function GamePage() {
       <Div>
         {/* UP,DOWN 메세지가 들어갈 컨테이너  */}
         <Heading number={1} content={message}/>
+        <Div className = {count ===1 ? "color-red" : ""} children={ `남은기회 : ${count}` }/>
       </Div>
       <Div>
         <Input value={inputValue} onChange={inputHandler} />

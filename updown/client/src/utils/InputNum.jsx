@@ -19,7 +19,7 @@ export function InputNum({
   history, 
   setHistory,
   status,
-  setStatus
+  setStatus,
   }) {
   
   // trim() 메서드는 문자열의 양쪽 공백을 제거 , 사용자가 입력한 값이 공백일 경우를 방지.
