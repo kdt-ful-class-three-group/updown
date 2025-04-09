@@ -12,9 +12,9 @@ export const Paragraph = ({ children, className = ""}) => {
 //* Heading 컴포넌트
 //* - number: Heading의 레벨 (1~6)
 //* - content: Heading에 들어갈 내용
-export const Heading = ({ number=1, content }) => {
+export const Heading = ({ number=1, children }) => {
   const Tag = `h${number}`
-  return <Tag>{content}</Tag>
+  return <Tag>{children}</Tag>
 }
 
 //* Div 컴포넌트

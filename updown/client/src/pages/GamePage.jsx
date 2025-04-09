@@ -29,6 +29,7 @@ export function GamePage() {
   // useMemo를 통해 level에 따라 maxNum을 설정
   
   // levelData에서 level에 해당하는 설정값을 가져옴
+  //
   const setting = useMemo(() => levelData[level], [level]);
   const maxNum = setting.max;
   const [count, setCount] = useState(setting.count);
@@ -60,11 +61,11 @@ export function GamePage() {
   return (
     <Div>
       <Div>
-        <Heading number={1} content={level} />
+        <Heading number={1} children={level} />
       </Div>
       <Div>
         {/* UP,DOWN 메세지가 들어갈 컨테이너  */}
-        <Heading number={1} content={message}/>
+        <Heading number={1} children={message}/>
       </Div>
       <Div>
         <Input value={inputValue} onChange={inputHandler} />
@@ -83,7 +84,7 @@ export function GamePage() {
           }
         />
       </Div>
-      </Div>
+    </Div>
       
   );
 }

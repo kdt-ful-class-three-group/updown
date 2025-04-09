@@ -19,7 +19,7 @@ export function ResultPage() {
 
   return (
       <Div>
-        <Heading number={1} content={successOrFail ? '성공' : '실패'} />
+        <Heading number={1} children={successOrFail ? '성공' : '실패'} />
         <Div>
           {/* 페이지 이동 버튼들 */}
           {/* navigate 경로를 '/' 직접설정할 수 있지만 -숫자 이렇게 쓰면 숫자만큼 뒤로 갈 수 있음.
