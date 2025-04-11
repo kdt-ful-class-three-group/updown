@@ -16,4 +16,5 @@ export const Input = ({type = "text", placeholder = "", value, onChange, id, cla
       onChange={onChange}
       className={`${className}`}
       id={id}
+      required
     />
