@@ -12,7 +12,7 @@ export function StartPage() {
 
   return (
     <Div>
-      <Button btnName={'START'} onClick={() => navigate('/mode')}/>
+      <Button btnName={'START'} onClick={() => navigate('/login')}/>
     </Div>
   );
 }

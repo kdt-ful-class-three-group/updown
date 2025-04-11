@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 // 템플릿이 들어가있는 페이지들
 import { StartPage } from "./pages/StartPage";
+import { LoginPage } from "./pages/loginPage";
 import { ModePage } from "./pages/ModePage";
 import { GamePage } from "./pages/GamePage";
 import { ResultPage } from "./pages/ResultPage";
@@ -19,9 +20,10 @@ function App() {
     <Provider>
       <Routes>
         <Route path="/" element={<StartPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/mode" element={<ModePage />} />
-          <Route path="/:level" element={<GamePage />} />
-      <Route path="/result" element={<ResultPage />} />
+        <Route path="/:level" element={<GamePage />} />
+        <Route path="/result" element={<ResultPage />} />
       </Routes>
     </Provider>
       
