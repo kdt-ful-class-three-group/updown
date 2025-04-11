@@ -6,19 +6,21 @@ import { GuessNum } from "./GuessNum";
 // * max: 최대 숫자 (레벨에 따라 다름)
 // * answer: 정답 숫자 (랜덤으로 생성된 숫자)
 // * setMessage: 메시지를 설정하는 함수
-// * navigate: 페이지 이동을 위한 함수
+//* count: 남은 기회
+//* setCount: 남은 기회를 설정하는 함수
+//* history: 이전에 입력한 숫자
+//* setHistory: 이전에 입력한 숫자를 설정하는 함수
+//* setStatus: 상태를 설정하는 함수 (success, fail)
 
 export function InputNum({
   value,
   max,
   answer,
   setMessage,
-  navigate,
   count,
   setCount,
   history, 
   setHistory,
-  status,
   setStatus,
   }) {
   

@@ -5,7 +5,7 @@ import React from "react";
 //* - onClick: 버튼 클릭 시 실행되는 함수
 //* - type: 버튼 타입 (default: button)
 
-export const Button = ({ btnName, onClick, type = "button" }) => {
+export const Button = ({ btnName, onClick, type = "button", id}) => {
   return <button
     type={type}
     onClick={onClick}>

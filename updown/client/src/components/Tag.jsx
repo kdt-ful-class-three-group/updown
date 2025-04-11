@@ -21,6 +21,6 @@ export const Heading = ({ number=1, content }) => {
 //* - children: Div에 들어갈 내용
 //* - className: Div에 추가할 클래스 이름
 //* - id: Div의 id
-export const Div = ({children, className = "",id}) => {
-  return <div className={`${className}`}id={id}>{children}</div>
+export const Div = ({children, className = "", id}) => {
+  return <div className={`${className}`} id={id}>{children}</div>
 }

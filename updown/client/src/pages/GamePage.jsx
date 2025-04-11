@@ -91,12 +91,10 @@ export function GamePage() {
               max: maxNum,
               answer: randomNum.current,
               setMessage,
-              navigate,
               count,
               setCount,
               history,
               setHistory,
-              status,
               setStatus
             })
           }

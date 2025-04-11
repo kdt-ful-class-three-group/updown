@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
-import { Div, Heading } from "../components/Tag";
+import { Div } from "../components/Tag";
 
 //* ModePage 컴포넌트 - 모드 선택 페이지
 //* EASY, NORMAL, HARD 모드 선택 후 각 페이지로 이동
