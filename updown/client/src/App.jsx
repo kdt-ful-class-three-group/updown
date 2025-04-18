@@ -8,7 +8,7 @@ import { ModePage } from "./pages/ModePage";
 import { GamePage } from "./pages/GamePage";
 import { ResultPage } from "./pages/ResultPage";
 import { Provider } from './context/MessageContext';
-import { SignUpPage } from "./pages/signUpPage";
+import { SignUpPage } from "./pages/SignUpPage";
 
 
 import "./App.css";

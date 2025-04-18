@@ -13,27 +13,7 @@ export function LoginPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const input = document.querySelectorAll('input');
-  
-  //   const loginData = []
-  
-  //   try {
-  //     const response = await fetch("http://localhost:8003/login", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(userData),
-  //     });
-  
-  //     const data = await response.json();
-  //     console.log(data);
-  
-  //   // 로그인 처리 후 /mode 페이지로 이동
-  //   navigate("/mode");
-  //   } catch (error) {
-  //     console.log(`${error} 에러발생`);
-  //   }
-  // };
+    
   const userData = {
     user_id: input[0].value,
     password: input[1].value,
