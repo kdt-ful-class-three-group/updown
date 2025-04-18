@@ -9,13 +9,38 @@ import { Button } from "../components/Button";
 //* - 로그인 후 /mode 페이지로 이동
 export function SignUpPage() {
   const navigate = useNavigate();
+  // * 데이터를 보내는 코드
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // 로그인 처리 후 /mode 페이지로 이동
-    navigate("/login");
+    const input = document.querySelectorAll('input');
+  
+    const userData = {
+      user_id: input[0].value,
+      password: input[1].value,
+      name: input[2].value,
+      e_mail: input[3].value
+    };
+  
+    try {
+      const response = await fetch("http://localhost:8003/signUp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+  
+      const data = await response.json();
+      console.log(data);
+  
+      // 성공 시 로그인 페이지로 이동
+      navigate('/login');
+    } catch (error) {
+      console.log(`${error} 에러발생`);
+    }
   };
-
+  
   return (
     <>
     <Div className="login-form">
