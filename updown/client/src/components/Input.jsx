@@ -8,4 +8,5 @@ export const Input = ({type = "text", placeholder = "", value, id, className = "
       value={value}
       className={`${className}`}
       id={id}
+      required
     />
