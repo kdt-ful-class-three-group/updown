@@ -3,10 +3,11 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import { Button } from './components/Button'
 import './App.css'
-import { SignUp, StartPage } from './Pages/SignUp'
+import { SignUp } from './Pages/SignUp'
 import { GameEnd } from './Pages/GameEnd'
 import { GamePage } from './pages/GamePage'
 import { Login } from './Pages/Login'
+import { StartPage } from './Pages/StartPage'
 
 
 function App() {
