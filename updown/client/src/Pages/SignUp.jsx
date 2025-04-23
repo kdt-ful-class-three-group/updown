@@ -11,7 +11,7 @@ export const SignUp = () => {
   const [email, setEmailValue] = useState('');
 
   const fetchGet = () =>{
-    fetch("http://localhost:8003/login", {
+    fetch("http://localhost:8003/SignUp", {
       method: "POST",
       headers: { 
         "Content-Type": "application/json",
