@@ -1,3 +1,4 @@
+import { useState } from "react";
 import React from "react";
 import { Form } from "../components/form";
 import { Div } from "../components/Tag";
@@ -18,7 +19,7 @@ export function LoginPage() {
   return (
     <Div className="login-form">
       <Heading number={1} content={"로그인"} />
-      <Form onSubmit={handleSubmit} />
+      <Form onSubmit={handleSubmit} method='post' />
     </Div>
   );
 }

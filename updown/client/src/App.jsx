@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 // 템플릿이 들어가있는 페이지들
 import { StartPage } from "./pages/StartPage";
-import { LoginPage } from "./pages/loginPage";
+import { LoginPage } from "./pages/LoginPage";
 import { ModePage } from "./pages/ModePage";
 import { GamePage } from "./pages/GamePage";
 import { ResultPage } from "./pages/ResultPage";
