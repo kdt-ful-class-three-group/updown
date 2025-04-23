@@ -17,28 +17,31 @@ export const SignUp = () => {
     email: email
   };
   
-   const onClickBtn = () => {
+  const onClickBtn = async () => {
     if (id === "" || password === "" || name === "" || email === "") {
       alert("모든 필드를 입력해주세요.");
       return;
     }
-    else {
 
-      fetch("http://localhost:8003/signup", {
+    try {
+      const res = await fetch("http://localhost:8003/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userData }),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((err) => console.log(`${err} 에러발생`));
+        body: JSON.stringify(userData),
+      });
+
+      const data = await res.json();
+      console.log(data);
+
       alert("가입이 완료되었습니다.");
-    
-      navigate('/login')
+      navigate('/login');
+
+    } catch (err) {
+      console.log(`${err} 에러발생`);
     }
-  }
+  };
 
   return <>
     <h1>회원가입</h1>

@@ -5,8 +5,8 @@ import { router as signupRouter } from './routes/signup.js';
 import { router as loginRouter } from './routes/login.js';
 
 const app = express();
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 // 라우터 등록
 app.use("/login", loginRouter);

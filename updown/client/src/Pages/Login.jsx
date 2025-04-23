@@ -24,7 +24,7 @@ export const Login = () => {
           },
           body: JSON.stringify({ id, password }),
         });
-        const data = await res.text();
+        const data = await res.json();
         console.log(data);
         if (res.status === 200) {
           alert("로그인 성공");
