@@ -1,14 +1,18 @@
+
 ```
 updown
-├─ README.md
+├─ .DS_Store
 └─ updown
+   ├─ .DS_Store
    ├─ client
+   │  ├─ .DS_Store
    │  ├─ README.md
    │  ├─ eslint.config.js
    │  ├─ index.html
    │  ├─ package-lock.json
    │  ├─ package.json
    │  ├─ public
+   │  │  ├─ TEAM_UPDOWN_logo (1) (1).svg
    │  │  └─ vite.svg
    │  ├─ src
    │  │  ├─ App.css
@@ -22,10 +26,23 @@ updown
    │  │  │  ├─ Input.jsx
    │  │  │  ├─ Main.jsx
    │  │  │  └─ Tag.jsx
+   │  │  ├─ config
+   │  │  │  └─ levelData.jsx
+   │  │  ├─ context
+   │  │  │  └─ MessageContext.jsx
    │  │  ├─ index.css
-   │  │  └─ main.jsx
+   │  │  ├─ main.jsx
+   │  │  ├─ pages
+   │  │  │  ├─ GamePage.jsx
+   │  │  │  ├─ ModePage.jsx
+   │  │  │  ├─ ResultPage.jsx
+   │  │  │  └─ StartPage.jsx
+   │  │  └─ utils
+   │  │     ├─ GuessNum.jsx
+   │  │     └─ InputNum.jsx
    │  └─ vite.config.js
    └─ server
+      ├─ .DS_Store
       ├─ app.js
       ├─ config
       │  └─ database.js

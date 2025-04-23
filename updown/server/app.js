@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.get('/', async (req, res) => {
   try {
-    const [rows] = await pool.query('SELECT * FROM user');
+    const [rows] = await pool.query('SELECT * FROM users');
     res.json(rows);
   } catch (err) {
     console.error(err.message);
@@ -23,22 +23,22 @@ app.get('/', async (req, res) => {
 }
 );
 
-app.get('/game', async (req, res) => {
-  try {
-    const [rows] = await pool.query('SELECT * FROM game');
-    res.json(rows);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Internal Server Error');
-  }
-}
-);
+// app.get('/game', async (req, res) => {
+//   try {
+//     const [rows] = await pool.query('SELECT * FROM game');
+//     res.json(rows);
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send('Internal Server Error');
+//   }
+// }
+// );
 
 app.post('/login', async (req, res) => {
-  const { dummy } = req.body;
+  const { id, password, name, email } = req.body;
   try {
-    const [rows] = await pool.query('INSERT INTO user (dummy) VALUES (?)', [dummy]);
-    res.status(201).json({ dummy });
+    const [rows] = await pool.query('INSERT INTO users (user_id, password, name, e_mail) VALUES (?,?,?,?)', [id, password, name, email]);
+    res.status(201).json({ id, password, name, email });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Internal Server Error');
@@ -46,17 +46,17 @@ app.post('/login', async (req, res) => {
 }
 );
 
-app.post('/gameEnd', async (req, res) => {
-  const { dummy } = req.body;
-  try {
-    const [rows] = await pool.query('INSERT INTO game (dummy) VALUES (?)', [dummy]);
-    res.status(201).json({ dummy });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Internal Server Error');
-  }
-}
-);
+// app.post('/gameEnd', async (req, res) => {
+//   const { dummy } = req.body;
+//   try {
+//     const [rows] = await pool.query('INSERT INTO game (dummy) VALUES (?)', [dummy]);
+//     res.status(201).json({ dummy });
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send('Internal Server Error');
+//   }
+// }
+// );
 
 
 
