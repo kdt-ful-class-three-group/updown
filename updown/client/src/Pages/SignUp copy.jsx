@@ -1,24 +1,23 @@
 import { useNavigate } from "react-router-dom"
 import { Button } from "../components/Button"
-import { useState } from "react";
-
 
 export const SignUp = () => {
-  const [ id, setId ] = useState("");
-  const [ pw, setPw ] = useState("");
-  const [ name, setName ] = useState("");
-  const [ e_mail, setEmail ] = useState("");
-  
+
   const navigate = useNavigate();
-return <>        
-        <input placeholder="id" onChange={(e) => {setId(e.target.value)}} />
-        <input placeholder="pw" onChange={(e) => {setPw(e.target.value)}} />
-        <input placeholder="nickName" onChange={(e) => {setName(e.target.value)}} />
-        <input placeholder="email" onChange={(e) => {setEmail(e.target.value)}}/>
+return <>
+        <input placeholder="id"></input>
+        <input placeholder="pw"></input>
+        <input placeholder="nickName"></input>
+        <input placeholder="email"></input>
         <Button btnName={"가입"} onClick={() => {  
-          const postData = {id, pw, name, e_mail};
+          const input = document.querySelectorAll("input");
+          const user_id = input[0].value;
+          const password = input[1].value;
+          const name = input[2].value;
+          const e_mail = input[3].value;
+          const postData = {user_id, password, name, e_mail};
           console.log(postData);
-          if(id === "" || pw === "" || name === "" || e_mail === ""){
+          if(user_id === "" || password === "" || name === "" || e_mail === ""){
             alert("모든 항목을 입력해주세요.");
             return;
           } else {
@@ -34,5 +33,5 @@ return <>
           .catch((err) => console.log(`${err} 에러발생`));
         alert("가입이 완료되었습니다.");
         navigate('/login')}}}/>
-      </>
+       </>
 }

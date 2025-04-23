@@ -35,10 +35,10 @@ app.get('/game', async (req, res) => {
 );
 
 app.post('/login', async (req, res) => {
-  const { dummy } = req.body;
+  const { postData } = req.body;
   try {
-    const [rows] = await pool.query('INSERT INTO user (dummy) VALUES (?)', [dummy]);
-    res.status(201).json({ dummy });
+    const [rows] = await pool.query('INSERT INTO user (user_id, password, name, e_mail) VALUES (?,?,?,?)', [postData.id, postData.pw, postData.name, postData.e_mail]);
+    res.status(201).json({ postData });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Internal Server Error');
