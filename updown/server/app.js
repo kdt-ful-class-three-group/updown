@@ -34,11 +34,33 @@ app.get('/game', async (req, res) => {
 }
 );
 
-app.post('/login', async (req, res) => {
+app.post('/signUp', async (req, res) => {
   const { postData } = req.body;
   try {
-    const [rows] = await pool.query('INSERT INTO user (user_id, password, name, e_mail) VALUES (?,?,?,?)', [postData.id, postData.pw, postData.name, postData.e_mail]);
+    const [rows] = await pool.query ('INSERT INTO user (user_id, password, name, e_mail) VALUES (?,?,?,?)', [postData.id, postData.pw, postData.name, postData.e_mail]);
     res.status(201).json({ postData });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Internal Server Error');
+  }
+}
+);
+
+app.post('/login', async (req, res) => {
+  const { postData } = req.body;
+  console.log(postData);
+  try {
+    const [rows] = await pool.query (`SELECT * FROM user WHERE user_id = ?`, [postData.id]);
+    console.log(rows);
+    // console.log(rows[0].user_id);
+    // console.log(rows[0].password);
+    if (rows.length === 0) {
+      return res.status(200).json({message:'아이디가 존재하지 않습니다.'});
+    } else if (rows[0].password !== postData.pw) {
+      return res.status(200).json({message:'비밀번호가 올바르지 않습니다.'});
+    } else {
+      return res.status(200).json({message:'로그인 성공', name: rows[0].name});
+    }
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Internal Server Error');

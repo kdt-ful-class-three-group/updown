@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { Button } from "../components/Button"
 import { useState } from "react";
+import { GetFetch } from "../../public/modules/GetFetch";
 
 
 export const SignUp = () => {
@@ -17,21 +18,11 @@ return <>
         <input placeholder="email" onChange={(e) => {setEmail(e.target.value)}}/>
         <Button btnName={"가입"} onClick={() => {  
           const postData = {id, pw, name, e_mail};
-          console.log(postData);
           if(id === "" || pw === "" || name === "" || e_mail === ""){
             alert("모든 항목을 입력해주세요.");
             return;
           } else {
-          fetch("http://localhost:8003/login", {
-          method: "POST",
-          headers: { 
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({postData})
-        })
-          .then((response) => response.json())
-          .then((data) => console.log(data))
-          .catch((err) => console.log(`${err} 에러발생`));
+            GetFetch("8003/signUp", "POST", postData);
         alert("가입이 완료되었습니다.");
         navigate('/login')}}}/>
       </>

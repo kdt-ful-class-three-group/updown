@@ -5,7 +5,7 @@ export const GameEnd = () => {
   
   const navigate = useNavigate();
 return <>
-        <Button btnName={"게임종료"} onClick={() => {
+        <Button btnName={"게임종료"} onClick={() => {                                                                 
           if(confirm("내용을 기록 하시겠습니까?") === true){
           fetch("http://localhost:8003/gameEnd", {
             method: "POST",
