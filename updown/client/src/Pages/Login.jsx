@@ -8,21 +8,32 @@ export const Login = () => {
   const [pw, setPwValue] = useState('');
   const navigate = useNavigate();
   
-  const fetchGet = () => {
-    fetch("http://localhost:8003/", {
-      method: "GET",
-      headers: { 
-        "Content-Type": "application/json",
+  // id와 pw를 POST로 보냄
+  async function fetchPost() {
+    const res = await fetch("http://localhost:8003/login", {
+      method : "POST", 
+      headers : {
+        "Content-Type" : "application/json"
       },
+      body : JSON.stringify({
+        id : id,
+        pw : pw,
+      }),
     })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log(`${err} 에러발생`));
+    const data = await res.json();
+    console.log(data);
+    if(data){
+      alert('로그인에 성공하였습니다');
+      navigate('/game')
+    }
+    else{
+      alert('다시 시도해주세요');
+    }
   }
 
-  useEffect(() => {
-    fetchGet();
-  }, [])
+  // useEffect(() => {
+  //   fetchGet();
+  // }, [])
 
   console.log(id);
   console.log(pw);
@@ -32,7 +43,7 @@ return <>
         <input type="password" onChange={(e)=>(setPwValue(e.target.value))}/>
         {/* <Input placeholder="id" type="text"/>
         <Input placeholder="pw" type="text"/> */}
-        <Button btnName={"로그인"} onClick={() => {navigate('/game')}}/>
+        <Button btnName={"로그인"} onClick={fetchPost}/>
         <Button btnName={"회원가입"} onClick={() => {navigate('/SignUp')}}/>
        </>
 }

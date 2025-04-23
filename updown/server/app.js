@@ -45,11 +45,22 @@ app.get('/login', async(req,res) => {
   }
 })
 
+// 받은 id와 pw를 확인
 app.post('/login', async (req, res) => {
-
+  const {id, pw} = req.body
   try {
-    const [rows] = await pool.query(`SELECT user_id, password FROM user_info where = "gg"`);
-    res.json(rows);
+    const [rows] = await pool.query('SELECT user_id, password FROM user_info where user_id= ?', [id]);
+    const user = rows[0];
+    console.log(user.user_id);
+    console.log(user.password);
+
+    // id와 pw가 맞는지 확인
+    if(user.user_id === id && user.password === pw){
+      res.json(true);
+    }
+    else{
+      res.json(false);
+    }
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Internal Server Error');
