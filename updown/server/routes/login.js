@@ -9,13 +9,19 @@ router.post('/', async (req, res) => {
   try {
     // 데이터 조회 SELECT : 테이블에서 특정 조건에 맞는 행을 검색하는 명령어
     // WHERE 절을 사용하여 특정 조건을 만족하는 행을 검색. AND 연산자를 사용하여 두 개의 조건을 결합
-    const [rows] = await pool.query('SELECT * FROM users WHERE user_id = ? AND password = ?', [id, password]);
+    const [rows] = await pool.query('SELECT * FROM user WHERE user_id = ?', [id]);
     console.log(rows);
     // rows는 배열 형태로 반환되며, 조건에 맞는 행이 존재하면 그 행의 정보가 담김
     if (rows.length > 0) {
-      res.status(200).json({ message: `${id}님 환영합니다.` });
+      // res.status(200).json({ message: `${id}님 환영합니다.` });
+      // 비밀번호 확인
+      if (rows[0].password === password) {
+        res.status(200).json({message: '로그인 성공', name: rows[0].name});
+      } else {
+        res.status(200).json({message: '비밀번호가 올바르지 않습니다.'})
+      }
     } else {
-      res.status(401).json({ message: '아이디 또는 비밀번호가 틀렸습니다.' });
+      res.status(200).json({ message: '아이디가 존재하지 않습니다.' });
     }
   } catch (err) {
     console.error(err.message);

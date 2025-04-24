@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Button } from "../components/Button"
 
-export const SignUpPage = () => {
+export const SignUpPage = ({nickName}) => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -43,14 +43,18 @@ export const SignUpPage = () => {
     }
   };
 
-  return <>
-    <h1>회원가입</h1>
-    <div>
-    <input type="text" placeholder="아이디" value={id} onChange={(e)=> setId(e.target.value)}/>
-    <input type="password" placeholder="비밀번호" value={password} onChange={(e) => setPassword(e.target.value)} />
-    <input type="text" placeholder="이름" name="name" value={name} onChange={(e)=> setName(e.target.value)} />
-    <input type="text" placeholder="이메일" name="email" value={email} onChange={(e)=> setEmail(e.target.value)} />
-    <Button btnName={"가입"} type="submit" onClick={onClickBtn} />
-    </div>
-  </>
+  return (
+          <> (
+            <>
+              <h1>회원가입</h1>
+              <div>
+              <input type="text" placeholder="아이디" value={id} onChange={(e)=> setId(e.target.value)}/>
+              <input type="password" placeholder="비밀번호" value={password} onChange={(e) => setPassword(e.target.value)} />
+              <input type="text" placeholder="이름" name="name" value={name} onChange={(e)=> setName(e.target.value)} />
+              <input type="text" placeholder="이메일" name="email" value={email} onChange={(e)=> setEmail(e.target.value)} />
+              <Button btnName={"가입"} type="submit" onClick={onClickBtn} />
+              </div>
+            </>
+    ) </> 
+  )
 }

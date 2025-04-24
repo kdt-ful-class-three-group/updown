@@ -1,13 +1,20 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Button } from "../components/Button"
 
-export const LoginPage = () => {
+export const LoginPage = ({setName}) => {
 
   const navigate = useNavigate();
   
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+ 
+  useEffect(() => {
+    if (setName) {
+      setName("");
+    }
+  }, [setName]);
+
 
   const onClickBtn = async () => {
     if (id === "" || password === "") {
@@ -26,13 +33,19 @@ export const LoginPage = () => {
         const data = await res.json();
         console.log(data);
         if (res.status === 200) {
+          if(data.message === '아이디가 존재하지 않습니다.') {
+            alert("아이디가 존재하지 않습니다.");
+          } else if (data.message === '비밀번호가 올바르지 않습니다.') {
+            alert("비밀번호가 올바르지 않습니다.");
+          } else if (data.message === '로그인 성공') {
           alert("로그인 성공");
+          setName(data.name);
           navigate('/mode');
         } else {
           setId("");
           setPassword("");
           alert("아이디 또는 비밀번호가 틀렸습니다.");
-        }
+        }}
       }
       catch (err) {
         console.log(`${err} 에러발생`);

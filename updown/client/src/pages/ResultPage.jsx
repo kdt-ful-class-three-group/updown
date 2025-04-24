@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useLocation,useNavigate } from 'react-router-dom';
 import { Button } from '../components/Button';
@@ -6,7 +6,7 @@ import { Div,Heading } from '../components/Tag';
 
 //* ResultPage 컴포넌트 - 결과 페이지
 //* 성공, 실패 결과에 따라 페이지 이동할 예정 - 지금은 성공일 때만 작동
-export function ResultPage() {
+export function ResultPage({name}) {
   // useLocation을 통해 url의 쿼리스트링을 가져옴
   const location = useLocation();
   const navigate = useNavigate();
@@ -47,12 +47,18 @@ export function ResultPage() {
       <p>{history[3]}</p>
     </Div>
   </>;
+     useEffect(() => {
+      if (!name) {
+        navigate('/');
+      }
+    }, [name, navigate]); 
 
 
 // * Div의 Children으로 moveEvent와 historyBox를 넣어줌
 // * successOrFail이 true일 때와 false일 때를 나누어 줌
 // * successOrFail이 true일 때는 닉네임을 입력받는 버튼을 추가로 보여줌
   return (
+        <> { name ? (
       <Div>
         <Heading number={1} content={successOrFail ? '성공' : '실패'} />
         <Div children={successOrFail ? 
@@ -79,6 +85,11 @@ export function ResultPage() {
           서로의 장단점은 아직 모르겠음 */}
 
         </Div>
+        ) : (
+          <></>
+        )
+     }
+        </>
       // </Div>
   )
 }

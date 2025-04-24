@@ -9,7 +9,7 @@ router.post('/', async (req, res) => {
   try {
     // 데이터 삽입 INSERT INTO : 테이블에 새 행을 추가하는 명령어
     // 여기서 ?는 자리표시자로, 실제 값은 배열의 요소로 대체됨 (id, password, name, email)
-    await pool.query('INSERT INTO users (user_id, password, name, e_mail) VALUES (?,?,?,?)', [id, password, name, email]);
+    await pool.query('INSERT INTO user (user_id, password, name, e_mail) VALUES (?,?,?,?)', [id, password, name, email]);
     res.status(201).json({id, password, name, email});
   } catch (err) {
     console.error(err.message);

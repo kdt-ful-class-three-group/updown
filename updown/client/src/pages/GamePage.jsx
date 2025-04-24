@@ -16,7 +16,7 @@ import { Input } from '../components/Input';
 
 //*  이지,노말,하드 모두 한 템플릿(GamePage)에서 작동
 
-export function GamePage() {
+export function GamePage({name}) {
   // useParams를 통해 url에서 level(easy, normal, hard) 가져오기
   const { level } = useParams();
 
@@ -69,10 +69,16 @@ export function GamePage() {
   const inputHandler = (e) => {
     setInputValue(e.target.value);
   };
+  useEffect(() => {
+    if (!name) {
+      navigate('/');
+    }
+  }, [name, navigate]); 
 
 
   return (
-    <Div>
+    <> { name ? (
+    <>
       <Div>
         <Heading number={1} content={level} />
       </Div>
@@ -107,6 +113,11 @@ export function GamePage() {
         <p>{history[2]}</p>
         <p>{history[3]}</p>
       </Div>
-    </Div>
+    </>
+        ) : (
+          <></>
+        )
+     }
+        </>
   );
 }
