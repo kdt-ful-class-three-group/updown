@@ -1,8 +1,13 @@
-const express = require('express');
-const pool = require('./config/database');
-const router = express.Router();
+import express from 'express';
+import pool from './config/database.js';
+import cors from 'cors';
+
 const app = express();
-const cors = require('cors');
+
+// const express = require('express');
+// const pool = require('./config/database');
+// const Router = require('./router/router')
+// const cors = require('cors');
 
 
 app.use(cors({
@@ -12,16 +17,20 @@ app.use(cors({
 }));
 app.use(express.json());
 
-app.get('/', async (req, res) => {
+
+// 회원 가입 시 id,pw,name,email 삽입
+app.post('/SignUp', async (req, res) => {
+  const { id,pw,name,email } = req.body;
+  console.log(req.body);
   try {
-    const [rows] = await pool.query('SELECT * FROM user_info');
+    const [rows] = await pool.query('INSERT INTO user_info (user_id, password,name, email) VALUES (?, ?, ?, ?)', [id, pw, name, email]);
     res.json(rows);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Internal Server Error');
   }
-}
-);
+});
+
 
 app.get('/game', async (req, res) => {
   try {
@@ -32,18 +41,6 @@ app.get('/game', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
-
-app.get('/login', async(req,res) => {
-  const [id, pw] = req.body;
-  try{
-    const [rows] = await pool.query(`SELECT user_id, password FROM user_info where = '${id}'`)
-    res.json(rows);
-  }
-  catch(err){
-    console.err(err.message);
-    res.status(500).send('Internal Server Error');
-  }
-})
 
 // 받은 id와 pw를 확인
 app.post('/login', async (req, res) => {
@@ -58,9 +55,7 @@ app.post('/login', async (req, res) => {
     if(user.user_id === id && user.password === pw){
       res.json(true);
     }
-    // else{
-    //   res.json(false);
-    // }
+
   } catch (err) {
     res.json(false);
     console.log("아이디 또는 비밀번호 맞지 않습니다.");
@@ -69,18 +64,7 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// 회원 가입 시 id,pw,name,email 삽입
-app.post('/SignUp', async (req, res) => {
-  const { id,pw,name,email } = req.body;
-  console.log(req.body);
-  try {
-    const [rows] = await pool.query('INSERT INTO user_info (user_id, password,name, email) VALUES (?, ?, ?, ?)', [id, pw, name, email]);
-    res.json(rows);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Internal Server Error');
-  }
-});
+
 
 // app.post('/gameEnd', async (req, res) => {
 //   const { dummy } = req.body;
