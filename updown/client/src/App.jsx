@@ -18,7 +18,7 @@ function App() {
 
     return (
         <>
-        <Header name={name} />
+        <Header name={name} setName={setName} />
                 <Routes>
                     <Route path='/' element={<StartPage />} />
                     <Route path='/login' element={<Login setName={setName} />} />
