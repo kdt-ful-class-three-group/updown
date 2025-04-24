@@ -19,6 +19,3 @@ app.use("/", usersRouter); //
 app.listen(8003, () => {
   console.log('Server running on http://localhost:8003');
 });
-
-
-
