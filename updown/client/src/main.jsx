@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './App.jsx'
-import { BrowserRouter } from 'react-router-dom'
 
 createRoot(document.getElementById('root')).render(
   //* Provider는 context API를 사용하여 하위 컴포넌트에 context를 전달하는 역할을 함

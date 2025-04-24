@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import express from 'express';
 import { pool } from '../config/database.js';
 
@@ -39,12 +38,3 @@ router.get('/', async (req, res) => {
 // );
 
 export { router };
-=======
-import express, from 'express';
-
-const router = express.Router();
-
-router.
-
-export { Router }
->>>>>>> joon14
