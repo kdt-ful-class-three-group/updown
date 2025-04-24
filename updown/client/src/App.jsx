@@ -5,7 +5,7 @@ import { Button } from './components/Button'
 import './App.css'
 import { SignUp } from './Pages/SignUp'
 import { GameEnd } from './Pages/GameEnd'
-import { GamePage } from './pages/GamePage'
+import { GamePage } from './Pages/GamePage'
 import { Login } from './Pages/Login'
 import { StartPage } from './Pages/StartPage'
 
