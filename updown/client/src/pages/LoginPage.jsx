@@ -27,7 +27,7 @@ export const LoginPage = () => {
         console.log(data);
         if (res.status === 200) {
           alert("로그인 성공");
-          navigate('/game');
+          navigate('/mode');
         } else {
           setId("");
           setPassword("");
@@ -45,7 +45,7 @@ export const LoginPage = () => {
         <input type="text" placeholder="아이디" value={id} onChange={(e) => setId(e.target.value)} />
         <input type="password" placeholder="비밀번호" value={password} onChange={(e) => setPassword(e.target.value)} />
         <Button btnName={"로그인"} type="submit" onClick={onClickBtn} />
-        <Button btnName={"회원가입"} onClick={() => { navigate('/SignUp') }} />
+        <Button btnName={"회원가입"} onClick={() => { navigate('/signup') }} />
       </div>
     </>
   }

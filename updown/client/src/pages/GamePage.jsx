@@ -51,19 +51,19 @@ export function GamePage() {
   }, [maxNum]);
 
   // 다시하기를 했을 때 up,down 메세지가 그대로 남아있어 useEffect를 사용하여 message를 초기화
-    useEffect(() => {
+  useEffect(() => {
     setMessage('');
-    }, [])
+  }, [])
 
-    // *useEffect를 사용하여, status값이 변경되면, navigate를 통해 결과 페이지로 이동
-    // * status는 success, fail로 나뉨 => InputNum에 status를 변경하는 코드가 있음.
-    useEffect(() => {
-      if(status !== null) {
+  // *useEffect를 사용하여, status값이 변경되면, navigate를 통해 결과 페이지로 이동
+  // * status는 success, fail로 나뉨 => InputNum에 status를 변경하는 코드가 있음.
+  useEffect(() => {
+    if (status !== null) {
       // * 들어오는 status에 따라 header에 성공, 실패가 결정되고, history의 데이터를 통해, 이전에 입력한 숫자에 대한 내용이 결정 된다.
       // * navigate를 GamePage에서 관리를 하는 이유는 InputNum에서는 status와 history를 InputNum 함수의 매개 변수로 받아오는데, 그러면 useEffect를 사용해 status와 history를 관리 할 수 없다. 그리고, useEffect를 사용해야 하는 이유는, status와 history가 바뀐 이후에 navigate를 해야 하는데, useEffect를 사용하지 않으면, navigate가 먼저 실행되고, history가 바뀌지 않고 넘어가 마지막으로 입력한 history가 추가 되지 않기 때문. 
       navigate(`/result?status=${status}&history=${history}`);
-      }
-    }, [status, history])
+    }
+  }, [status, history])
 
   // inputHandler는 input값을 관리하는 함수
   const inputHandler = (e) => {
@@ -78,8 +78,8 @@ export function GamePage() {
       </Div>
       <Div>
         {/* UP,DOWN 메세지가 들어갈 컨테이너  */}
-        <Heading number={1} content={message}/>
-        <Div className = {count ===1 ? "color-red" : ""} children={ `남은기회 : ${count}` }/>
+        <Heading number={1} content={message} />
+        <Div className={count === 1 ? "color-red" : ""} children={`남은기회 : ${count}`} />
       </Div>
       <Div>
         <Input value={inputValue} onChange={inputHandler} />
@@ -107,7 +107,6 @@ export function GamePage() {
         <p>{history[2]}</p>
         <p>{history[3]}</p>
       </Div>
-      </Div>
-      
+    </Div>
   );
 }
