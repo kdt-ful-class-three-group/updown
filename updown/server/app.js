@@ -49,7 +49,7 @@ app.get('/login', async(req,res) => {
 app.post('/login', async (req, res) => {
   const {id, pw} = req.body
   try {
-    const [rows] = await pool.query('SELECT user_id, password FROM user_info where user_id= ?', [id]);
+    const [rows] = await pool.query('SELECT user_id, password FROM user_info where user_id= ? AND password = ?', [id, pw]);
     const user = rows[0];
     console.log(user.user_id);
     console.log(user.password);
@@ -58,12 +58,14 @@ app.post('/login', async (req, res) => {
     if(user.user_id === id && user.password === pw){
       res.json(true);
     }
-    else{
-      res.json(false);
-    }
+    // else{
+    //   res.json(false);
+    // }
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Internal Server Error');
+    res.json(false);
+    console.log("아이디 또는 비밀번호 맞지 않습니다.");
+    // console.error(err.message);
+    // res.status(500).send('Internal Server Error');
   }
 });
 
