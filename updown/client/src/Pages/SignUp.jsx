@@ -13,7 +13,7 @@ export const SignUp = () => {
   const navigate = useNavigate();
 return <>        
         <input placeholder="id" onChange={(e) => {setId(e.target.value)}} />
-        <input placeholder="pw" onChange={(e) => {setPw(e.target.value)}} />
+        <input placeholder="pw" onChange={(e) => {setPw(e.target.value)}} type="password" />
         <input placeholder="nickName" onChange={(e) => {setName(e.target.value)}} />
         <input placeholder="email" onChange={(e) => {setEmail(e.target.value)}}/>
         <Button btnName={"가입"} onClick={() => {  

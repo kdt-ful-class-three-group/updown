@@ -1,10 +1,21 @@
 import { useNavigate } from "react-router-dom"
 import { Button } from "../components/Button"
+import { useEffect } from "react";
 
-export const GameEnd = () => {
+export const GameEnd = ({name}) => {
   
   const navigate = useNavigate();
-return <>
+
+    useEffect(() => {
+      if (!name) {
+        navigate('/');
+      }
+    }, [name, navigate]);
+
+return (
+  <>
+    { name ? (
+        <>
         <Button btnName={"다시하기"} onClick={() => {                                                                 
           if(confirm("내용을 기록 하시겠습니까?") === true){
           fetch("http://localhost:8003/gameEnd", {
@@ -25,4 +36,9 @@ return <>
         }
       }/>
        </>
+    ) : (
+      <></>
+    )}
+    </>
+);
 }
