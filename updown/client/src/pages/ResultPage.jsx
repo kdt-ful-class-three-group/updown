@@ -10,7 +10,6 @@ export function ResultPage() {
   // useLocation을 통해 url의 쿼리스트링을 가져옴
   const location = useLocation();
   const navigate = useNavigate();
-
   // URLSearchParams를 사용하여 쿼리스트링을 파싱
   // location 뒤에 search는 ?status=success 이런식으로 쿼리스트링을 가져옴
   const queryParams = new URLSearchParams(location.search);
@@ -21,12 +20,13 @@ export function ResultPage() {
   // * url에서 history의 값을 가져옴. history는 이전에 입력한 숫자들
   // * history는 문자열로 되어있으므로 split(',')을 사용하여 ,기준으로 나누어 배열로 변환 이후, map(Number)로 숫자로 변환.
   const history = queryParams.get('history').split(',').map(Number); // 문자열을 숫자로 변환 
-
+  
   // * 닉네임이라는 변수를 useState를 사용해서 관리
   const [nickName, setNickName] = useState('');
 
   const successOrFail = status === 'success';
 
+  console.log(successOrFail)
   // * 연속해서 사용되는 button요소들을 묶어서 변수에 담아줌
   const moveEvent = 
     <>
@@ -48,6 +48,27 @@ export function ResultPage() {
     </Div>
   </>;
 
+// 기록하기 버튼을 눌렀을 때 동작하는 함수
+const fetchGet = async() =>{
+  try{
+    const res = await fetch("http://localhost:8003/record",{
+      method : "POST",
+      
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ status, history })
+    })
+    const data = await res.json() 
+    console.log(data);
+    alert("기록되었습니다!")
+    navigate(-3)
+  }
+  catch(err){
+    console.log(err);
+  }
+}
+
 
 // * Div의 Children으로 moveEvent와 historyBox를 넣어줌
 // * successOrFail이 true일 때와 false일 때를 나누어 줌
@@ -58,13 +79,7 @@ export function ResultPage() {
         <Div children={successOrFail ? 
           <>
           {moveEvent}
-          <Button btnName={'기록하기'} onClick={() => { 
-              let nickName = prompt("닉네임을 입력하세요", setNickName(''));
-              if(nickName) {
-              console.log(`닉네임 : ${nickName}`);
-              navigate(-3);
-              }
-          }}/> 
+          <Button btnName={'기록하기'} onClick={fetchGet}/> 
           {historyBox}
           </>
           

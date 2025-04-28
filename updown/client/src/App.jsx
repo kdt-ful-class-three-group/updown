@@ -25,7 +25,8 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/mode" element={<ModePage />} />
         <Route path="/:level" element={<GamePage />} />
-        <Route path="/result" element={<ResultPage />} />
+        {/* 쿼리스트링으로 레벨 값을 가져오기 위해서 사용 */}
+        <Route path="/:level/result" element={<ResultPage />} />
       </Routes>
     </Provider>
       
