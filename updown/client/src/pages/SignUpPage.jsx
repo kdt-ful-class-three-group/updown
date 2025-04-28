@@ -10,9 +10,9 @@ const signup_valid = ({id, password, name, email}) => {
     {condition : !email.includes("@") === '', message : "이메일 형식이 아닙니다."}
   ]
 
-  for(let validate of validaiton){
+  for(let validate of validation){
     if(validate.condition){
-      alert(validation.message)
+      alert(validate.message)
       return false
     }
   }
