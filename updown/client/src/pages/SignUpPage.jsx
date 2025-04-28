@@ -3,25 +3,21 @@ import { useNavigate } from "react-router-dom"
 import { Button } from "../components/Button"
 
 const signup_valid = ({id, password, name, email}) => {
-  if (id === '') {
-    alert("아이디를 입력해주세요.");
-    return false;
-  }
-  if (password === '') {
-    alert("비밀번호를 입력해주세요.");
-    return false;
-  }
-  if (name === '') {
-    alert("이름을 입력해주세요.");
-    return false;
-  }
-  if (!email.includes("@")) {
-    alert("이메일 형식이 아닙니다.");
-    return false;
+  const validation = [
+    {condition : id === '', message : "아이디를 입력해주세요"},
+    {condition : password === '', message : "비밀번호를 입력해주세요"},
+    {condition : name === '', message : "이름 입력해주세요"},
+    {condition : !email.includes("@") === '', message : "이메일 형식이 아닙니다."}
+  ]
+
+  for(let validate of validaiton){
+    if(validate.condition){
+      alert(validation.message)
+      return false
+    }
   }
   return true;
 };
-
 
 export const SignUpPage = () => {
   const [id, setId] = useState("");
@@ -33,8 +29,10 @@ export const SignUpPage = () => {
   
   // 클릭하면 fetch 실행
   const onClickBtn = async () => {
-
+    // 유효성 검사
     const valid = signup_valid({id, password, name, email});
+    
+    // 유효성 검사 통과하면 실행
     if(valid){
       try {
         const res = await fetch("http://localhost:8003/signup", {
