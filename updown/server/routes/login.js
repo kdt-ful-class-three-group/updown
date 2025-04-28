@@ -9,7 +9,7 @@ router.post('/', async (req, res) => {
   try {
     // 데이터 조회 SELECT : 테이블에서 특정 조건에 맞는 행을 검색하는 명령어
     // WHERE 절을 사용하여 특정 조건을 만족하는 행을 검색. AND 연산자를 사용하여 두 개의 조건을 결합
-    const [rows] = await pool.query('SELECT * FROM users WHERE user_id = ? AND password = ?', [id, password]);
+    const [rows] = await pool.query('SELECT * FROM user_info WHERE id = ? AND password = ?', [id, password]);
     console.log(rows);
     // rows는 배열 형태로 반환되며, 조건에 맞는 행이 존재하면 그 행의 정보가 담김
     if (rows.length > 0) {
