@@ -13,7 +13,16 @@ router.post('/', async (req, res) => {
     console.log(rows);
     // rows는 배열 형태로 반환되며, 조건에 맞는 행이 존재하면 그 행의 정보가 담김
     if (rows.length > 0) {
-      res.status(200).json({ message: `${id}님 환영합니다.` });
+      req.session.user = { id };
+      req.session.touch();
+      req.session.save((err) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).send('Internal Server Error 세션 저장 오류');
+        }
+        console.log(req.session.user, '성공');
+        res.status(200).json({ message: `${id}님 환영합니다.` });
+      });
     } else {
       res.status(401).json({ message: '아이디 또는 비밀번호가 틀렸습니다.' });
     }

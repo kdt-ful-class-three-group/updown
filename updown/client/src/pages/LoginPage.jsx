@@ -22,11 +22,13 @@ export const LoginPage = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ id, password }),
+          credentials: "include",
         });
         const data = await res.json();
         console.log(data);
         if (res.status === 200) {
           alert("로그인 성공");
+          sessionStorage.setItem("id", id);
           navigate('/mode');
         } else {
           setId("");
