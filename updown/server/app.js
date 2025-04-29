@@ -5,6 +5,7 @@ import session from 'express-session';
 import { router as usersRouter } from './routes/users.js';
 import { router as signupRouter } from './routes/signup.js';
 import { router as loginRouter } from './routes/login.js';
+import { router as logoutRouter } from './routes/logout.js';
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(session({
 
 // 라우터 등록
 app.use("/login", loginRouter);
+app.use("/logout", logoutRouter);
 app.use("/signup", signupRouter);
 app.use("/", usersRouter); //
 
