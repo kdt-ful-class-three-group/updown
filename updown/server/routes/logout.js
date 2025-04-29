@@ -1,8 +1,11 @@
-import { router } from "./users";
+import express from 'express';
 
-router.post('/logout', (req, res) => {
+const router = express.Router();
+
+router.post('/', (req, res) => {
 	req.session.destroy(() => {
-		res.send('로그아웃 완료');
+		res.clearCookie('connect.sid');
+		res.json({ message: '로그아웃 완료'});
 	});
 });
 

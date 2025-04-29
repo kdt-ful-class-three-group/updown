@@ -1,18 +1,28 @@
 // src/pages/StartPage.jsx
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 
 export function Layout() {
-  const logoutHandle = async () => {
+  const navigate = useNavigate();
+
+  const Logout = async () => {
     // 로그아웃 처리
     try {
-        await fetch("http://localhost:8003/logout", {
+        const res = await fetch("http://localhost:8003/logout", {
         method: "POST",
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
-      })
+        })
+      if(res.ok) {
+        alert("로그아웃 성공");
+        sessionStorage.clear();
+        navigate('/login');
+      } else {
+        alert("로그아웃 실패");
+      }
     }
     catch (err) {
       console.log(`${err} 에러발생`);
@@ -23,7 +33,7 @@ export function Layout() {
   return (
     <div>
       <header>
-        <button onClick={logoutHandle}>로그아웃</button>
+        <button onClick={Logout}>로그아웃</button>
       </header>
 
       <main>
