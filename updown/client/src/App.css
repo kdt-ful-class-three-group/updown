@@ -8,6 +8,7 @@
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   min-height: 80vh;
+  position: relative;
 }
 
 .card {
@@ -18,6 +19,28 @@
   color: #888;
 }
 
+
+.info {
+  position: absolute;
+  right: 30px;
+  top: 0;
+}
+
+.infoPanel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  max-width: 90%;
+  height: auto;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  z-index: 1000;
+  border-radius: 12px;
+  transition: opacity 0.3s ease-in-out;
+}
 button {
   background-color: #4caf50;
   border: none;
@@ -29,6 +52,8 @@ button {
   margin: 0.5rem;
   transition: background-color 0.3s ease;
 }
+
+
 
 button:hover {
   background-color: #388e3c;

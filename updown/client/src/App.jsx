@@ -11,7 +11,6 @@ import { SignUpPage } from "./Pages/SignUpPage";
 import { ResultPage } from "./Pages/ResultPage";
 import { Provider } from './context/MessageContext';
 
-
 import "./App.css";
 
 // 라우터 경로설정
