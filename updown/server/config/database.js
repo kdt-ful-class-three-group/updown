@@ -1,6 +1,7 @@
 import mysql from 'mysql2/promise';
 
 const pool = mysql.createPool({
+  // * 리모트 DB서버 인 경우 host를 localhost가 아닌, mysql -u poop -p -h ip주소 로 들어간 ip주소를 host로 설정 해야함.
   host: `192.168.100.74`,
   user: `poop`,
   password: `poop123`,
