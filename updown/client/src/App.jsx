@@ -10,11 +10,16 @@ import { GamePage } from "./Pages/GamePage";
 import { SignUpPage } from "./Pages/SignUpPage";
 import { ResultPage } from "./Pages/ResultPage";
 import { Provider } from './context/MessageContext';
+import { useState } from "react";
 
 import "./App.css";
 
+
 // 라우터 경로설정
 function App() {
+  const [easyChallenge, setEasyChallenge] = useState(0);
+  const [normalChallenge, setNormalChallenge] = useState(0);
+  const [hardChallenge, setHardChallenge] = useState(0);
   return (
     // <Routes> 컴포넌트는 react-router-dom에서 제공하는 라우팅 기능을 사용하기 위한 컴포넌트 그리고 각 경로에 해당하는 컴포넌트를 지정
     // path는 URL 경로를 지정
@@ -27,7 +32,14 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/mode" element={<ModePage />} />
           <Route path="/:level" element={<GamePage />} />
-          <Route path="/result" element={<ResultPage />} />
+          <Route path="/result" element={<ResultPage
+          easy = {easyChallenge}
+          setEasy = {setEasyChallenge}
+          normal = {normalChallenge}
+          setNormal = {setNormalChallenge}
+          hard = {hardChallenge}
+          setHard = {setHardChallenge}
+          />} />
         </Route>
 
       </Routes>

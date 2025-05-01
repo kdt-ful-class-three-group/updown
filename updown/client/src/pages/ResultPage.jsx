@@ -3,13 +3,15 @@ import { useState } from 'react';
 import { useLocation,useNavigate } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { Div,Heading } from '../components/Tag';
+import { useEffect } from 'react';
 
 //* ResultPage 컴포넌트 - 결과 페이지
 //* 성공, 실패 결과에 따라 페이지 이동할 예정 - 지금은 성공일 때만 작동
-export function ResultPage() {
+export function ResultPage({easy, setEasy, normal, setNormal, hard, setHard}) {
   // useLocation을 통해 url의 쿼리스트링을 가져옴
   const location = useLocation();
   const navigate = useNavigate();
+
 
   // URLSearchParams를 사용하여 쿼리스트링을 파싱
   // location 뒤에 search는 ?status=success 이런식으로 쿼리스트링을 가져옴
@@ -22,10 +24,16 @@ export function ResultPage() {
   // * history는 문자열로 되어있으므로 split(',')을 사용하여 ,기준으로 나누어 배열로 변환 이후, map(Number)로 숫자로 변환.
   const history = queryParams.get('history').split(',').map(Number); // 문자열을 숫자로 변환 
 
-  // * 닉네임이라는 변수를 useState를 사용해서 관리
-  const [nickName, setNickName] = useState('');
+  const mode = queryParams.get('mode');
+
+  // // * 닉네임이라는 변수를 useState를 사용해서 관리
+  // const [nickName, setNickName] = useState('');
 
   const successOrFail = status === 'success';
+  const easyMode = mode === 'easy';
+  const normalMode = mode === 'normal';
+  const hardMode = mode === 'hard';
+
 
   // * 연속해서 사용되는 button요소들을 묶어서 변수에 담아줌
   const moveEvent = 
@@ -48,6 +56,35 @@ export function ResultPage() {
     </Div>
   </>;
 
+const gameData = {
+  name : sessionStorage.getItem('name'),
+  mode : mode,
+  challenge : {
+    easy : easy,
+    normal : normal,
+    hard : hard
+  },
+  successOrFail : status,
+  history : {
+    first : history[0],
+    second : history[1],
+    third : history[2],
+    fourth : history[3],
+  },
+};
+
+
+
+  useEffect(() => {
+    if(easyMode) {
+      return setEasy( easy++ );
+    } else if (normalMode) {
+      return setNormal( normal++ );
+    } else if (hardMode) {
+      return setHard( hard++ );
+    }
+  }, [easy, normal, hard])
+
 
 // * Div의 Children으로 moveEvent와 historyBox를 넣어줌
 // * successOrFail이 true일 때와 false일 때를 나누어 줌
@@ -58,12 +95,13 @@ export function ResultPage() {
         <Div children={successOrFail ? 
           <>
           {moveEvent}
-          <Button btnName={'기록하기'} onClick={() => { 
-              let nickName = prompt("닉네임을 입력하세요", setNickName(''));
-              if(nickName) {
-              console.log(`닉네임 : ${nickName}`);
-              navigate(-3);
-              }
+          <Button btnName={'기록하기'} onClick={async () => { 
+              // let nickName = prompt("닉네임을 입력하세요", setNickName(''));
+              // if(nickName) {
+              // console.log(`닉네임 : ${nickName}`);
+              // navigate(-3);
+              // }
+              console.log(gameData);
           }}/> 
           {historyBox}
           </>
