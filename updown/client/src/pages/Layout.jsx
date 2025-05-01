@@ -13,7 +13,7 @@ export function Layout() {
 
   const logout = useLogout();
   // 세션 스토리지에서 id를 가져옴
-  const userId = sessionStorage.getItem("id");
+  const username = sessionStorage.getItem("name");
 
   return (
     <div>
@@ -24,7 +24,7 @@ export function Layout() {
       {isPanelOpen && (
         <div className="infoPanel">
           <h2>내 정보</h2>
-          <p>{userId}님</p>
+          <p>{username}님</p>
           <button onClick={togglePanel}>닫기</button>
           <button onClick={logout}>로그아웃</button>
 
