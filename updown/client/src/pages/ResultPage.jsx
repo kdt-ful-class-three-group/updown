@@ -24,14 +24,19 @@ export function ResultPage({easy, setEasy, normal, setNormal, hard, setHard}) {
   // * history는 문자열로 되어있으므로 split(',')을 사용하여 ,기준으로 나누어 배열로 변환 이후, map(Number)로 숫자로 변환.
   const history = queryParams.get('history').split(',').map(Number); // 문자열을 숫자로 변환 
 
+  // * 게임 페이지에서, 결과페이지로 url을 보낼때, mode라는 키에 설정한 값을 가져온다. 
   const mode = queryParams.get('mode');
 
   // // * 닉네임이라는 변수를 useState를 사용해서 관리
   // const [nickName, setNickName] = useState('');
 
+  // * 성공 여부를 관리, 만일 status가 success라면 true라는 뜻으로 사용가능.
   const successOrFail = status === 'success';
+  // * easyMode 라는 변수에 mode의 값이 easy인 경우 true
   const easyMode = mode === 'easy';
+  // * normalMode 라는 변수에 mode의 값이 normal인 경우 true
   const normalMode = mode === 'normal';
+  // * hardMode 라는 변수에 mode의 값이 hard인 경우 true
   const hardMode = mode === 'hard';
 
 
@@ -56,15 +61,21 @@ export function ResultPage({easy, setEasy, normal, setNormal, hard, setHard}) {
     </Div>
   </>;
 
+// * 게임데이터 라는 변수에 db에 보낼 데이터들을 지정해준다.
 const gameData = {
+  // * name은 세션스토리지의 name값
   name : sessionStorage.getItem('name'),
+  // * mode는 queryParams로 가져온 mode의 값
   mode : mode,
+  // * challenge는 easy, normal, hard 각각에 대한, App.jsx에서 가져온 매개변수들
   challenge : {
     easy : easy,
     normal : normal,
     hard : hard
   },
+  // * successOrFail은 queryParams로 가져온 status의 값.
   successOrFail : status,
+  // * history는 queryParams로 가져온 history의 값 들.
   history : {
     first : history[0],
     second : history[1],
@@ -74,13 +85,19 @@ const gameData = {
 };
 
 
-
+// * useEffect로 easy, normal, hard 값이 바뀔 때 마다 실행되는 함수를 지정.
   useEffect(() => {
+    // * 만일 mode가 easy라면?
     if(easyMode) {
+      // * easy의 값이 1씩 올라간다.
       return setEasy( easy++ );
+    // * 만일 mode가 normal 이라면?
     } else if (normalMode) {
+      // * normal의 값이 1씩 올라간다.
       return setNormal( normal++ );
+    // * 만일 mode가 hard라면?
     } else if (hardMode) {
+      // * hard의 값이 1씩 올라간다.
       return setHard( hard++ );
     }
   }, [easy, normal, hard])
@@ -101,6 +118,7 @@ const gameData = {
               // console.log(`닉네임 : ${nickName}`);
               // navigate(-3);
               // }
+              // * 기록하기 버튼 클릭시 콘솔 로그로 gameData의 데이터를 표출
               console.log(gameData);
           }}/> 
           {historyBox}

@@ -17,6 +17,7 @@ import "./App.css";
 
 // 라우터 경로설정
 function App() {
+  // * 전역으로 이지모드 도전횟수, 노멀모드 도전횟수, 하드모드 도전횟수를 제어할 수 있게 만드는 변수들
   const [easyChallenge, setEasyChallenge] = useState(0);
   const [normalChallenge, setNormalChallenge] = useState(0);
   const [hardChallenge, setHardChallenge] = useState(0);
@@ -33,6 +34,7 @@ function App() {
           <Route path="/mode" element={<ModePage />} />
           <Route path="/:level" element={<GamePage />} />
           <Route path="/result" element={<ResultPage
+          // * 결과 페이지에 각 모드별 도전횟수를 사용할 수 있게 매개변수로 보냄.
           easy = {easyChallenge}
           setEasy = {setEasyChallenge}
           normal = {normalChallenge}

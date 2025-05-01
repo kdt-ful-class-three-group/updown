@@ -9,6 +9,7 @@ import { router as logoutRouter } from './routes/logout.js';
 
 const app = express();
 
+// * cors로 localhost:5173에서 오는 메서드 요청들을 허용해준다.
 app.use(cors({
   origin: 'http://localhost:5173',
   credentials: true
