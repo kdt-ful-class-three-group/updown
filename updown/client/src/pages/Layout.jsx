@@ -13,7 +13,7 @@ export function Layout() {
 
   const logout = useLogout();
   // 세션 스토리지에서 id를 가져옴
-  const userId = sessionStorage.getItem("id");
+  const userId = sessionStorage.getItem("name");
 
   return (
     <div>
