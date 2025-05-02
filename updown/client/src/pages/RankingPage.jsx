@@ -14,6 +14,7 @@ export const RankingPage = () => {
         throw new Error('랭킹 에러');
       }
       const data = await response.json();
+      console.log(data);
       setRankingData(data);
     } catch (error) {
       console.error('Error fetching ranking data:', error);
@@ -28,7 +29,29 @@ export const RankingPage = () => {
     setMode(selectMode);
   }
 
+  // 성공률까지 만들어서
+  const sortedData = rankingData.map((item) => ({
+    name : item.name,
+    mode : item.mode,
+    success : item.success,
+    total : item.total,
+    rate : Math.round((item.success / item.total) * 100) + '%'
+  }))
 
+  console.log(sortedData);
+  // 확률 기준으로 정렬
+  sortedData.sort(function (a, b) {
+    if (a.rate > b.rate) {
+      return 1;
+    }
+    if (a.rate < b.rate) {
+      return -1;
+    }
+    // a must be equal to b
+    return 0;
+  });
+
+  console.log(sortedData);
   return (
     <div>
       <h1>랭킹</h1>
@@ -50,14 +73,14 @@ export const RankingPage = () => {
             </tr>
           </thead>
           <tbody>
-            {rankingData.map((item, index) => (
+            {sortedData.map((item, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{item.name}</td>
                 <td>{item.mode}</td>
                 <td>{item.success}</td>
                 <td>{item.total}</td>
-                <td>{item.success / item.total * 100}%</td>
+                <td>{item.rate}</td>
               </tr>
             ))}
           </tbody>
