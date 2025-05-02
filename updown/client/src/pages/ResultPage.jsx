@@ -2,7 +2,8 @@ import React from 'react';
 import { useEffect, useRef } from 'react';
 import { useLocation,useNavigate } from 'react-router-dom';
 import { Button } from '../components/Button';
-import { Div,Heading } from '../components/Tag';
+import { Div, Heading } from '../components/Tag';
+
 //* ResultPage 컴포넌트 - 결과 페이지
 //* 성공, 실패 결과에 따라 페이지 이동할 예정 - 지금은 성공일 때만 작동
 export function ResultPage() {
@@ -33,9 +34,10 @@ export function ResultPage() {
       <Button btnName={'홈'} onClick={() => navigate(-3)}/>
     </>;   
 
+  
   // * 연속해서 사용되는 history요소들을 묶어서 변수에 담아줌
-  const historyBox = 
   // * history는 최대 4개까지만 생성 되므로, 이후 스타일을 넣을 때, 모든 칸에 underline을 만들어 주기 위해, 밀 p태그를 생성해둠, 
+  const historyBox = 
   <>
     <Div>
       <p>이전에 입력한 숫자</p>
@@ -46,6 +48,7 @@ export function ResultPage() {
     </Div>
   </>;
 
+  // * useEffect를 사용해서 ResultPage가 렌더링 될 때 DB에 저장.
   useEffect(() => {
     if (recordRef.current) return;
     recordRef.current = true;
