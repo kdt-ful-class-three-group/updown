@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
 import { Div } from "../components/Tag";
@@ -18,6 +18,6 @@ import { Div } from "../components/Tag";
         <Button btnName={'NORMAL'} onClick={() => navigate('/normal')}/>
         <Button btnName={'HARD'} onClick={() => navigate('/hard')}/>
       </Div>
-    </Div>
+    </Div> 
   )
 }
