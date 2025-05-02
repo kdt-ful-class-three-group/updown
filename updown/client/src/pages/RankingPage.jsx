@@ -7,7 +7,7 @@ export const RankingPage = () => {
   const [rankingData, setRankingData] = useState([]);
   const [mode, setMode] = useState('easy');
 
-  const fetchRankingData = async (seletMode) => {
+  const fetchRankingData = async () => {
     try {
       const response = await fetch(`http://localhost:8003/ranking?mode=${mode}`);
       if (!response.ok) {
