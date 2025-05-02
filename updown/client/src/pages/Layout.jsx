@@ -2,14 +2,22 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useLogout } from "../components/Auth/Logout";
+import { useNavigate } from "react-router-dom";
 
 export function Layout() {
   
   const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const navigate = useNavigate();
 
   const togglePanel = () => {
     setIsPanelOpen(!isPanelOpen);
   };
+
+  const rankingBtn = () => {
+    // 랭킹 버튼 클릭 시 /ranking 페이지로 이동
+    navigate('/ranking');
+  }
+
 
   const logout = useLogout();
   // 세션 스토리지에서 id를 가져옴
@@ -18,6 +26,7 @@ export function Layout() {
   return (
     <div>
       <header>
+        <button onClick={rankingBtn}>랭킹</button>
         <button className="info" onClick={togglePanel}>내 정보</button>
       </header>
 
