@@ -25,17 +25,12 @@ export function ResultPage() {
 
 
   const successOrFail = status === 'success';
-
-  const key = sessionStorage.getItem("data")
   // * 연속해서 사용되는 button요소들을 묶어서 변수에 담아줌
   const moveEvent = 
     <>
-      <Button btnName={'다시하기'} onClick={() => {sessionStorage.removeItem(key),navigate(-1)}
-        } />
-      <Button btnName={'모드선택'} onClick={() =>
-        navigate(-2)} />
-      <Button btnName={'홈'} onClick={() =>
-        navigate(-3)} />
+      <Button btnName={'다시하기'} onClick={() => { sessionStorage.removeItem('data'); navigate(-1); }} />
+      <Button btnName={'모드선택'} onClick={() => { sessionStorage.removeItem('data'); navigate(-2); }} />
+      <Button btnName={'홈'} onClick={() => { sessionStorage.removeItem('data'); navigate(-3); }} />
     </>;   
 
   
