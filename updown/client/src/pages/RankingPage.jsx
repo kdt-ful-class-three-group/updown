@@ -35,21 +35,11 @@ export const RankingPage = () => {
     mode : item.mode,
     success : item.success,
     total : item.total,
-    rate : Math.round((item.success / item.total) * 100) + '%'
+    rate : Math.round((item.success / item.total) * 100)
   }))
-
-  console.log(sortedData);
-  // 확률 기준으로 정렬
-  sortedData.sort(function (a, b) {
-    if (a.rate > b.rate) {
-      return 1;
-    }
-    if (a.rate < b.rate) {
-      return -1;
-    }
-    // a must be equal to b
-    return 0;
-  });
+  
+  // 내림차순으로 정렬
+  sortedData.sort((a,b) => b.rate - a.rate);
 
   console.log(sortedData);
   return (
@@ -80,7 +70,7 @@ export const RankingPage = () => {
                 <td>{item.mode}</td>
                 <td>{item.success}</td>
                 <td>{item.total}</td>
-                <td>{item.rate}</td>
+                <td>{item.rate + '%'}</td>
               </tr>
             ))}
           </tbody>
