@@ -2,43 +2,57 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useLogout } from "../components/Auth/Logout";
-import { useNavigate } from "react-router-dom";
+
+import { RankingPage } from "./RankingPage";
 
 export function Layout() {
   
-  const [isPanelOpen, setIsPanelOpen] = useState(false);
-  const navigate = useNavigate();
+  // 랭킹,내 정보 상태값
+  const [isInfoOpen, setisInfoOpen] = useState(false);
+  const [isRankOpen, setRankOpen] = useState(false);
 
-  const togglePanel = () => {
-    setIsPanelOpen(!isPanelOpen);
+  //  랭킹버튼,내 정보 버튼 이벤트
+  const rankToggle = () => {
+    setRankOpen(prev => !prev);
+    setisInfoOpen(false);
   };
 
-  const rankingBtn = () => {
-    // 랭킹 버튼 클릭 시 /ranking 페이지로 이동
-    navigate('/ranking');
-  }
+  const infoToggle = () => {
+    setisInfoOpen(prev => !prev);
+    setRankOpen(false);
+  };
 
-
+  // 커스텀 훅
   const logout = useLogout();
+
+
   // 세션 스토리지에서 id를 가져옴
   const username = sessionStorage.getItem("name");
 
   return (
     <div>
       <header>
-        <button onClick={rankingBtn}>랭킹</button>
-        <button className="info" onClick={togglePanel}>내 정보</button>
+        <div className="header">
+          <button className="rank"onClick={rankToggle}>랭킹</button>
+          <button className="info" onClick={infoToggle}>내 정보</button>
+        </div>
       </header>
 
-      {isPanelOpen && (
+      {isInfoOpen && (
         <div className="infoPanel">
           <h2>내 정보</h2>
           <p>{username}님</p>
-          <button onClick={togglePanel}>닫기</button>
+          <button onClick={infoToggle}>닫기</button>
           <button onClick={logout}>로그아웃</button>
-
         </div>
       )}
+      {isRankOpen && (
+        <div className="rankPanel">
+          <RankingPage />
+          <button onClick={rankToggle}>닫기</button>
+        </div>
+      )}
+
 
       <main>
       <Outlet />

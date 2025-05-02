@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useRef } from 'react';
-import { useLocation,useNavigate } from 'react-router-dom';
+import { data, useLocation,useNavigate } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { Div, Heading } from '../components/Tag';
 
@@ -26,12 +26,16 @@ export function ResultPage() {
 
   const successOrFail = status === 'success';
 
+  const key = sessionStorage.getItem("data")
   // * 연속해서 사용되는 button요소들을 묶어서 변수에 담아줌
   const moveEvent = 
     <>
-      <Button btnName={'다시하기'} onClick={() => navigate(-1)}/>
-      <Button btnName={'모드선택'} onClick={() => navigate(-2)}/>
-      <Button btnName={'홈'} onClick={() => navigate(-3)}/>
+      <Button btnName={'다시하기'} onClick={() => {sessionStorage.removeItem(key),navigate(-1)}
+        } />
+      <Button btnName={'모드선택'} onClick={() =>
+        navigate(-2)} />
+      <Button btnName={'홈'} onClick={() =>
+        navigate(-3)} />
     </>;   
 
   
@@ -55,31 +59,41 @@ export function ResultPage() {
 
     const user_id = sessionStorage.getItem('id');
     const mode = queryParams.get('level');
+    const key = 'data';
+    
+    const gameRecordSave = sessionStorage.getItem(key);
+    if (gameRecordSave) {
+      console.log('이미 저장함');
+      return;
+    }
 
     const gameRecord = {
       user_id, // 세션에서 가져온 아이디
       mode, // url에서 가져옴
       success: successOrFail ? 1 : 0,// 성공여부
     };
-
     console.log(gameRecord);
 
-    fetch('http://localhost:8003/record', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(gameRecord),
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log('기록 저장되었습니다.');
-          // alert('기록 저장되었습니다.');
-        } else {
-          console.error('기록 저장 실패');
-          alert('기록 저장 실패');
-        }
-      });
+    sessionStorage.setItem(key, JSON.stringify(gameRecord));
+
+    
+      fetch('http://localhost:8003/record', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(gameRecord),
+
+      })
+        .then((response) => {
+          if (response.ok) {
+            console.log('기록 저장되었습니다.');
+            // alert('기록 저장되었습니다.');
+          } else {
+            console.error('기록 저장 실패');
+            alert('기록 저장 실패');
+          }
+        });
   }, []);
   
   

@@ -9,7 +9,7 @@ import { ModePage } from "./Pages/ModePage";
 import { GamePage } from "./Pages/GamePage";
 import { SignUpPage } from "./Pages/SignUpPage";
 import { ResultPage } from "./Pages/ResultPage";
-import { RankingPage } from "./Pages/RankingPage";
+// import { RankingPage } from "./Pages/RankingPage";
 import { Provider } from './context/MessageContext';
 
 import "./App.css";
@@ -24,7 +24,7 @@ function App() {
         <Route path="/" element={<StartPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/ranking" element={<RankingPage />} />
+        {/* <Route path="/ranking" element={<RankingPage />} /> */}
 
         <Route element={<Layout />}>
           <Route path="/mode" element={<ModePage />} />
