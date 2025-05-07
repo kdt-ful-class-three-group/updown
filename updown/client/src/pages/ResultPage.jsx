@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { data, useLocation,useNavigate } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { Div, Heading } from '../components/Tag';
-import { setEmitFlags } from 'typescript';
+// import { setEmitFlags } from 'typescript';
 
 
 //* ResultPage 컴포넌트 - 결과 페이지
@@ -51,6 +51,14 @@ export function ResultPage() {
 
   // * useEffect를 사용해서 ResultPage가 렌더링 될 때 DB에 저장.
   useEffect(() => {
+    if(!sessionStorage.getItem('id') || !sessionStorage.getItem('passed')) {
+      // 세션이 없는 상태에서 접근하면 오류를 발생
+      console.log('유효하지 않는 접근입니다.')
+      sessionStorage.removeItem('passed');
+      sessionStorage.removeItem('data');
+      navigate('/mode');
+
+    } else {
     if (recordRef.current) return;
     recordRef.current = true;
 
@@ -94,13 +102,7 @@ export function ResultPage() {
           }
         });
     }
-    else{
-      // 세션이 없는 상태에서 접근하면 오류를 발생
-      alert('유효하지 않는 접근입니다.')
-      sessionStorage.removeItem('passed');
-      sessionStorage.removeItem('data');
-      navigate('/mode')
-    }
+  }
   }, []);
   
   
