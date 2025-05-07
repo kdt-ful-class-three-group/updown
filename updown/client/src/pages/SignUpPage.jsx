@@ -6,8 +6,10 @@ import { SignUpValid } from "./SignValid"
 export const SignUpPage = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordCheck, setPasswordCheck] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [hidePw, setHidePw] = useState(true);
 
   const navigate = useNavigate();
 
@@ -18,6 +20,7 @@ export const SignUpPage = () => {
     // }
 
     // 유효성검사가 true면 실행
+    if(password === passwordCheck) {
     const validPass = SignUpValid({id, password, name, email})
 
     // 유효성 통과가 확인되면 실행
@@ -41,15 +44,23 @@ export const SignUpPage = () => {
         console.log(`${err} 에러발생`);
       }
     };
+  } else {
+    console.log('비밀번호가 틀림');
+  }
+  }
 
+  const showPw = () => {
+    setHidePw(!hidePw);
   }
 
   return <>
     <h1>회원가입</h1>
     <div>
-      <input type="text" placeholder="아이디" value={id} onChange={(e) => setId(e.target.value)} />
-      <input type="password" placeholder="비밀번호" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <input type="text" placeholder="아이디" value={id} name='user_id' onChange={(e) => setId(e.target.value)} />
+      <input type={hidePw ? "password" : "text"} placeholder="비밀번호" value={password} name="pw" onChange={(e) => setPassword(e.target.value)} />
+      <input  type={hidePw ? "password" : "text"} placeholder="비밀번호 체크" value={passwordCheck} name="pw_check" onChange={(e) => setPasswordCheck(e.target.value)} />
       <input type="text" placeholder="이름" name="name" value={name} onChange={(e) => setName(e.target.value)} />
+      <button onMouseDown={() => { showPw(); }} onMouseUp={() => { showPw() }}>비밀번호 확인</button>
       <input type="text" placeholder="이메일" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
       <Button btnName={"가입"} type="submit" onClick={onClickBtn} />
     </div>
