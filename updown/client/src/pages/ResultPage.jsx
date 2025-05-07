@@ -32,7 +32,7 @@ export function ResultPage() {
     <>
       <Button btnName={'다시하기'} onClick={() => { sessionStorage.removeItem('data'); navigate(-1); }} />
       <Button btnName={'모드선택'} onClick={() => { sessionStorage.removeItem('data'); navigate(-2); }} />
-      <Button btnName={'홈'} onClick={() => {sessionStorage.removeItem('data'); sessionStorage.removeItem('passed'); navigate(-3);}} />
+      <Button btnName={'홈'} onClick={() => {sessionStorage.removeItem('data'); navigate(-3);}} />
     </>;   
 
   
