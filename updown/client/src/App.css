@@ -101,3 +101,8 @@ button:hover {
   justify-content: center;
   align-items: center;
 }
+
+.button_zip {
+  display: flex;
+  flex-direction: row;
+}

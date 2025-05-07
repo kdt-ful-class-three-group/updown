@@ -78,7 +78,10 @@ export const SignUpPage = () => {
       }}>비밀번호 확인</button>
       <input type="text" placeholder="이름" name="name" value={name} onChange={(e) => setName(e.target.value)} />
       <input type="text" placeholder="이메일" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <div className="button_zip">
       <Button btnName={"가입"} type="submit" onClick={onClickBtn} />
+      <button onClick={() => {navigate(-1)}}>취소</button>
+      </div>
     </div>
   </>
 }
