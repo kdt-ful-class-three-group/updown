@@ -76,7 +76,7 @@ export const SignUpPage = () => {
           pw_check.type = 'password';
         }
       }}>비밀번호 확인</button>
-      <input type="text" placeholder="이름" name="name" value={name} onChange={(e) => setName(e.target.value)} />
+      <input type="text" placeholder="닉네임" name="name" value={name} onChange={(e) => setName(e.target.value)} />
       <input type="text" placeholder="이메일" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
       <div className="button_zip">
       <Button btnName={"가입"} type="submit" onClick={onClickBtn} />
