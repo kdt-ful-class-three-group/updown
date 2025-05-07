@@ -80,3 +80,24 @@ button {
 button:hover {
   background-color: #388e3c;
 }
+
+.login_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.password_check {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.password {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,7 +1,8 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Button } from "../components/Button"
 import { SignUpValid } from "./SignValid"
+import { useMessage } from "../context/MessageContext"
 
 export const SignUpPage = () => {
   const [id, setId] = useState("");
@@ -9,7 +10,7 @@ export const SignUpPage = () => {
   const [passwordCheck, setPasswordCheck] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [hidePw, setHidePw] = useState(true);
+  const {message, setMessage} = useMessage();
 
   const navigate = useNavigate();
 
@@ -49,18 +50,33 @@ export const SignUpPage = () => {
   }
   }
 
-  const showPw = () => {
-    setHidePw(!hidePw);
-  }
+  useEffect(() => {
+    if(password !== passwordCheck) {
+    setMessage('비밀번호를 다시 확인해 주세요.');
+    } else {
+    setMessage('');
+    }
+  }, [password, passwordCheck])
 
   return <>
     <h1>회원가입</h1>
-    <div>
+    <div className="login_form">
       <input type="text" placeholder="아이디" value={id} name='user_id' onChange={(e) => setId(e.target.value)} />
-      <input type={hidePw ? "password" : "text"} placeholder="비밀번호" value={password} name="pw" onChange={(e) => setPassword(e.target.value)} />
-      <input  type={hidePw ? "password" : "text"} placeholder="비밀번호 체크" value={passwordCheck} name="pw_check" onChange={(e) => setPasswordCheck(e.target.value)} />
+      <input type="password" placeholder="비밀번호" value={password} name="pw" onChange={(e) => setPassword(e.target.value)} />
+      <input type="password" placeholder="비밀번호 체크" value={passwordCheck} name="pw_check" onChange={(e) => setPasswordCheck(e.target.value)} />
+      <div>{message}</div>
+      <button onClick={() => {
+        const pw = document.querySelectorAll('input')[1];
+        const pw_check = document.querySelectorAll('input')[2];
+        if(pw.type === 'password') {
+          pw.type = 'text';
+          pw_check.type = 'text';
+        } else {
+          pw.type = 'password';
+          pw_check.type = 'password';
+        }
+      }}>비밀번호 확인</button>
       <input type="text" placeholder="이름" name="name" value={name} onChange={(e) => setName(e.target.value)} />
-      <button onMouseDown={() => { showPw(); }} onMouseUp={() => { showPw() }}>비밀번호 확인</button>
       <input type="text" placeholder="이메일" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
       <Button btnName={"가입"} type="submit" onClick={onClickBtn} />
     </div>
