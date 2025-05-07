@@ -68,6 +68,9 @@ export function ResultPage() {
     
     const gameRecordSave = sessionStorage.getItem(key);
     if (gameRecordSave) {
+      sessionStorage.removeItem('passed');
+      sessionStorage.removeItem('data');
+      navigate('/mode');
       console.log('이미 저장함');
       return;
     }
