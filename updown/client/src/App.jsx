@@ -14,6 +14,7 @@ import { Provider } from './context/MessageContext';
 
 import "./App.css";
 import { IdCheck } from "./components/Auth/IdCheck";
+import { GameProvider } from "./components/GameContext";
 
 // 라우터 경로설정
 function App() {
@@ -21,6 +22,7 @@ function App() {
     // <Routes> 컴포넌트는 react-router-dom에서 제공하는 라우팅 기능을 사용하기 위한 컴포넌트 그리고 각 경로에 해당하는 컴포넌트를 지정
     // path는 URL 경로를 지정
     <Provider>
+      <GameProvider>
       <Routes>
         <Route path="/" element={<StartPage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -34,6 +36,7 @@ function App() {
         </Route>
 
       </Routes>
+      </GameProvider>
     </Provider>
       
   );

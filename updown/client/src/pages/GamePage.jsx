@@ -13,6 +13,8 @@ import { InputNum } from '../utils/InputNum';
 import { Div, Heading } from '../components/Tag';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
+// * useGame이라는 변수안에 GameContext의 내용을 가져온다.
+import { useGame } from '../components/GameContext'; 
 
 //*  이지,노말,하드 모두 한 템플릿(GamePage)에서 작동
 
@@ -37,19 +39,31 @@ export function GamePage() {
   const [history, setHistory] = useState([]);
   const [status, setStatus] = useState(null);
 
+  // * useGame의 randomNum과 setRandomNum을 매개변수로 가져와서 사용할 수 있게 한다.
+  const { randomNum, setRandomNum } = useGame();
 
   //! randomNum을 한 번만 초기화
-  const randomNum = useRef(null);
+  const randomNumRef = useRef(null);
   // useEffect를 통해 randomNum을 초기화
   useEffect(() => {
     // 시작할 때 콘솔이 두번찍히는 이유는 main.jsx에  <StrictMode>가 있기 때문. 두번 렌더링되서 그런것
     // StrictMode를 제거하면 한 번만 렌더링됨 or if (randomNum.current === null) 조건을 추가해서 한 번만 렌더링되게 할 수 있음
-    if (randomNum.current === null) {
-      randomNum.current = Math.floor(Math.random() * maxNum) + 1;
+    if (randomNumRef.current === null) {
+      randomNumRef.current = Math.floor(Math.random() * maxNum) + 1;
+      // * randomNum의 값을 randomNumRef의 값으로 변경한다.
+      setRandomNum(randomNumRef.current);
       console.log(`Game Start! - ${level} mode`);
-      console.log(randomNum.current);
+      console.log(randomNumRef.current);
     }
-  }, [maxNum]);
+  }, [maxNum, randomNum, level]);
+
+  // * randomNum의 값이 변경 될 때, 랜덤넘버 값을 표출한다.
+  // ! 디버깅 용
+  useEffect(() => {
+    if (randomNum !== null) {
+      console.log("랜덤넘버:", randomNum);
+    }
+  }, [randomNum]);
 
   // 다시하기를 했을 때 up,down 메세지가 그대로 남아있어 useEffect를 사용하여 message를 초기화
   useEffect(() => {
@@ -90,7 +104,7 @@ export function GamePage() {
             InputNum({
               value: inputValue,
               max: maxNum,
-              answer: randomNum.current,
+              answer: randomNumRef.current,
               setMessage,
               count,
               setCount,
