@@ -1,5 +1,5 @@
 // 리액트, 훅
-import React, { useMemo, useRef, useState, useEffect} from 'react';
+import React, { useMemo, useRef, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useMessage } from '../context/MessageContext';
 
@@ -27,7 +27,7 @@ export function GamePage() {
   // useMessage는 MessageContext에서 만든 커스텀 훅
   const { message, setMessage } = useMessage();
   // useMemo를 통해 level에 따라 maxNum을 설정
-  
+
   // levelData에서 level에 해당하는 설정값을 가져옴
   const setting = useMemo(() => levelData[level], [level]);
   const maxNum = setting.max;
@@ -47,6 +47,7 @@ export function GamePage() {
       randomNum.current = Math.floor(Math.random() * maxNum) + 1;
       console.log(`Game Start! - ${level} mode`);
       console.log(randomNum.current);
+      // 중복 쿼리스트링 방지를 위한 조건
     }
   }, [maxNum]);
 
@@ -59,6 +60,9 @@ export function GamePage() {
   // * status는 success, fail로 나뉨 => InputNum에 status를 변경하는 코드가 있음.
   useEffect(() => {
     if (status !== null) {
+      // 버튼을 누르면 게임을 플레이 한 것으로 판단하여 true로 세션 저장
+      sessionStorage.setItem('passed',true)
+      
       // * 들어오는 status에 따라 header에 성공, 실패가 결정되고, history의 데이터를 통해, 이전에 입력한 숫자에 대한 내용이 결정 된다.
       // * navigate를 GamePage에서 관리를 하는 이유는 InputNum에서는 status와 history를 InputNum 함수의 매개 변수로 받아오는데, 그러면 useEffect를 사용해 status와 history를 관리 할 수 없다. 그리고, useEffect를 사용해야 하는 이유는, status와 history가 바뀐 이후에 navigate를 해야 하는데, useEffect를 사용하지 않으면, navigate가 먼저 실행되고, history가 바뀌지 않고 넘어가 마지막으로 입력한 history가 추가 되지 않기 때문. 
       navigate(`/result?status=${status}&history=${history}&level=${level}`);

@@ -3,6 +3,8 @@ import { useEffect, useRef } from 'react';
 import { data, useLocation,useNavigate } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { Div, Heading } from '../components/Tag';
+import { setEmitFlags } from 'typescript';
+
 
 //* ResultPage 컴포넌트 - 결과 페이지
 //* 성공, 실패 결과에 따라 페이지 이동할 예정 - 지금은 성공일 때만 작동
@@ -30,7 +32,7 @@ export function ResultPage() {
     <>
       <Button btnName={'다시하기'} onClick={() => { sessionStorage.removeItem('data'); navigate(-1); }} />
       <Button btnName={'모드선택'} onClick={() => { sessionStorage.removeItem('data'); navigate(-2); }} />
-      <Button btnName={'홈'} onClick={() => { sessionStorage.removeItem('data'); navigate(-3); }} />
+      <Button btnName={'홈'} onClick={() => {sessionStorage.removeItem('data'); sessionStorage.removeItem('passed'); navigate(-3);}} />
     </>;   
 
   
@@ -71,7 +73,9 @@ export function ResultPage() {
 
     sessionStorage.setItem(key, JSON.stringify(gameRecord));
 
-    
+    const validPass = sessionStorage.getItem('passed')
+
+    if(validPass){
       fetch('http://localhost:8003/record', {
         method: 'POST',
         headers: {
@@ -89,6 +93,14 @@ export function ResultPage() {
             alert('기록 저장 실패');
           }
         });
+    }
+    else{
+      // 세션이 없는 상태에서 접근하면 오류를 발생
+      alert('유효하지 않는 접근입니다.')
+      sessionStorage.removeItem('passed');
+      sessionStorage.removeItem('data');
+      navigate('/mode')
+    }
   }, []);
   
   
