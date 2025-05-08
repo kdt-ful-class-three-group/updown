@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { Button } from "../components/Button"
 import { SignUpValid } from "./SignValid"
 import { checkedIdName } from "../components/Auth/CheckIdName"
+import { useMessage } from "../context/MessageContext";
 
 export const SignUpPage = () => {
   // 상태값 관리
@@ -11,13 +12,9 @@ export const SignUpPage = () => {
   const [passwordCheck, setPasswordCheck] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState({ id: '', name: '', password: '' });
+  const { message, setMessage } = useMessage();
 
   const navigate = useNavigate();
-
-  const updateMessage = (field, text) => {
-    setMessage(prev => ({ ...prev, [field]: text }));
-  };
 
   const onClickBtn = async () => {
     // 유효성검사가 true면 실행
@@ -64,9 +61,9 @@ export const SignUpPage = () => {
 
   useEffect(() => {
     if(password !== passwordCheck) {
-    updateMessage('password', '비밀번호를 다시 확인해 주세요.');
+    setMessage(prev => ({ ...prev, password: '비밀번호를 다시 확인해 주세요.' }))
     } else {
-    updateMessage('password', '');
+    setMessage(prev => ({ ...prev, password: '' }))
     }
   }, [password, passwordCheck])
 
@@ -79,7 +76,7 @@ export const SignUpPage = () => {
       <div className="form-group">
           <input type="text" placeholder="아이디" value={id} name='user_id' onChange={(e) => setId(e.target.value)} />
           <div className="form-message">{message.id}</div>
-          <button className="signup-btn" onClick={() => { checkedIdName({ field: 'id', value: id, setMessage: (msg) => updateMessage('id', msg) }) }}>중복확인</button>
+          <button className="signup-btn" onClick={() => { checkedIdName({ field: 'id', value: id, setMessage: msg => setMessage(prev => ({ ...prev, id: msg })) }) }}>중복확인</button>
       </div>
 
       <div className="form-group">
@@ -95,7 +92,7 @@ export const SignUpPage = () => {
       <div className="form-group">
           <input type="text" placeholder="이름" name="name" value={name} onChange={(e) => setName(e.target.value)} />
         <div className="form-message">{message.name}</div>
-          <button className="signup-btn" onClick={() => { checkedIdName({ field: 'name', value: name, setMessage: (msg) => updateMessage('name', msg) }) } }>중복확인</button>
+          <button className="signup-btn" onClick={() => { checkedIdName({ field: 'name', value: name, setMessage: msg => setMessage(prev => ({ ...prev, name: msg })) }) } }>중복확인</button>
       </div>
 
       <div className="form-group">
