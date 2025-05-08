@@ -90,20 +90,6 @@ button:hover {
   padding: 1rem;
 }
 
-.password_check {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.password {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .signup-btn {
   background-color: #e0e0e0;
   color: #333;
@@ -111,9 +97,10 @@ button:hover {
   border-radius: 6px;
   border: 1px solid #ccc;
   cursor: pointer;
-  margin-left: 0.5rem;
   font-size: 0.85rem;
-  width:  100px;
+  width: auto;
+  height: 2.4em;
+  align-self: flex-start;
 }
 
 .form-group {
@@ -123,15 +110,7 @@ button:hover {
   width: 100%;
   max-width: 400px;
 }
-
-.input-row {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  width: 100%;
-}
-
-.input-row input {
+.form-group input {
   width: 200px;
   padding: 0.5em;
   font-size: 1rem;

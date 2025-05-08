@@ -5,6 +5,7 @@ import { SignUpValid } from "./SignValid"
 import { checkedIdName } from "../components/Auth/CheckIdName"
 
 export const SignUpPage = () => {
+  // 상태값 관리
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
@@ -74,38 +75,35 @@ export const SignUpPage = () => {
   return <>
     <h1>회원가입</h1>
     <div className="signup-form">
+
       <div className="form-group">
-        <div className="input-row">
           <input type="text" placeholder="아이디" value={id} name='user_id' onChange={(e) => setId(e.target.value)} />
+          <div className="form-message">{message.id}</div>
           <button className="signup-btn" onClick={() => { checkedIdName({ field: 'id', value: id, setMessage: (msg) => updateMessage('id', msg) }) }}>중복확인</button>
-        </div>
-        <div className="form-message">{message.id}</div>
       </div>
+
       <div className="form-group">
-        <div className="input-row">
           <input type="password" placeholder="비밀번호" value={password} name="pw" onChange={(e) => setPassword(e.target.value)} />
-        </div>
       </div>
+
       <div className="form-group">
-        <div className="input-row">
           <input type="password" placeholder="비밀번호 체크" value={passwordCheck} name="pw_check" onChange={(e) => setPasswordCheck(e.target.value)} />
+          <div className="form-message">{message.password}</div>
           <button className="signup-btn" onClick={passwordCheckBtn}>비밀번호 확인</button>
-        </div>
-        <div className="form-message">{message.password}</div>
       </div>
+      
       <div className="form-group">
-        <div className="input-row">
           <input type="text" placeholder="이름" name="name" value={name} onChange={(e) => setName(e.target.value)} />
-          <button className="signup-btn" onClick={() => { checkedIdName({ field: 'name', value: name, setMessage: (msg) => updateMessage('name', msg) }) } }>중복확인</button>
-        </div>
         <div className="form-message">{message.name}</div>
+          <button className="signup-btn" onClick={() => { checkedIdName({ field: 'name', value: name, setMessage: (msg) => updateMessage('name', msg) }) } }>중복확인</button>
       </div>
+
       <div className="form-group">
-        <div className="input-row">
           <input type="text" placeholder="이메일" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </div>
       </div>
+
       <Button btnName={"가입"} type="submit" onClick={onClickBtn} />
+
     </div>
   </>
 }
