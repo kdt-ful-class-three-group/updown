@@ -18,13 +18,14 @@ export const SignUpPage = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({id : id}),
+        body: JSON.stringify({id : (id !== "" ? id : null ), name : (name !== "" ? name : null )}),
       });
   
-      const data = await res.json();
-      console.log(data);
+      const {idData, nameData} = await res.json();
+      console.log('id:',idData);
+      console.log('name:',nameData);
       // true, false값을 받아옴.
-      setValidID(data);
+      setValidID(idData);
     } catch (err) {
       console.log(`${err} 에러발생`);
     }
