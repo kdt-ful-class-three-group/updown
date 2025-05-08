@@ -81,11 +81,13 @@ button:hover {
   background-color: #388e3c;
 }
 
-.login_form {
+.signup-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
+  padding: 1rem;
 }
 
 .password_check {
@@ -100,4 +102,51 @@ button:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.signup-btn {
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 0.3em 0.8em;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+  width:  100px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 400px;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.input-row input {
+  width: 200px;
+  padding: 0.5em;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.form-message {
+  font-size: 0.85rem;
+  color: #d32f2f;
+  margin-top: 0.25rem;
+  margin-left: 0.25rem;
+  text-align: left;
+  width: 100%;
+  max-width: 400px;
+  min-height: 1.2em;
 }

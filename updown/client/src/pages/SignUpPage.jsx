@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Button } from "../components/Button"
 import { SignUpValid } from "./SignValid"
-import { useMessage } from "../context/MessageContext"
+import { checkedIdName } from "../components/Auth/CheckIdName"
 
 export const SignUpPage = () => {
   const [id, setId] = useState("");
@@ -10,16 +10,15 @@ export const SignUpPage = () => {
   const [passwordCheck, setPasswordCheck] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const {message, setMessage} = useMessage();
+  const [message, setMessage] = useState({ id: '', name: '', password: '' });
 
   const navigate = useNavigate();
 
-  const onClickBtn = async () => {
-    // if (id === "" || password === "" || name === "" || email === "") {
-    //   alert("모든 필드를 입력해주세요.");
-    //   return;
-    // }
+  const updateMessage = (field, text) => {
+    setMessage(prev => ({ ...prev, [field]: text }));
+  };
 
+  const onClickBtn = async () => {
     // 유효성검사가 true면 실행
     if(password === passwordCheck) {
     const validPass = SignUpValid({id, password, name, email})
@@ -50,34 +49,62 @@ export const SignUpPage = () => {
   }
   }
 
+  const passwordCheckBtn = () => {
+    const pw = document.querySelectorAll('input')[1];
+    const pw_check = document.querySelectorAll('input')[2];
+    if (pw.type === 'password') {
+      pw.type = 'text';
+      pw_check.type = 'text';
+    } else {
+      pw.type = 'password';
+      pw_check.type = 'password';
+    }
+  };
+
   useEffect(() => {
     if(password !== passwordCheck) {
-    setMessage('비밀번호를 다시 확인해 주세요.');
+    updateMessage('password', '비밀번호를 다시 확인해 주세요.');
     } else {
-    setMessage('');
+    updateMessage('password', '');
     }
   }, [password, passwordCheck])
 
+
+
   return <>
     <h1>회원가입</h1>
-    <div className="login_form">
-      <input type="text" placeholder="아이디" value={id} name='user_id' onChange={(e) => setId(e.target.value)} />
-      <input type="password" placeholder="비밀번호" value={password} name="pw" onChange={(e) => setPassword(e.target.value)} />
-      <input type="password" placeholder="비밀번호 체크" value={passwordCheck} name="pw_check" onChange={(e) => setPasswordCheck(e.target.value)} />
-      <div>{message}</div>
-      <button onClick={() => {
-        const pw = document.querySelectorAll('input')[1];
-        const pw_check = document.querySelectorAll('input')[2];
-        if(pw.type === 'password') {
-          pw.type = 'text';
-          pw_check.type = 'text';
-        } else {
-          pw.type = 'password';
-          pw_check.type = 'password';
-        }
-      }}>비밀번호 확인</button>
-      <input type="text" placeholder="이름" name="name" value={name} onChange={(e) => setName(e.target.value)} />
-      <input type="text" placeholder="이메일" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+    <div className="signup-form">
+      <div className="form-group">
+        <div className="input-row">
+          <input type="text" placeholder="아이디" value={id} name='user_id' onChange={(e) => setId(e.target.value)} />
+          <button className="signup-btn" onClick={() => { checkedIdName({ field: 'id', value: id, setMessage: (msg) => updateMessage('id', msg) }) }}>중복확인</button>
+        </div>
+        <div className="form-message">{message.id}</div>
+      </div>
+      <div className="form-group">
+        <div className="input-row">
+          <input type="password" placeholder="비밀번호" value={password} name="pw" onChange={(e) => setPassword(e.target.value)} />
+        </div>
+      </div>
+      <div className="form-group">
+        <div className="input-row">
+          <input type="password" placeholder="비밀번호 체크" value={passwordCheck} name="pw_check" onChange={(e) => setPasswordCheck(e.target.value)} />
+          <button className="signup-btn" onClick={passwordCheckBtn}>비밀번호 확인</button>
+        </div>
+        <div className="form-message">{message.password}</div>
+      </div>
+      <div className="form-group">
+        <div className="input-row">
+          <input type="text" placeholder="이름" name="name" value={name} onChange={(e) => setName(e.target.value)} />
+          <button className="signup-btn" onClick={() => { checkedIdName({ field: 'name', value: name, setMessage: (msg) => updateMessage('name', msg) }) } }>중복확인</button>
+        </div>
+        <div className="form-message">{message.name}</div>
+      </div>
+      <div className="form-group">
+        <div className="input-row">
+          <input type="text" placeholder="이메일" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </div>
+      </div>
       <Button btnName={"가입"} type="submit" onClick={onClickBtn} />
     </div>
   </>
