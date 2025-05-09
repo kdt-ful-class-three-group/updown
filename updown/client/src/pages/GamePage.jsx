@@ -69,52 +69,53 @@ export function GamePage() {
         navigate(`/result?status=${status}&history=${history}&level=${level}`);
       }
     }, [status, history])
-   }
+  
 
     // inputHandler는 input값을 관리하는 함수
     const inputHandler = (e) => {
       setInputValue(e.target.value);
     };
 
-  return (
-    <Div>
+    return (
       <Div>
-        <Heading number={1} content={level} />
+        <Div>
+          <Heading number={1} content={level} />
+        </Div>
+        <Div>
+          {/* UP,DOWN 메세지가 들어갈 컨테이너  */}
+          <Heading number={1} content={message} />
+          <Div className={count === 1 ? "color-red" : ""} children={`남은기회 : ${count}`} />
+        </Div>
+        <Div>
+          <Input value={inputValue} onChange={inputHandler} />
+          <Button
+            btnName="확인"
+            onClick={() =>
+              InputNum({
+                value: inputValue,
+                max: maxNum,
+                answer: randomNum.current,
+                setMessage,
+                count,
+                setCount,
+                history,
+                setHistory,
+                setStatus
+              })
+            }
+          />
+        </Div>
+        <Div>
+          <p>이전에 입력한 숫자</p>
+          <p>{history[0]}</p>
+          <p>{history[1]}</p>
+          <p>{history[2]}</p>
+          <p>{history[3]}</p>
+        </Div>
+        <div>
+          <button className='all-btn' onClick={() => navigate('/mode')}>처음으로</button>
+        </div>
       </Div>
-      <Div>
-        {/* UP,DOWN 메세지가 들어갈 컨테이너  */}
-        <Heading number={1} content={message} />
-        <Div className={count === 1 ? "color-red" : ""} children={`남은기회 : ${count}`} />
-      </Div>
-      <Div>
-        <Input value={inputValue} onChange={inputHandler} />
-        <Button
-          btnName="확인"
-          onClick={() =>
-            InputNum({
-              value: inputValue,
-              max: maxNum,
-              answer: randomNum.current,
-              setMessage,
-              count,
-              setCount,
-              history,
-              setHistory,
-              setStatus
-            })
-          }
-        />
-      </Div>
-      <Div>
-        <p>이전에 입력한 숫자</p>
-        <p>{history[0]}</p>
-        <p>{history[1]}</p>
-        <p>{history[2]}</p>
-        <p>{history[3]}</p>
-      </Div>
-      <div>
-        <button className='all-btn' onClick={() => navigate('/mode')}>처음으로</button>
-      </div>
-    </Div>
-  );
+    );
+  }
 }
