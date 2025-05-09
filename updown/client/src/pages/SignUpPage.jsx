@@ -16,8 +16,13 @@ export const SignUpPage = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setMessage("");
+  }, [])
+
   const onClickBtn = async () => {
     // 유효성검사가 true면 실행
+    if(message.id === "사용가능한 아이디입니다." && message.name === "사용가능한 닉네임입니다." && message.password === "") {
     if(password === passwordCheck) {
     const validPass = SignUpValid({id, password, name, email})
 
@@ -45,7 +50,10 @@ export const SignUpPage = () => {
   } else {
     console.log('비밀번호가 틀림');
   }
+  } else {
+    alert('중복체크를 전부 진행해 주세요.')
   }
+}
 
   const passwordCheckBtn = () => {
     const pw = document.querySelectorAll('input')[1];
@@ -74,7 +82,7 @@ export const SignUpPage = () => {
 
       <div className="form-group">
         <div className="input-with-button">
-          <input type="text" placeholder="아이디" value={id} name='user_id' onChange={(e) => setId(e.target.value)} />
+          <input type="text" placeholder="아이디" value={id} name='user_id' onChange={(e) => {setId(e.target.value); message.id = ""}} />
           <button className="input-inline-btn" onClick={() => { checkedIdName({ field: 'id', value: id, setMessage: msg => setMessage(prev => ({ ...prev, id: msg })) }) }}>확인</button>
         </div>
         <div className={message.id === '사용가능한 아이디입니다.' ? "form-message color-blue" : "form-message color-red"}>{message.id}</div>
@@ -97,7 +105,7 @@ export const SignUpPage = () => {
       
       <div className="form-group">
         <div className="input-with-button">
-          <input type="text" placeholder="이름" name="name" value={name} onChange={(e) => setName(e.target.value)} />
+          <input type="text" placeholder="이름" name="name" value={name} onChange={(e) => {setName(e.target.value); message.name = ""}} />
           <button className="input-inline-btn" onClick={() => { checkedIdName({ field: 'name', value: name, setMessage: msg => setMessage(prev => ({ ...prev, name: msg })) }) } }>확인</button>
         </div>
         <div className={message.name === '사용가능한 닉네임입니다.' ? "form-message color-blue" : "form-message color-red"}>{message.name}</div>
@@ -110,7 +118,7 @@ export const SignUpPage = () => {
         <div className="form-message"></div>
       </div>
 
-      <button className="all-btn" type="submit" onClick={onClickBtn}>가입</button>
+      <button className="signup-btn" type="submit" onClick={onClickBtn}>가입</button>
      
     </div>
   </>
