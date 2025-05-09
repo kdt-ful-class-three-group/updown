@@ -80,3 +80,9 @@ button {
 button:hover {
   background-color: #388e3c;
 }
+
+.signup {
+  display: flex;
+  flex-direction: column;
+
+}
