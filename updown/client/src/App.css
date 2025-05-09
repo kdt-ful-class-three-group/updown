@@ -206,6 +206,42 @@
 .hard:hover {
   background-color: #cc0000;
 }
+.hard:hover{
+  background-color: #CC0000;
+}
+
+.history-box {
+  width: 200px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+.history {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid gray;
+  height: 40px;
+  width: 90%;
+}
+
+/* .result-box {
+  display: flex;
+  justify-content: center;
+} */
+
+.start {
+  height: 30px;
+}
+
+.end {
+  margin-bottom: 10px;
+}
 
  /* 랭킹 리스트 정렬 및 표 */
 .ranking-table {
@@ -304,10 +340,6 @@
   background-color: #5a6268;
 }
 
-.history-box {
-  height: 12em;
-  overflow-y: auto;
-}
 .start-btn {
     position: fixed;
     bottom: 15%;

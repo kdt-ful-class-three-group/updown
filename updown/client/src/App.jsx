@@ -2,15 +2,14 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 // 템플릿이 들어가있는 페이지들
-import { Layout } from "./Pages/Layout";
+import { Layout } from "./pages/Layout";
 import { StartPage } from "./Pages/StartPage";
 import { LoginPage } from "./Pages/LoginPage";
 import { ModePage } from "./Pages/ModePage";
 import { GamePage } from "./Pages/GamePage";
-import { SignUpPage } from "./Pages/SignUpPage";
-import { ResultPage } from "./Pages/ResultPage";
-// import { RankingPage } from "./Pages/RankingPage";
-import { Provider } from './context/MessageContext';
+import { SignUpPage } from "./pages/SignUpPage";
+import { ResultPage } from "./pages/ResultPage";
+import { Provider } from "./context/MessageContext";
 
 import "./App.css";
 import { IdCheck } from "./components/Auth/IdCheck";
@@ -25,17 +24,35 @@ function App() {
         <Route path="/" element={<StartPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        {/* <Route path="/ranking" element={<RankingPage />} /> */}
 
         <Route element={<Layout />}>
-          <Route path="/mode" element={<IdCheck><ModePage /></IdCheck>} />
-          <Route path="/:level" element={<IdCheck><GamePage /></IdCheck>} />
-          <Route path="/result" element={<IdCheck><ResultPage /></IdCheck>} />
+          <Route
+            path="/mode"
+            element={
+              <IdCheck>
+                <ModePage />
+              </IdCheck>
+            }
+          />
+          <Route
+            path="/:level"
+            element={
+              <IdCheck>
+                <GamePage />
+              </IdCheck>
+            }
+          />
+          <Route
+            path="/result"
+            element={
+              <IdCheck>
+                <ResultPage />
+              </IdCheck>
+            }
+          />
         </Route>
-
       </Routes>
     </Provider>
-      
   );
 }
 
