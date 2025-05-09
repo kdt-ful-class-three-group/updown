@@ -47,7 +47,7 @@ export function Layout() {
         </div>
       )}
       {isRankOpen && (
-        <div className="rankPanel">
+        <div className="rankPanel d-flex column j-between a-center">
           <RankingPage />
           <button className="all-btn" onClick={rankToggle}>닫기</button>
         </div>

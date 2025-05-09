@@ -1,3 +1,32 @@
+/* * 유틸리티 클래스 */
+
+.d-flex {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.j-end {
+  justify-content: flex-end;
+}
+
+.j-between {
+  justify-content: space-between;
+}
+
+.a-center {
+  align-items: center;
+}
+
+.a-end {
+  align-items: flex-end;
+}
+
+/* * 스타일 시작 */
+
+
 #root {
   max-width: 60%;
   margin: 0 auto;
@@ -64,6 +93,8 @@
   border-radius: 12px;
   transition: opacity 0.3s ease-in-out;
 }
+
+
 
 /** 내정보 버튼 */
 .info {
