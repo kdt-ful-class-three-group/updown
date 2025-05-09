@@ -18,62 +18,63 @@ import { Input } from '../components/Input';
 
 export function GamePage() {
   // useParams를 통해 url에서 level(easy, normal, hard) 가져오기
-  const { level } = useParams();
+  if (sessionStorage.getItem('id')) {
+    const { level } = useParams();
 
-  const navigate = useNavigate();
-  // useState를 통해 input값을 관리
-  const [inputValue, setInputValue] = useState('');
-  // useMessage를 통해 message값을 관리
-  // useMessage는 MessageContext에서 만든 커스텀 훅
-  const { message, setMessage } = useMessage();
-  // useMemo를 통해 level에 따라 maxNum을 설정
+    const navigate = useNavigate();
+    // useState를 통해 input값을 관리
+    const [inputValue, setInputValue] = useState('');
+    // useMessage를 통해 message값을 관리
+    // useMessage는 MessageContext에서 만든 커스텀 훅
+    const { message, setMessage } = useMessage();
+    // useMemo를 통해 level에 따라 maxNum을 설정
 
-  // levelData에서 level에 해당하는 설정값을 가져옴
-  const setting = useMemo(() => levelData[level], [level]);
-  const maxNum = setting.max;
-  const [count, setCount] = useState(setting.count);
-  // * history와 status는 바뀔 값들이기에 useState를 통해 관리
-  const [history, setHistory] = useState([]);
-  const [status, setStatus] = useState(null);
+    // levelData에서 level에 해당하는 설정값을 가져옴
+    const setting = useMemo(() => levelData[level], [level]);
+    const maxNum = setting.max;
+    const [count, setCount] = useState(setting.count);
+    // * history와 status는 바뀔 값들이기에 useState를 통해 관리
+    const [history, setHistory] = useState([]);
+    const [status, setStatus] = useState(null);
 
 
-  //! randomNum을 한 번만 초기화
-  const randomNum = useRef(null);
-  // useEffect를 통해 randomNum을 초기화
-  useEffect(() => {
-    // 시작할 때 콘솔이 두번찍히는 이유는 main.jsx에  <StrictMode>가 있기 때문. 두번 렌더링되서 그런것
-    // StrictMode를 제거하면 한 번만 렌더링됨 or if (randomNum.current === null) 조건을 추가해서 한 번만 렌더링되게 할 수 있음
-    if (randomNum.current === null) {
-      randomNum.current = Math.floor(Math.random() * maxNum) + 1;
-      console.log(`Game Start! - ${level} mode`);
-      console.log(randomNum.current);
-      // 중복 쿼리스트링 방지를 위한 조건
-    }
-  }, [maxNum]);
+    //! randomNum을 한 번만 초기화
+    const randomNum = useRef(null);
+    // useEffect를 통해 randomNum을 초기화
+    useEffect(() => {
+      // 시작할 때 콘솔이 두번찍히는 이유는 main.jsx에  <StrictMode>가 있기 때문. 두번 렌더링되서 그런것
+      // StrictMode를 제거하면 한 번만 렌더링됨 or if (randomNum.current === null) 조건을 추가해서 한 번만 렌더링되게 할 수 있음
+      if (randomNum.current === null) {
+        randomNum.current = Math.floor(Math.random() * maxNum) + 1;
+        console.log(`Game Start! - ${level} mode`);
+        console.log(randomNum.current);
+        // 중복 쿼리스트링 방지를 위한 조건
+      }
+    }, [maxNum]);
 
-  // 다시하기를 했을 때 up,down 메세지가 그대로 남아있어 useEffect를 사용하여 message를 초기화
-  useEffect(() => {
-    setMessage('');
-  }, [])
+    // 다시하기를 했을 때 up,down 메세지가 그대로 남아있어 useEffect를 사용하여 message를 초기화
+    useEffect(() => {
+      setMessage('');
+    }, [])
 
-  // *useEffect를 사용하여, status값이 변경되면, navigate를 통해 결과 페이지로 이동
-  // * status는 success, fail로 나뉨 => InputNum에 status를 변경하는 코드가 있음.
-  useEffect(() => {
-    if (status !== null) {
-      // 버튼을 누르면 게임을 플레이 한 것으로 판단하여 true로 세션 저장
-      sessionStorage.setItem('passed',true)
+    // *useEffect를 사용하여, status값이 변경되면, navigate를 통해 결과 페이지로 이동
+    // * status는 success, fail로 나뉨 => InputNum에 status를 변경하는 코드가 있음.
+    useEffect(() => {
+      if (status !== null) {
+        // 버튼을 누르면 게임을 플레이 한 것으로 판단하여 true로 세션 저장
+        sessionStorage.setItem('passed', true)
       
-      // * 들어오는 status에 따라 header에 성공, 실패가 결정되고, history의 데이터를 통해, 이전에 입력한 숫자에 대한 내용이 결정 된다.
-      // * navigate를 GamePage에서 관리를 하는 이유는 InputNum에서는 status와 history를 InputNum 함수의 매개 변수로 받아오는데, 그러면 useEffect를 사용해 status와 history를 관리 할 수 없다. 그리고, useEffect를 사용해야 하는 이유는, status와 history가 바뀐 이후에 navigate를 해야 하는데, useEffect를 사용하지 않으면, navigate가 먼저 실행되고, history가 바뀌지 않고 넘어가 마지막으로 입력한 history가 추가 되지 않기 때문. 
-      navigate(`/result?status=${status}&history=${history}&level=${level}`);
-    }
-  }, [status, history])
+        // * 들어오는 status에 따라 header에 성공, 실패가 결정되고, history의 데이터를 통해, 이전에 입력한 숫자에 대한 내용이 결정 된다.
+        // * navigate를 GamePage에서 관리를 하는 이유는 InputNum에서는 status와 history를 InputNum 함수의 매개 변수로 받아오는데, 그러면 useEffect를 사용해 status와 history를 관리 할 수 없다. 그리고, useEffect를 사용해야 하는 이유는, status와 history가 바뀐 이후에 navigate를 해야 하는데, useEffect를 사용하지 않으면, navigate가 먼저 실행되고, history가 바뀌지 않고 넘어가 마지막으로 입력한 history가 추가 되지 않기 때문. 
+        navigate(`/result?status=${status}&history=${history}&level=${level}`);
+      }
+    }, [status, history])
+   }
 
-  // inputHandler는 input값을 관리하는 함수
-  const inputHandler = (e) => {
-    setInputValue(e.target.value);
-  };
-
+    // inputHandler는 input값을 관리하는 함수
+    const inputHandler = (e) => {
+      setInputValue(e.target.value);
+    };
 
   return (
     <Div>
