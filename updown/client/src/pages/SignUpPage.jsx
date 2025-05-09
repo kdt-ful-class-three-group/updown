@@ -16,6 +16,10 @@ export const SignUpPage = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setMessage("");
+  }, [])
+
   const onClickBtn = async () => {
     // 유효성검사가 true면 실행
     if(message.id === "사용가능한 아이디입니다." && message.name === "사용가능한 닉네임입니다." && message.password === "") {
