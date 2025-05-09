@@ -1,8 +1,8 @@
 // src/pages/StartPage.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Div } from "../components/Tag"  
-import { Button } from "../components/Button"
+import { Div } from "../components/Tag";
+import { Button } from "../components/Button";
 
 //* StartPage 컴포넌트 - 시작 페이지
 //* 버튼 클릭 시 모드 선택 페이지로 이동
@@ -11,9 +11,13 @@ export function StartPage() {
   const navigate = useNavigate();
 
   return (
-    <Div>
-      <Button className="all-btn" btnName={'START'} onClick={() => navigate('/login')}/>
+    <Div className="start-page-container">
+      <img src="/vite.svg" className="start-logo" />
+      <Button
+        className="all-btn"
+        btnName={"START"}
+        onClick={() => navigate("/login")}
+      />
     </Div>
   );
 }
-

@@ -1,55 +1,63 @@
 import React from "react";
-import { useEffect} from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 
 export const RankingPage = () => {
-
   const [rankingData, setRankingData] = useState([]);
-  const [mode, setMode] = useState('easy');
+  const [mode, setMode] = useState("easy");
 
   const fetchRankingData = async () => {
     try {
-      const response = await fetch(`http://localhost:8003/ranking?mode=${mode}`);
+      const response = await fetch(
+        `http://localhost:8003/ranking?mode=${mode}`
+      );
       if (!response.ok) {
-        throw new Error('랭킹 에러');
+        throw new Error("랭킹 에러");
       }
       const data = await response.json();
       console.log(data);
       setRankingData(data);
     } catch (error) {
-      console.error('Error fetching ranking data:', error);
+      console.error("Error fetching ranking data:", error);
     }
   };
-  
+
   useEffect(() => {
     fetchRankingData(mode);
-  },[mode]);
+  }, [mode]);
 
   const modeClick = (selectMode) => {
     setMode(selectMode);
-  }
+  };
 
   // 성공률까지 만들어서
-  const sortedData = rankingData.map((item) => ({
-    name : item.name,
-    mode : item.mode,
-    success : item.success,
-    total : item.total,
-    rate : Math.round((item.success / item.total) * 100)
-  }))
-
-  sortedData.sort((a,b) => b.rate - a.rate)
+  const sortedData = rankingData
+    .map((item) => ({
+      name: item.name,
+      mode: item.mode,
+      success: item.success,
+      total: item.total,
+      rate: Math.round((item.success / item.total) * 100),
+    }))
+    .sort((a, b) => b.rate - a.rate) // 정렬
+    .slice(0, 10); // 10개까지만 정렬
 
   return (
     <div>
       <h1>랭킹</h1>
       <div>
-        <button className="all-btn easy" onClick={() => modeClick('easy')}>EASY</button>
-        <button className="all-btn normal" onClick={() => modeClick('normal')}>NORMAL</button>
-        <button className="all-btn hard" onClick={() => modeClick('hard')}>HARD</button>
+        <button className="all-btn easy" onClick={() => modeClick("easy")}>
+          EASY
+        </button>
+        <button className="all-btn normal" onClick={() => modeClick("normal")}>
+          NORMAL
+        </button>
+        <button className="all-btn hard" onClick={() => modeClick("hard")}>
+          HARD
+        </button>
       </div>
       <div>
-        <table>
+        <table className="ranking-table">
           <thead>
             <tr>
               <th>순위</th>
@@ -73,10 +81,7 @@ export const RankingPage = () => {
             ))}
           </tbody>
         </table>
-
-
       </div>
     </div>
-  )
-}
-
+  );
+};

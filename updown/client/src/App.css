@@ -3,7 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f9f9f9;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -46,18 +46,17 @@
   position: absolute;
   left: 30px;
   top: 0;
-  
 }
 
 /** 랭킹페이지 */
 .rankPanel {
   position: fixed;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 400px;
+  width: 450px;
   max-width: 90%;
-  height: 60%;
+  height: 70%;
   background: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   padding: 2rem;
@@ -106,8 +105,6 @@
 .all-btn:hover {
   background-color: #388e3c;
 }
-
-
 
 /** 회원가입페이지 */
 .signup-form {
@@ -190,25 +187,63 @@
 /** 모드선택 */
 
 .easy {
-  background-color: #0D9A08
+  background-color: #0d9a08;
 }
-.easy:hover{
-  background-color: #0B7E07;
+.easy:hover {
+  background-color: #0b7e07;
 }
 
 .normal {
-  background-color: #006AFF;
+  background-color: #006aff;
 }
 .normal:hover {
-  background-color: #0052CC;
+  background-color: #0052cc;
 }
 
 .hard {
-   background-color: #FF0000;
+  background-color: #ff0000;
 }
-.hard:hover{
-  background-color: #CC0000;
+.hard:hover {
+  background-color: #cc0000;
 }
+
+// 랭킹 리스트 정렬 및 표
+/* .ranking-table {
+  width: 100%;
+  text-align: center;
+} */
+
+.ranking-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ranking-table th,
+.ranking-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+//StartPage 이미지 조정
+.ranking-table tbody tr:hover {
+  background-color: #f0f0f0;
+}
+
+.start-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  background-color: #f9f9f9;
+}
+
+.start-logo {
+  width: 200px;
+  height: auto;
+  margin-bottom: 30px; /* 버튼과 간격 */
+}
+
 
 /** 게임페이지  **/
 .mode-title {

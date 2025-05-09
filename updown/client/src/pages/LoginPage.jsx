@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react"
-import { useLogin } from "../components/Auth/Login"
-import { useNavigate } from "react-router-dom"
-import { Button } from "../components/Button"
+import React, { useState, useEffect } from "react";
+import { useLogin } from "../components/Auth/Login";
+import { useNavigate } from "react-router-dom";
+import { Button } from "../components/Button";
 
 export const LoginPage = () => {
-
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -15,19 +14,17 @@ export const LoginPage = () => {
     const userId = sessionStorage.getItem("id");
 
     if (userId) {
-
       navigate("/mode");
-
     }
   }, [navigate]);
 
   const onClickBtn = () => {
-    
     login(id, password, setId, setPassword);
+  };
 
-  }
-
-    return <>
+  return (
+    <>
+      <img src="/vite.svg" className="start-logo" />
       <h1>로그인</h1>
       <div className="login-form">
         <input
@@ -44,18 +41,21 @@ export const LoginPage = () => {
         />
 
         <div className="login-btn">
-        <Button
-          className="all-btn"
-          btnName={"로그인"}
-          type="submit"
-          onClick={onClickBtn}
-        />
-        <Button
-          className="all-btn"
-          btnName={"회원가입"}
-          onClick={() => { navigate('/signup') }}
+          <Button
+            className="all-btn"
+            btnName={"로그인"}
+            type="submit"
+            onClick={onClickBtn}
+          />
+          <Button
+            className="all-btn"
+            btnName={"회원가입"}
+            onClick={() => {
+              navigate("/signup");
+            }}
           />
         </div>
       </div>
     </>
-  }
+  );
+};
