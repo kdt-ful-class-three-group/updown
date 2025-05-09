@@ -207,11 +207,11 @@
   background-color: #cc0000;
 }
 
-// 랭킹 리스트 정렬 및 표
-/* .ranking-table {
+/* // 랭킹 리스트 정렬 및 표 */
+.ranking-table {
   width: 100%;
   text-align: center;
-} */
+}
 
 .ranking-table {
   width: 100%;
@@ -224,7 +224,7 @@
   padding: 8px;
   text-align: center;
 }
-//StartPage 이미지 조정
+
 .ranking-table tbody tr:hover {
   background-color: #f0f0f0;
 }
