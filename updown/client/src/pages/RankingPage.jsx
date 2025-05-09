@@ -30,17 +30,16 @@ export const RankingPage = () => {
     setMode(selectMode);
   };
 
-  // 성공률까지 만들어서
-  const sortedData = rankingData
-    .map((item) => ({
-      name: item.name,
-      mode: item.mode,
-      success: item.success,
-      total: item.total,
-      rate: Math.round((item.success / item.total) * 100),
-    }))
-    .sort((a, b) => b.rate - a.rate) // 정렬
-    .slice(0, 10); // 10개까지만 정렬
+  // 성공률까지 만들어서 배열 저장. 내림차순으로 정렬 후 상위 10개 표출
+  const sortedData = rankingData.map((item) => ({
+    name : item.name,
+    mode : item.mode,
+    success : item.success,
+    total : item.total,
+    rate : Math.round((item.success / item.total) * 100)
+  })).sort((a,b) => b.rate - a.rate).slice(0,9)
+
+
 
   return (
     <div>
