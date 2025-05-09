@@ -41,6 +41,24 @@
   border-radius: 10px;
 }
 
+.border-b {
+  border-bottom: 1px solid gray;
+}
+
+.border-t {
+  border-top: 1px solid gray;
+
+}
+
+.stiky {
+  position: sticky;
+  top: 0;
+}
+
+.bg-white {
+  background-color: white;
+}
+
 /* * 스타일 시작 */
 
 body {

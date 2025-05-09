@@ -58,7 +58,7 @@ export const RankingPage = () => {
       </div>
       <div className="height over-scroll border">
         <table className="ranking-table">
-          <thead>
+          <thead className="stiky bg-white">
             <tr>
               <th>순위</th>
               <th>이름</th>
