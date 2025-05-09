@@ -8,7 +8,8 @@ export const SignUpPage = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [validID, setValidID] = useState();
+  const [validID, setValidID] = useState(null);
+  const [validName, setVaildName] = useState(null);
   const navigate = useNavigate();
   
   const getFetch = async () => {
@@ -26,6 +27,7 @@ export const SignUpPage = () => {
       console.log('name:',nameData);
       // true, false값을 받아옴.
       setValidID(idData);
+      setVaildName(nameData);
     } catch (err) {
       console.log(`${err} 에러발생`);
     }
@@ -66,10 +68,12 @@ export const SignUpPage = () => {
     <div>
       <input type="text" placeholder="아이디" value={id} onChange={(e) => setId(e.target.value)} />
       {/* 아이디가 중복되면 p태그로 출력 */}
-      {validID && <p>중복된 아이디입니다.</p>}
-      <button onClick={getFetch}>확인</button>
+      {validID ? <p>중복된 아이디입니다.</p> : <p>사용가능한 ID 입니다.</p>}
+      <button onClick={getFetch}>id 중복 확인</button>
       <input type="password" placeholder="비밀번호" value={password} onChange={(e) => setPassword(e.target.value)} />
       <input type="text" placeholder="이름" name="name" value={name} onChange={(e) => setName(e.target.value)} />
+      {validName ? <p>중복된 닉네임 입니다.</p> : <p>사용가능한 닉네임 입니다.</p>}
+      <button onClick={getFetch}>닉네임 중복 확인</button>
       <input type="text" placeholder="이메일" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
       <Button btnName={"가입"} type="submit" onClick={onClickBtn} />
     </div>
