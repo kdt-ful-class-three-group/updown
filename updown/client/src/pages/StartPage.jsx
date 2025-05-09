@@ -12,7 +12,7 @@ export function StartPage() {
 
   return (
     <Div>
-      <Button btnName={'START'} onClick={() => navigate('/login')}/>
+      <Button className="all-btn" btnName={'START'} onClick={() => navigate('/login')}/>
     </Div>
   );
 }

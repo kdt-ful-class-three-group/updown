@@ -29,7 +29,7 @@ export const LoginPage = () => {
 
     return <>
       <h1>로그인</h1>
-      <div>
+      <div className="login-form">
         <input
           type="text"
           placeholder="아이디"
@@ -42,15 +42,20 @@ export const LoginPage = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+
+        <div className="login-btn">
         <Button
+          className="all-btn"
           btnName={"로그인"}
           type="submit"
           onClick={onClickBtn}
         />
         <Button
+          className="all-btn"
           btnName={"회원가입"}
           onClick={() => { navigate('/signup') }}
-        />
+          />
+        </div>
       </div>
     </>
   }
