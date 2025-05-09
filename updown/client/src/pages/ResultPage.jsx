@@ -40,12 +40,12 @@ export function ResultPage() {
   // * history는 최대 4개까지만 생성 되므로, 이후 스타일을 넣을 때, 모든 칸에 underline을 만들어 주기 위해, 밀 p태그를 생성해둠, 
   const historyBox = 
   <>
-    <Div>
-      <p>이전에 입력한 숫자</p>
-      <p>{history[0]}</p>
-      <p>{history[1]}</p>
-      <p>{history[2]}</p>
-      <p>{history[3]}</p>
+    <Div className={'history-box'}>
+      <div className='history start'>이전에 입력한 숫자</div>
+      <div className='history'>{history[0]}</div>
+      <div className='history'>{history[1]}</div>
+      <div className='history'>{history[2]}</div>
+      <div className='history end'>{history[3]}</div>
     </Div>
   </>;
 
