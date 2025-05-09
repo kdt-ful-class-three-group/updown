@@ -24,6 +24,23 @@
   align-items: flex-end;
 }
 
+.height {
+  height: 50vh;
+}
+
+.over-scroll {
+  overflow: scroll;
+}
+
+.over-hidden {
+  overflow: hidden;
+}
+
+.border {
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
 /* * 스타일 시작 */
 
 

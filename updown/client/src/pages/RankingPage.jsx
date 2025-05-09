@@ -56,7 +56,7 @@ export const RankingPage = () => {
           HARD
         </button>
       </div>
-      <div>
+      <div className="height over-scroll border">
         <table className="ranking-table">
           <thead>
             <tr>
