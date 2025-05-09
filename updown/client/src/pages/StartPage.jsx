@@ -12,7 +12,7 @@ export function StartPage() {
 
   return (
     <Div className="start-page-container">
-      <img src="/vite.svg" className="start-logo" />
+      <img src="/upDown_logo.png" className="start-logo" />
       <Button
         className="all-btn"
         btnName={"START"}

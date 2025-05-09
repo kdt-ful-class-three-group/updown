@@ -11,7 +11,7 @@ export function ModePage() {
   return (
     <Div className="main-content">
       <Div>
-        <img src="/vite.svg" className="start-logo" />
+        <img src="/upDown_logo.png" className="start-logo" />
         <h1>모드선택</h1>
       </Div>
       <Div>
