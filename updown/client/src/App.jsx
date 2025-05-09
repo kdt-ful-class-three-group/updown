@@ -13,6 +13,7 @@ import { ResultPage } from "./Pages/ResultPage";
 import { Provider } from './context/MessageContext';
 
 import "./App.css";
+import { IdCheck } from "./components/Auth/IdCheck";
 
 // 라우터 경로설정
 function App() {
@@ -27,9 +28,9 @@ function App() {
         {/* <Route path="/ranking" element={<RankingPage />} /> */}
 
         <Route element={<Layout />}>
-          <Route path="/mode" element={<ModePage />} />
-          <Route path="/:level" element={<GamePage />} />
-          <Route path="/result" element={<ResultPage />} />
+          <Route path="/mode" element={<IdCheck><ModePage /></IdCheck>} />
+          <Route path="/:level" element={<IdCheck><GamePage /></IdCheck>} />
+          <Route path="/result" element={<IdCheck><ResultPage /></IdCheck>} />
         </Route>
 
       </Routes>

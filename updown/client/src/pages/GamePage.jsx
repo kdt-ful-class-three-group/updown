@@ -17,6 +17,7 @@ import { Input } from '../components/Input';
 //*  이지,노말,하드 모두 한 템플릿(GamePage)에서 작동
 
 export function GamePage() {
+  if(sessionStorage.getItem('id')) {
   // useParams를 통해 url에서 level(easy, normal, hard) 가져오기
   const { level } = useParams();
 
@@ -116,4 +117,5 @@ export function GamePage() {
       </div>
     </Div>
   );
+}
 }

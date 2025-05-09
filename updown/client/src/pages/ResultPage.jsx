@@ -9,6 +9,7 @@ import { Div, Heading } from '../components/Tag';
 //* ResultPage 컴포넌트 - 결과 페이지
 //* 성공, 실패 결과에 따라 페이지 이동할 예정 - 지금은 성공일 때만 작동
 export function ResultPage() {
+  if(sessionStorage.getItem('id')) {
   const recordRef = useRef(false);
   // useLocation을 통해 url의 쿼리스트링을 가져옴
   const location = useLocation();
@@ -139,4 +140,5 @@ export function ResultPage() {
         </Div>
       // </Div>
   )
+}
 }
