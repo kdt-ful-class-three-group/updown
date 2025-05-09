@@ -224,7 +224,7 @@
   padding: 8px;
   text-align: center;
 }
-//StartPage 이미지 조정
+/* StartPage 이미지 조정 */
 .ranking-table tbody tr:hover {
   background-color: #f0f0f0;
 }
@@ -239,9 +239,9 @@
 }
 
 .start-logo {
-  width: 200px;
+  width: 300px;
   height: auto;
-  margin-bottom: 30px; /* 버튼과 간격 */
+  margin-bottom: 10px; /* 버튼과 간격 */
 }
 
 
