@@ -1,7 +1,11 @@
 export const checkedIdName = async ({ field, value, setMessage }) => {
-
     const load = field === 'id' ? { id: value } : { name: value };
-    
+
+    if (!value || value.trim() === '') {
+      setMessage(field === 'id' ? '아이디를 입력해주세요' : '닉네임을 입력해주세요');
+      return;
+    }
+    // 서버에서 id,name 확인. 
     try {
       const res = await fetch('http://localhost:8003/checked', {
         method: "POST",
