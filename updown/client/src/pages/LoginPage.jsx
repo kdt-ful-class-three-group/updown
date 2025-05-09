@@ -24,7 +24,7 @@ export const LoginPage = () => {
 
   return (
     <>
-      <img src="/vite.svg" className="start-logo" />
+      <img src="/upDown_logo.png" className="start-logo" />
       <h1>로그인</h1>
       <div className="login-form">
         <input
