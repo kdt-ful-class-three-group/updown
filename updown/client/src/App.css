@@ -79,7 +79,7 @@
   padding: 1rem;
 }
 .login-form input {
-  width: 50%;
+  width: 70%;
   padding: 0.5em;
   font-size: 1rem;
   border: 1px solid #ccc;
@@ -110,7 +110,28 @@
   border-radius: 12px;
   transition: opacity 0.3s ease-in-out;
 }
+/* 랭킹 리스트 정렬 및 표 */
+.ranking-table {
+  width: 100%;
+  text-align: center;
+}
 
+.ranking-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ranking-table th,
+.ranking-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+/* StartPage 이미지 조정 */
+.ranking-table tbody tr:hover {
+  background-color: #f0f0f0;
+}
 
 
 /** 내정보 버튼 */
@@ -292,29 +313,6 @@
 
 .end {
   margin-bottom: 10px;
-}
-
- /* 랭킹 리스트 정렬 및 표 */
-.ranking-table {
-  width: 100%;
-  text-align: center;
-}
-
-.ranking-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.ranking-table th,
-.ranking-table td {
-  border: 1px solid #ccc;
-  padding: 8px;
-  text-align: center;
-}
-
-/* StartPage 이미지 조정 */
-.ranking-table tbody tr:hover {
-  background-color: #f0f0f0;
 }
 
 .start-page-container {
