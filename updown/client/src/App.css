@@ -230,10 +230,13 @@
   width: 90%;
 }
 
-/* .result-box {
+.result-box {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-} */
+  align-items: center;
+
+}
 
 .start {
   height: 30px;
