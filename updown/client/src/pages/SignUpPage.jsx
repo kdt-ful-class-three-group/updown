@@ -77,7 +77,7 @@ export const SignUpPage = () => {
           <input type="text" placeholder="아이디" value={id} name='user_id' onChange={(e) => setId(e.target.value)} />
           <button className="input-inline-btn" onClick={() => { checkedIdName({ field: 'id', value: id, setMessage: msg => setMessage(prev => ({ ...prev, id: msg })) }) }}>확인</button>
         </div>
-        <div className="form-message">{message.id}</div>
+        <div className={message.id === '사용가능한 아이디입니다.' ? "form-message color-blue" : "form-message color-red"}>{message.id}</div>
       </div>
 
       <div className="form-group">
@@ -92,7 +92,7 @@ export const SignUpPage = () => {
           <input type="password" placeholder="비밀번호 체크" value={passwordCheck} name="pw_check" onChange={(e) => setPasswordCheck(e.target.value)} />
           <button className="input-inline-btn" onClick={passwordCheckBtn}>체크</button>
         </div>
-        <div className="form-message">{message.password}</div>
+        <div className="form-message color-red">{message.password}</div>
       </div>
       
       <div className="form-group">
@@ -100,7 +100,7 @@ export const SignUpPage = () => {
           <input type="text" placeholder="이름" name="name" value={name} onChange={(e) => setName(e.target.value)} />
           <button className="input-inline-btn" onClick={() => { checkedIdName({ field: 'name', value: name, setMessage: msg => setMessage(prev => ({ ...prev, name: msg })) }) } }>확인</button>
         </div>
-        <div className="form-message">{message.name}</div>
+        <div className={message.name === '사용가능한 닉네임입니다.' ? "form-message color-blue" : "form-message color-red"}>{message.name}</div>
       </div>
 
       <div className="form-group">
