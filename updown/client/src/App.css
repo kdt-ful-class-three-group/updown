@@ -318,7 +318,7 @@
 
 /** 게임페이지  **/
 .mode-title {
-  position: fixed;
+  position: absolute;
   top: 10%;
   left: 50%;
   transform: translateX(-50%);
@@ -376,8 +376,8 @@
 }
 
 .start-btn {
-    position: fixed;
-    bottom: 15%;
+    position: absolute;
+    bottom: 5%;
     left: 50%;
     transform: translateX(-50%);
 }
