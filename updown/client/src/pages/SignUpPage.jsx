@@ -10,7 +10,13 @@ export const SignUpPage = () => {
   const [email, setEmail] = useState("");
   const [validID, setValidID] = useState();
   const navigate = useNavigate();
-  
+
+  // 중복된 setValidID가 있을 수 있어 초기화
+  useEffect(() => {
+    setValidID();
+    console.log(validID)
+  },[])
+
   const getFetch = async () => {
     try {
       const res = await fetch("http://localhost:8003/idsearch", {
@@ -64,7 +70,7 @@ export const SignUpPage = () => {
     <h1>회원가입</h1>
     <div>
       <input type="text" placeholder="아이디" value={id} onChange={(e) => setId(e.target.value)} />
-      {/* 아이디가 중복되면 p태그로 출력 */}
+      {validID === false && <p>사용가능한 아이디입니다.</p>}
       {validID && <p>중복된 아이디입니다.</p>}
       <button onClick={getFetch}>확인</button>
       <input type="password" placeholder="비밀번호" value={password} onChange={(e) => setPassword(e.target.value)} />
