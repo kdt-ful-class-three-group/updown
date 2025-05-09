@@ -110,7 +110,7 @@ export const SignUpPage = () => {
         <div className="form-message"></div>
       </div>
 
-      <button className="signup-btn" type="submit" onClick={onClickBtn}>가입</button>
+      <button className="all-btn" type="submit" onClick={onClickBtn}>가입</button>
      
     </div>
   </>
