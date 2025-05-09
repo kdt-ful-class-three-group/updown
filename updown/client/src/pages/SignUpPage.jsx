@@ -18,6 +18,7 @@ export const SignUpPage = () => {
 
   const onClickBtn = async () => {
     // 유효성검사가 true면 실행
+    if(message.id === "사용가능한 아이디입니다." && message.name === "사용가능한 닉네임입니다." && message.password === "") {
     if(password === passwordCheck) {
     const validPass = SignUpValid({id, password, name, email})
 
@@ -45,7 +46,10 @@ export const SignUpPage = () => {
   } else {
     console.log('비밀번호가 틀림');
   }
+  } else {
+    alert('중복체크를 전부 진행해 주세요.')
   }
+}
 
   const passwordCheckBtn = () => {
     const pw = document.querySelectorAll('input')[1];
