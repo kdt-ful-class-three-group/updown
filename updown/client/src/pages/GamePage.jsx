@@ -74,7 +74,7 @@ export function GamePage() {
   };
 
   return (
-    <Div className="container">
+    <Div className="container d-flex column j-center a-center">
       <Div className="mode-title">
         <h1>{level}</h1>
       </Div>
