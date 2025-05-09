@@ -44,9 +44,9 @@ export const RankingPage = () => {
     <div>
       <h1>랭킹</h1>
       <div>
-        <button onClick={() => modeClick('easy')}>EASY</button>
-        <button onClick={() => modeClick('normal')}>NORMAL</button>
-        <button onClick={() => modeClick('hard')}>HARD</button>
+        <button className="all-btn easy" onClick={() => modeClick('easy')}>EASY</button>
+        <button className="all-btn normal" onClick={() => modeClick('normal')}>NORMAL</button>
+        <button className="all-btn hard" onClick={() => modeClick('hard')}>HARD</button>
       </div>
       <div>
         <table>

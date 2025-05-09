@@ -9,14 +9,14 @@ import { Div } from "../components/Tag";
   // useNavigate 훅을 사용하여 페이지 이동
    const navigate = useNavigate();
   return (
-    <Div>
-      <Div>
+    <Div className="main-content">
+      <Div >
       <h1>모드선택</h1>
       </Div>
       <Div>
-        <Button btnName={'EASY'} onClick={() => navigate('/easy')}/>
-        <Button btnName={'NORMAL'} onClick={() => navigate('/normal')}/>
-        <Button btnName={'HARD'} onClick={() => navigate('/hard')}/>
+        <Button className="all-btn easy" btnName={'EASY'} onClick={() => navigate('/easy')}/>
+        <Button className="all-btn normal" btnName={'NORMAL'} onClick={() => navigate('/normal')}/>
+        <Button className="all-btn hard" btnName={'HARD'} onClick={() => navigate('/hard')}/>
       </Div>
     </Div>
   )

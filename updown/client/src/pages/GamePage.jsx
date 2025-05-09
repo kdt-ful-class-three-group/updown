@@ -112,7 +112,7 @@ export function GamePage() {
         <p>{history[3]}</p>
       </Div>
       <div>
-        <button onClick={() => navigate('/mode')}>처음으로</button>
+        <button className='all-btn' onClick={() => navigate('/mode')}>처음으로</button>
       </div>
     </Div>
   );

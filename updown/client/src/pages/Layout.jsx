@@ -33,8 +33,8 @@ export function Layout() {
     <div>
       <header>
         <div className="header">
-          <button className="rank"onClick={rankToggle}>랭킹</button>
-          <button className="info" onClick={infoToggle}>내 정보</button>
+          <button className="all-btn rank"onClick={rankToggle}>랭킹</button>
+          <button className="all-btn info" onClick={infoToggle}>내 정보</button>
         </div>
       </header>
 
@@ -42,14 +42,14 @@ export function Layout() {
         <div className="infoPanel">
           <h2>내 정보</h2>
           <p>{username}님</p>
-          <button onClick={infoToggle}>닫기</button>
-          <button onClick={logout}>로그아웃</button>
+          <button className="all-btn" onClick={infoToggle}>닫기</button>
+          <button className="all-btn" onClick={logout}>로그아웃</button>
         </div>
       )}
       {isRankOpen && (
         <div className="rankPanel">
           <RankingPage />
-          <button onClick={rankToggle}>닫기</button>
+          <button className="all-btn" onClick={rankToggle}>닫기</button>
         </div>
       )}
 
