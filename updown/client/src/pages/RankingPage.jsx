@@ -40,7 +40,7 @@ export const RankingPage = () => {
   })).sort((a,b) => b.rate - a.rate).slice(0,9)
 
 
-
+  // 표출
   return (
     <div>
       <h1>랭킹</h1>
