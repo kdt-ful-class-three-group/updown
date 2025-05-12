@@ -73,6 +73,20 @@ export function GamePage() {
     setInputValue(e.target.value);
   };
 
+  const handleSubmit = () => {
+    InputNum({
+      value: inputValue,
+      max: maxNum,
+      answer: randomNum.current,
+      setMessage,
+      count,
+      setCount,
+      history,
+      setHistory,
+      setStatus,
+    });
+  };
+
   return (
     <Div className="container d-flex column j-center a-center">
       <Div className="mode-title">
@@ -88,23 +102,16 @@ export function GamePage() {
           children={`남은기회 : ${count}`}
         />
         <div className="guess-form">
-          <Input value={inputValue} onChange={inputHandler} />
-          <Button
-            btnName="확인"
-            onClick={() =>
-              InputNum({
-                value: inputValue,
-                max: maxNum,
-                answer: randomNum.current,
-                setMessage,
-                count,
-                setCount,
-                history,
-                setHistory,
-                setStatus,
-              })
-            }
+          <Input
+            value={inputValue}
+            onChange={inputHandler}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSubmit();
+              }
+            }}
           />
+          <Button btnName="확인" onClick={handleSubmit} />
         </div>
       </Div>
       <Div className={"history-box"}>

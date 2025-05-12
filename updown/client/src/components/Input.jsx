@@ -12,13 +12,16 @@ export const Input = ({
   name = "",
   id = "",
   className = "",
+  onKeyDown,
   ...rest
-}) => 
+}) => (
   <input
     type={type}
     placeholder={placeholder}
     name={name}
     id={id}
     className={`${className}`}
+    onKeyDown={onKeyDown}
     {...rest}
-  />;
+  />
+);

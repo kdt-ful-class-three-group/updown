@@ -2,13 +2,13 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 // 템플릿이 들어가있는 페이지들
-import { Layout } from "./pages/Layout";
+import { Layout } from "./Pages/Layout";
 import { StartPage } from "./Pages/StartPage";
 import { LoginPage } from "./Pages/LoginPage";
 import { ModePage } from "./Pages/ModePage";
 import { GamePage } from "./Pages/GamePage";
-import { SignUpPage } from "./pages/SignUpPage";
-import { ResultPage } from "./pages/ResultPage";
+import { SignUpPage } from "./Pages/SignUpPage";
+import { ResultPage } from "./Pages/ResultPage";
 import { Provider } from "./context/MessageContext";
 
 import "./App.css";
