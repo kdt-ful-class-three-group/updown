@@ -13,15 +13,33 @@ updown
    │  ├─ package.json
    │  ├─ public
    │  │  ├─ TEAM_UPDOWN_logo (1) (1).svg
+   │  │  ├─ upDown_logo.png
    │  │  └─ vite.svg
    │  ├─ src
    │  │  ├─ App.css
    │  │  ├─ App.jsx
+   │  │  ├─ Pages
+   │  │  │  ├─ GameEnd.jsx
+   │  │  │  ├─ GamePage.jsx
+   │  │  │  ├─ Layout.jsx
+   │  │  │  ├─ LoginPage.jsx
+   │  │  │  ├─ ModePage.jsx
+   │  │  │  ├─ RankingPage.jsx
+   │  │  │  ├─ ResultPage.jsx
+   │  │  │  ├─ SignUpPage.jsx
+   │  │  │  ├─ SignValid.jsx
+   │  │  │  └─ StartPage.jsx
    │  │  ├─ assets
    │  │  │  └─ react.svg
    │  │  ├─ components
+   │  │  │  ├─ Auth
+   │  │  │  │  ├─ CheckIdName.jsx
+   │  │  │  │  ├─ IdCheck.jsx
+   │  │  │  │  ├─ Login.jsx
+   │  │  │  │  └─ Logout.jsx
    │  │  │  ├─ Button.jsx
    │  │  │  ├─ Footer.jsx
+   │  │  │  ├─ Form.jsx
    │  │  │  ├─ Header.jsx
    │  │  │  ├─ Input.jsx
    │  │  │  ├─ Main.jsx
@@ -32,11 +50,6 @@ updown
    │  │  │  └─ MessageContext.jsx
    │  │  ├─ index.css
    │  │  ├─ main.jsx
-   │  │  ├─ pages
-   │  │  │  ├─ GamePage.jsx
-   │  │  │  ├─ ModePage.jsx
-   │  │  │  ├─ ResultPage.jsx
-   │  │  │  └─ StartPage.jsx
    │  │  └─ utils
    │  │     ├─ GuessNum.jsx
    │  │     └─ InputNum.jsx
@@ -49,5 +62,12 @@ updown
       ├─ package-lock.json
       ├─ package.json
       └─ routes
+         ├─ checked.js
+         ├─ login.js
+         ├─ logout.js
+         ├─ ranking.js
+         ├─ record.js
+         ├─ signup.js
+         └─ users.js
 
 ```
