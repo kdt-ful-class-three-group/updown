@@ -25,7 +25,7 @@ export function GamePage() {
   const [inputValue, setInputValue] = useState("");
   // useMessage를 통해 message값을 관리
   // useMessage는 MessageContext에서 만든 커스텀 훅
-  const { message, setMessage } = useMessage();
+  const { message, setMessage } = useMessage("");
   // useMemo를 통해 level에 따라 maxNum을 설정
 
   // levelData에서 level에 해당하는 설정값을 가져옴

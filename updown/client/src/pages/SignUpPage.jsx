@@ -10,6 +10,7 @@ export const SignUpPage = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
+  const [passwordMessage, setPasswordMessage] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const { message, setMessage } = useMessage();
@@ -25,7 +26,7 @@ export const SignUpPage = () => {
     if (
       message.id === "사용가능한 아이디입니다." &&
       message.name === "사용가능한 닉네임입니다." &&
-      message.password === ""
+      passwordMessage === ""
     ) {
       if (password === passwordCheck) {
         const validPass = SignUpValid({ id, password, name, email });
@@ -77,12 +78,9 @@ export const SignUpPage = () => {
 
   useEffect(() => {
     if (password !== passwordCheck) {
-      setMessage((prev) => ({
-        ...prev,
-        password: "비밀번호를 다시 확인해 주세요.",
-      }));
+      setPasswordMessage("비밀번호를 다시 확인해 주세요.");
     } else {
-      setMessage((prev) => ({ ...prev, password: "" }));
+      setPasswordMessage("");
     }
   }, [password, passwordCheck]);
 
@@ -99,7 +97,7 @@ export const SignUpPage = () => {
               name="user_id"
               onChange={(e) => {
                 setId(e.target.value);
-                message.id = "";
+                setMessage((prev) => ({ ...prev, id: "" }));
               }}
             />
             <button
@@ -153,7 +151,7 @@ export const SignUpPage = () => {
               체크
             </button>
           </div>
-          <div className="form-message color-red">{message.password}</div>
+          <div className="form-message color-red">{passwordMessage}</div>{" "}
         </div>
 
         <div className="form-group">
@@ -165,7 +163,7 @@ export const SignUpPage = () => {
               value={name}
               onChange={(e) => {
                 setName(e.target.value);
-                message.name = "";
+                setMessage((prev) => ({ ...prev, name: "" }));
               }}
             />
             <button
