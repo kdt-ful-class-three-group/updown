@@ -10,7 +10,10 @@ import { router as recordRouter } from './routes/record.js';
 import { router as rankingRouter } from './routes/ranking.js';
 import { router as checkedRouter } from './routes/checked.js';
 
+
+
 const app = express();
+
 
 app.use(cors({
   origin: 'http://localhost:5173',
@@ -19,16 +22,15 @@ app.use(cors({
 app.use(express.json());
 
 app.use(session({
-    secret: 'updown',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      httpOnly: true,
-      secure: false,
-    }
-  })
+  secret: 'updown',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+  }
+})
 )
-
 
 // 라우터 등록
 app.use("/login", loginRouter);
@@ -39,6 +41,18 @@ app.use("/record", recordRouter); // 게임 기록 저장 라우터
 app.use("/ranking", rankingRouter); // 랭킹 조회 라우터
 app.use("/checked", checkedRouter);
 
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+app.use(express.static(join(__dirname, '../client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(join(__dirname, '../client/dist/index.html'));
+});
 
 
 app.listen(8003, () => {
