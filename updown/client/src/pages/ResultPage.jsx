@@ -1,9 +1,6 @@
 import React from "react";
 import { useEffect, useRef } from "react";
-import { data, useLocation, useNavigate } from "react-router-dom";
-import { Button } from "../components/Button";
-import { Div, Heading } from "../components/Tag";
-// import { setEmitFlags } from 'typescript';
+import { useLocation, useNavigate } from "react-router-dom";
 
 //* ResultPage 컴포넌트 - 결과 페이지
 //* 성공, 실패 결과에 따라 페이지 이동할 예정 - 지금은 성공일 때만 작동
@@ -28,30 +25,33 @@ export function ResultPage() {
   // * 연속해서 사용되는 button요소들을 묶어서 변수에 담아줌
   const moveEvent = (
     <>
-      <Button
+      <button
         className="all-btn"
-        btnName={"다시하기"}
         onClick={() => {
           sessionStorage.removeItem("data");
           navigate(-1);
         }}
-      />
-      <Button
+      >
+        다시하기
+      </button>
+      <button
         className="all-btn"
-        btnName={"모드선택"}
         onClick={() => {
           sessionStorage.removeItem("data");
           navigate(-2);
         }}
-      />
-      <Button
+      >
+        모드선택
+      </button>
+      <button
         className="all-btn"
-        btnName={"홈"}
         onClick={() => {
           sessionStorage.removeItem("data");
           navigate(-3);
         }}
-      />
+      >
+        홈
+      </button>
     </>
   );
 
@@ -59,13 +59,13 @@ export function ResultPage() {
   // * history는 최대 4개까지만 생성 되므로, 이후 스타일을 넣을 때, 모든 칸에 underline을 만들어 주기 위해, 밀 p태그를 생성해둠,
   const historyBox = (
     <>
-      <Div className={"history-box"}>
+      <div className="history-box">
         <div className="history start">이전에 입력한 숫자</div>
         <div className="history">{history[0]}</div>
         <div className="history">{history[1]}</div>
         <div className="history">{history[2]}</div>
         <div className="history end">{history[3]}</div>
-      </Div>
+      </div>
     </>
   );
 
@@ -129,29 +129,22 @@ export function ResultPage() {
   // * successOrFail이 true일 때와 false일 때를 나누어 줌
   // * successOrFail이 true일 때는 닉네임을 입력받는 버튼을 추가로 보여줌
   return (
-    <Div>
-      <Heading number={1} content={successOrFail ? "성공" : "실패"} />
+    <div>
+      <h1>{successOrFail ? "성공" : "실패"}</h1>
 
-      <Div
-        className="result-box"
-        children={
-          successOrFail ? (
-            <>
-              <div>{moveEvent}</div>
-              <div>{historyBox}</div>
-            </>
-          ) : (
-            <>
-              <div>{moveEvent}</div>
-              <div>{historyBox}</div>
-            </>
-          )
-        }
-      />
-      {/* 페이지 이동 버튼들 */}
-      {/* navigate 경로를 '/' 직접설정할 수 있지만 -숫자 이렇게 쓰면 숫자만큼 뒤로 갈 수 있음.
-          서로의 장단점은 아직 모르겠음 */}
-    </Div>
-    // </Div>
+      <div className="result-box">
+        {successOrFail ? (
+          <>
+            <div>{moveEvent}</div>
+            <div>{historyBox}</div>
+          </>
+        ) : (
+          <>
+            <div>{moveEvent}</div>
+            <div>{historyBox}</div>
+          </>
+        )}
+      </div>
+    </div>
   );
 }

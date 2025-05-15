@@ -9,11 +9,6 @@ import { levelData } from "../config/levelData";
 // 정답 맞추는 로직 함수
 import { InputNum } from "../utils/InputNum";
 
-// 태그 컴포넌트들
-import { Div, Heading } from "../components/Tag";
-import { Button } from "../components/Button";
-import { Input } from "../components/Input";
-
 //*  이지,노말,하드 모두 한 템플릿(GamePage)에서 작동
 
 export function GamePage() {
@@ -88,21 +83,17 @@ export function GamePage() {
   };
 
   return (
-    <Div className="container d-flex column j-center a-center">
-      <Div className="mode-title">
+    <div className="container d-flex column j-center a-center">
+      <div className="mode-title">
         <h1>{level}</h1>
-      </Div>
-      <Div className="updown-msg">
-        {/* UP,DOWN 메세지가 들어갈 컨테이너  */}
+      </div>
+      <div className="updown-msg">
         <h1>{message}</h1>
-      </Div>
-      <Div className="game-box">
-        <Div
-          className={count === 1 ? "color-red" : ""}
-          children={`남은기회 : ${count}`}
-        />
+      </div>
+      <div className="game-box">
+        <div className={count === 1 ? "color-red" : ""}>남은기회 : {count}</div>
         <div className="guess-form">
-          <Input
+          <input
             value={inputValue}
             onChange={inputHandler}
             onKeyDown={(e) => {
@@ -111,21 +102,21 @@ export function GamePage() {
               }
             }}
           />
-          <Button btnName="확인" onClick={handleSubmit} />
+          <button onClick={handleSubmit}>확인</button>
         </div>
-      </Div>
-      <Div className={"history-box"}>
+      </div>
+      <div className="history-box">
         <div className="history start">이전에 입력한 숫자</div>
         <div className="history">{history[0]}</div>
         <div className="history">{history[1]}</div>
         <div className="history">{history[2]}</div>
         <div className="history end">{history[3]}</div>
-      </Div>
+      </div>
       <div className="start-btn">
         <button className="all-btn" onClick={() => navigate("/mode")}>
           처음으로
         </button>
       </div>
-    </Div>
+    </div>
   );
 }

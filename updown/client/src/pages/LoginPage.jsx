@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLogin } from "../components/Auth/Login";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../components/Button";
 
 export const LoginPage = () => {
   const navigate = useNavigate();
@@ -41,19 +40,17 @@ export const LoginPage = () => {
         />
 
         <div className="login-btn">
-          <Button
+          <button className="all-btn" type="submit" onClick={onClickBtn}>
+            로그인
+          </button>
+          <button
             className="all-btn"
-            btnName={"로그인"}
-            type="submit"
-            onClick={onClickBtn}
-          />
-          <Button
-            className="all-btn"
-            btnName={"회원가입"}
             onClick={() => {
               navigate("/signup");
             }}
-          />
+          >
+            회원가입
+          </button>
         </div>
       </div>
     </>

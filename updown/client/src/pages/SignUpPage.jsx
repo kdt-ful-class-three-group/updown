@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../components/Button";
 import { SignUpValid } from "./SignValid";
 import { checkedIdName } from "../components/Auth/CheckIdName";
 import { useMessage } from "../context/MessageContext";
