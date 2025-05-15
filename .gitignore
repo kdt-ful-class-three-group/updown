@@ -1,19 +1,68 @@
-.DS_Store
-**/.DS_Store
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+.env
+.env.*
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependency directories
+node_modules
 **/node_modules/
 
-**/npm-debug.log*
-**/yarn-debug.log*
-**/yarn-error.log*
+# Build outputs
+dist
+dist-ssr
+**/dist/
+**/build/
 
-# 환경 변수 파일
+# Local environment files
+.env
+.env.*
 **/.env
 **/.env.*
 
-**/.vite
-
+# Editor directories and files
 .vscode/
+!.vscode/extensions.json
+.idea
+.DS_Store
+**/.DS_Store
 
-**/dist/
-**/build/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Vite and local config files
+*.local
+**/.vite
