@@ -1,6 +1,6 @@
 
 import express from 'express';
-import { pool } from '../config/database.js';
+import { pool } from '../database/database.js';
 
 const router = express.Router();
 //* 랭킹 조회
