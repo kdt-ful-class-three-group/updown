@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import session from 'express-session';
+import dotenv from 'dotenv';
+dotenv.config();
 
 import { router as usersRouter } from './routes/users.js';
 import { router as signupRouter } from './routes/signup.js';
@@ -11,18 +13,18 @@ import { router as rankingRouter } from './routes/ranking.js';
 import { router as checkedRouter } from './routes/checked.js';
 
 
-
+const PORT = process.env.PORT;
 const app = express();
 
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: process.env.CLIENT_URL,
   credentials: true
 }));
 app.use(express.json());
 
 app.use(session({
-  secret: 'updown',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -55,6 +57,6 @@ app.get('*', (req, res) => {
 });
 
 
-app.listen(8003, () => {
-  console.log('Server running on http://localhost:8003');
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });
