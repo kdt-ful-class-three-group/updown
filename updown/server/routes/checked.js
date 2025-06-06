@@ -12,12 +12,12 @@ router.post('/', async (req, res) => {
     };
 
     if (id) {
-      const [idRows] = await pool.query('SELECT * FROM user WHERE user_id = ?', [id]);
-      checkIdName.checkId = idRows.length > 0;
+      const idRows = await pool.query('SELECT * FROM "user" WHERE user_id = $1', [id]);
+      checkIdName.checkId = idRows.rows.length > 0;
     }
     if (name) {
-      const [nameRows] = await pool.query('SELECT * FROM user WHERE name =?', [name]);
-      checkIdName.checkName = nameRows.length > 0;
+      const nameRows = await pool.query('SELECT * FROM "user" WHERE name =$1', [name]);
+      checkIdName.checkName = nameRows.rows.length > 0;
     }
 
     return res.json({

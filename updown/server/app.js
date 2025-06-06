@@ -31,10 +31,10 @@ app.use("/record", recordRouter); // 게임 기록 저장 라우터
 app.use("/ranking", rankingRouter); // 랭킹 조회 라우터
 app.use("/checked", checkedRouter); // 체크리스트 조회 라우터
 
-app.use(express.static(join(__dirname, '../client/dist')));
+// app.use(express.static(join(__dirname, '../client/dist')));
 
-app.get('*', (req, res) => {
-  res.sendFile(join(__dirname, '../client/dist/index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(join(__dirname, '../client/dist/index.html'));
+// });
 
 export default app;
