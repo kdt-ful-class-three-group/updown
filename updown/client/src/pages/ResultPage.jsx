@@ -97,7 +97,8 @@ export function ResultPage() {
       const gameRecord = {
         user_id, // 세션에서 가져온 아이디
         mode, // url에서 가져옴
-        success: successOrFail ? 1 : 0, // 성공여부
+        success: successOrFail ? true : false, // 성공여부
+        // success: successOrFail ? 1 : 0, // 성공여부
       };
       console.log(gameRecord);
 
