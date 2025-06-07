@@ -182,7 +182,7 @@ export const FindPage = () => {
             console.log(`${err} 에러발생`);
           }
         } else {
-          alert('비밀번호가 안맞아요')
+          alert('비밀번호가 일치하지 않습니다.')
         }
   }
   
