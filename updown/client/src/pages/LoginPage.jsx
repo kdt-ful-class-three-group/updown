@@ -43,6 +43,9 @@ export const LoginPage = () => {
           <button className="all-btn" type="submit" onClick={onClickBtn}>
             로그인
           </button>
+        </div>
+
+        <div className="d-flex">
           <button
             className="all-btn"
             onClick={() => {
@@ -50,6 +53,14 @@ export const LoginPage = () => {
             }}
           >
             회원가입
+          </button>
+          <button
+            className="all-btn"
+            onClick={() => {
+              navigate("/find");
+            }}
+          >
+            ID/PW 찾기
           </button>
         </div>
       </div>

@@ -13,6 +13,7 @@ import { Provider } from "./context/MessageContext";
 
 import "./App.css";
 import { IdCheck } from "./components/Auth/IdCheck";
+import { FindPage } from "./pages/FindPage";
 
 // 라우터 경로설정
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route path="/" element={<StartPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/find" element={<FindPage />} />
         <Route path="/signup" element={<SignUpPage />} />
 
         <Route element={<Layout />}>
