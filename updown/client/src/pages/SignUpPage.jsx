@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { SignUpValid } from "./SignValid";
 import { checkedIdName } from "../components/Auth/CheckIdName";
@@ -13,11 +13,21 @@ export const SignUpPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const { message, setMessage } = useMessage();
+  const [emailChecked, setEmailChecked] = useState(false);
+  const [codeSent, setCodeSent] = useState(false);
+  const [codeVerified, setCodeVerified] = useState(false);
+  const [emailCode, setEmailCode] = useState("");
+  const [timeLeft, setTimeLeft] = useState(0); // 초 단위
+  const timerRef = useRef(null);
+  const [sendingCode, setSendingCode] = useState(false);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     setMessage("");
+      return () => {
+        if (timerRef.current) clearInterval(timerRef.current);
+      };
   }, []);
 
   const onClickBtn = async () => {
@@ -25,7 +35,9 @@ export const SignUpPage = () => {
     if (
       message.id === "사용가능한 아이디입니다." &&
       message.name === "사용가능한 닉네임입니다." &&
-      passwordMessage === ""
+      message.email === "사용가능한 이메일입니다." &&
+      passwordMessage === "" &&
+      codeVerified
     ) {
       if (password === passwordCheck) {
         const validPass = SignUpValid({ id, password, name, email });
@@ -59,7 +71,7 @@ export const SignUpPage = () => {
         console.log("비밀번호가 틀림");
       }
     } else {
-      alert("중복체크를 전부 진행해 주세요.");
+      alert("모든 인증 절차를 완료해주세요.");
     }
   };
 
@@ -82,6 +94,73 @@ export const SignUpPage = () => {
       setPasswordMessage("");
     }
   }, [password, passwordCheck]);
+
+  // ! 추가
+
+  const startTimer = (seconds) => {
+    setTimeLeft(seconds);
+    if (timerRef.current) clearInterval(timerRef.current);
+
+    timerRef.current = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timerRef.current);
+          setCodeSent(false); // 인증 만료 → 재발급 버튼 보이기
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  };
+
+  const sendVerificationCode = async () => {
+    // 중복 클릭 방지
+    if (sendingCode) return;
+
+    setSendingCode(true);
+
+    try {
+      const res = await fetch("http://localhost:8003/emailCheck/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        alert("인증코드가 이메일로 전송되었습니다.");
+        setCodeSent(true);
+        setCodeVerified(false);
+        startTimer(180); // 3분
+      } else {
+        alert("이메일 전송 실패");
+      }
+    } catch (err) {
+      console.error("전송 중 에러:", err);
+      alert("오류가 발생했습니다.");
+    } finally {
+      setSendingCode(false); // 완료 후 버튼 다시 활성화
+    }
+  };
+
+  const verifyCode = async () => {
+    const res = await fetch("http://localhost:8003/emailCheck/verify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, code: emailCode }),
+    });
+
+    const data = await res.json();
+    if (data.success) {
+      alert("인증 완료!");
+      setCodeVerified(true);
+      clearInterval(timerRef.current);
+    } else {
+      alert(data.msg || "인증 실패");
+    }
+  };
+
 
   return (
     <>
@@ -197,11 +276,91 @@ export const SignUpPage = () => {
               placeholder="이메일"
               name="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              disabled={emailChecked}
+              onChange={(e) => {
+                setEmail(e.target.value)
+                setMessage((prev) => ({ ...prev, email: "" }))
+                setCodeVerified(false);
+                setCodeSent(false);
+                setEmailCode("");
+                setTimeLeft(0);
+                if (timerRef.current) clearInterval(timerRef.current);
+              }}
             />
+            {!emailChecked ? 
+            <button
+              className="input-inline-btn"
+              onClick={() => {
+                checkedIdName({
+                  field: "email",
+                  value: email,
+                  setMessage: (msg) => {
+                      setMessage((prev) => ({ ...prev, email: msg }))
+                    if (msg === "사용가능한 이메일입니다.") {
+                      setEmailChecked(true); // ✅ 중복체크 성공 시 비활성화
+                    } else {
+                      setEmailChecked(false);
+                    }       
+                  },
+                });
+              }}
+            >
+              확인
+            </button>
+            :
+            <button
+              className="input-inline-btn"
+              onClick={() => {
+                setEmailChecked(false);
+              }}
+            >
+              변경
+            </button>
+            }
           </div>
-          <div className="form-message"></div>
+          <div
+            className={
+              message.email === "사용가능한 이메일입니다."
+                ? "form-message color-blue"
+                : "form-message color-red"
+            }
+          >
+            {message.email}
+          </div>
         </div>
+
+            {emailChecked && (
+              <div className="form-group">
+                <div className="input-with-button">
+                  <input
+                    type="text"
+                    maxLength="6"
+                    placeholder="인증코드"
+                    value={emailCode}
+                    onChange={(e) => setEmailCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                    disabled={codeVerified}
+                  />
+                  {!codeSent ? (
+                    <button 
+                      className="input-inline-btn"
+                      onClick={sendVerificationCode}
+                      disabled={sendingCode}>
+                        {sendingCode ? "전송 중..." : "인증코드 발급"}
+                      </button>
+                  ) : (
+                    <button 
+                      className="input-inline-btn"
+                      onClick={verifyCode} disabled={codeVerified}>
+                      확인
+                    </button>
+                  )}
+                </div>
+                {codeSent && !codeVerified && (
+                  <div className="form-message">남은 시간: {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, "0")}</div>
+                )}
+                {codeVerified && <div className="form-message color-blue">이메일 인증 완료</div>}
+              </div>
+            )}
 
         <button className="all-btn" type="submit" onClick={onClickBtn}>
           가입

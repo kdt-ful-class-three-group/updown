@@ -9,6 +9,7 @@ import { router as logoutRouter } from './routes/logout.js';
 import { router as recordRouter } from './routes/record.js';
 import { router as rankingRouter } from './routes/ranking.js';
 import { router as checkedRouter } from './routes/checked.js';
+import { router as emailCheckRouter } from './routes/emailCheck.js'
 
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -30,6 +31,7 @@ app.use("/", usersRouter); // 유저 정보 조회 라우터
 app.use("/record", recordRouter); // 게임 기록 저장 라우터
 app.use("/ranking", rankingRouter); // 랭킹 조회 라우터
 app.use("/checked", checkedRouter); // 체크리스트 조회 라우터
+app.use("/emailCheck", emailCheckRouter)
 
 // app.use(express.static(join(__dirname, '../client/dist')));
 

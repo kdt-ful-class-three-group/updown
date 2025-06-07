@@ -4,11 +4,12 @@ import { pool } from '../database/database.js';
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-  const { id, name } = req.body;
+  const { id, name, email } = req.body;
   try {
     let checkIdName = {
       checkId: false,
-      checkName: false
+      checkName: false,
+      email: false
     };
 
     if (id) {
@@ -17,6 +18,10 @@ router.post('/', async (req, res) => {
     }
     if (name) {
       const nameRows = await pool.query('SELECT * FROM "user" WHERE name =$1', [name]);
+      checkIdName.checkName = nameRows.rows.length > 0;
+    }
+    if (email) {
+      const nameRows = await pool.query('SELECT * FROM "user" WHERE e_mail =$1', [email]);
       checkIdName.checkName = nameRows.rows.length > 0;
     }
 

@@ -10,3 +10,5 @@ export const DB_PASSWORD = process.env.DB_PASSWORD;
 export const DB_NAME = process.env.DB_NAME;
 export const DB_URL = process.env.DB_URL;
 export const DB_PORT = process.env.DB_PORT;
+export const GMAIL_ID = process.env.GMAIL_ID;
+export const GMAIL_PW = process.env.GMAIL_PW;
