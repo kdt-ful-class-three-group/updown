@@ -1,6 +1,6 @@
 // src/pages/StartPage.jsx
 import React, { useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useLogout } from "../components/Auth/Logout";
 
 import { RankingPage } from "./RankingPage";
@@ -23,8 +23,6 @@ export function Layout() {
 
   const id = sessionStorage.getItem('id');
 
-  const navigate = useNavigate();
-  
 
   //  랭킹버튼,내 정보 버튼 이벤트
   const rankToggle = () => {
@@ -155,7 +153,7 @@ export function Layout() {
       fetchMyRankingData('easy');
       fetchMyRankingData('normal');
       fetchMyRankingData('hard');
-    }, []);
+    }, [isInfoOpen]);
 
     // useEffect(() => {
     //   console.log(easyData);

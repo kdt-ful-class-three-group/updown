@@ -38,6 +38,8 @@ router.post("/send", async (req, res) => {
     text: `인증코드는 ${code} 입니다. (3분 내에 입력해주세요)`,
   };
 
+  // console.log(code);
+
   try {
     await transporter.sendMail(mailOptions);
     res.json({ success: true });
