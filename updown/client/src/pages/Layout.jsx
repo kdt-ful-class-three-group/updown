@@ -15,6 +15,11 @@ export function Layout() {
   const [pw, setPw] = useState("");
   const [rePw, setRePw] = useState("");
   const [samePw, setSamePw] = useState('');
+  const [easyData, setEasyData] = useState([]);
+  const [normalData, setNormalData] = useState([]);
+  const [hardData, setHardData] = useState([]);
+
+  const id = sessionStorage.getItem('id');
   
 
   //  랭킹버튼,내 정보 버튼 이벤트
@@ -38,6 +43,8 @@ export function Layout() {
 
   // 세션 스토리지에서 id를 가져옴
   const username = sessionStorage.getItem("name");
+
+
 
     const changePw = async () => {
     if(pw === rePw) {
@@ -80,6 +87,71 @@ export function Layout() {
       }
     })
 
+
+    const fetchMyRankingData = async (mode) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8003/ranking/myRank?mode=${mode}&id=${id}`
+      );
+      if (!response.ok) {
+        throw new Error("랭킹 에러");
+      }
+      const data = await response.json();
+      console.log(data);
+      if(mode === 'easy') {
+        setEasyData(data);
+      } else if (mode === 'normal') {
+        setNormalData(data);
+      } else if (mode === 'hard') {
+        setHardData(data);
+      }
+    } catch (error) {
+      console.error("Error fetching ranking data:", error);
+    }
+  };
+
+    useEffect(() => {
+      fetchMyRankingData('easy');
+      fetchMyRankingData('normal');
+      fetchMyRankingData('hard');
+    }, []);
+
+    // useEffect(() => {
+    //   console.log(easyData);
+    //   console.log(normalData);
+    //   console.log(hardData);
+    // }, [easyData, normalData, hardData])
+
+    // const rankingData = [
+    //   easyData,
+    //   normalData,
+    //   hardData
+    // ];
+    
+    const rankingData = [
+      { ...easyData[0], mode: 'easy' },
+      { ...normalData[0], mode: 'normal' },
+      { ...hardData[0], mode: 'hard' },
+    ];
+
+  const sortedData = rankingData.map((item) => {
+    if (!item || item.success === undefined || item.total === undefined) {
+      return {
+        mode: item?.mode || '',
+        success: 0,
+        total: 0,
+        rate: 0,
+      };
+    }
+  
+    return {
+      mode: item.mode,
+      success: item.success,
+      total: item.total,
+      rate: item.total > 0 ? Math.round((item.success / item.total) * 100) : 0,
+    };
+  });
+
   return (
     <div>
       <header>
@@ -98,6 +170,28 @@ export function Layout() {
             비밀번호 변경
           </button>
           </div>
+          <div className="height over-scroll border">
+        <table className="ranking-table">
+          <thead className="stiky bg-white">
+            <tr>
+              <th>모드</th>
+              <th>성공횟수</th>
+              <th>시도횟수</th>
+              <th>성공률</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sortedData.map((item, index) => (
+              <tr key={index}>
+                <td>{item.mode}</td>
+                <td>{item.success}</td>
+                <td>{item.total}</td>
+                <td>{item.rate}%</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
           <div className="d-flex j-center">
           <button className="all-btn" onClick={infoToggle}>닫기</button>
           <button className="all-btn" onClick={logout}>로그아웃</button>
