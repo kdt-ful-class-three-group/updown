@@ -24,4 +24,28 @@ router.post('/pw', async (req, res) => {
 }
 );
 
+router.post('/name', async (req, res) => {
+  const { user_id, name } = req.body;
+  
+  try {
+   const check = await pool.query('SELECT name FROM "user" WHERE name = $1', [name]);
+
+
+   if(check.rows.length > 0) {
+      res.status(201).json({
+      message: `이미 존재하는 닉네임입니다.`
+    });
+    } else {
+    await pool.query('UPDATE "user" SET name = $1 WHERE user_id = $2', [name, user_id]);
+    res.status(201).json({
+      message: `${user_id}의 닉네임 변경 성공`
+    });
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Internal Server Error 서버 내부 오류');
+  }
+}
+);
+
 export { router };

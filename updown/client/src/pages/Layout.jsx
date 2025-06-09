@@ -1,6 +1,6 @@
 // src/pages/StartPage.jsx
 import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useLogout } from "../components/Auth/Logout";
 
 import { RankingPage } from "./RankingPage";
@@ -12,14 +12,18 @@ export function Layout() {
   const [isInfoOpen, setisInfoOpen] = useState(false);
   const [isRankOpen, setRankOpen] = useState(false);
   const [pwModalOpen, setPwModalOpen] = useState(false);
+  const [nameModalOpen, setNameModalOpen] = useState(false);
   const [pw, setPw] = useState("");
   const [rePw, setRePw] = useState("");
+  const [name, setName] = useState("");
   const [samePw, setSamePw] = useState('');
   const [easyData, setEasyData] = useState([]);
   const [normalData, setNormalData] = useState([]);
   const [hardData, setHardData] = useState([]);
 
   const id = sessionStorage.getItem('id');
+
+  const navigate = useNavigate();
   
 
   //  랭킹버튼,내 정보 버튼 이벤트
@@ -35,6 +39,10 @@ export function Layout() {
 
   const pwChange = () => {
     setPwModalOpen(prev => !prev)
+  }
+
+  const nameChange = () => {
+    setNameModalOpen(prev => !prev);
   }
 
   // 커스텀 훅
@@ -55,7 +63,7 @@ export function Layout() {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                user_id: user_id,
+                user_id: id,
                 password: pw
               }),
             });
@@ -63,9 +71,11 @@ export function Layout() {
             const data = await res.json();
             console.log(data.message);
 
-            if(data.message === `${user_id}의 비밀번호 변경 성공`)  {
+            if(data.message === `${id}의 비밀번호 변경 성공`)  {
               alert('비밀번호 변경 성공');
-              navigate('/login');
+              setPwModalOpen(false);
+              setPw('');
+              setRePw('');
             }
           } catch (err) {
             console.log(`${err} 에러발생`);
@@ -74,6 +84,37 @@ export function Layout() {
           alert('비밀번호가 일치하지 않습니다.')
         }
   }
+
+      const changeName = async () => {
+        if(username === name) {
+          alert('같은 닉네임으로는 변경이 안됩니다.');
+        } else {
+          try {
+            const res = await fetch("http://localhost:8003/change/name", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                user_id: id,
+                name: name
+              }),
+            });
+
+            const data = await res.json();
+            console.log(data.message);
+
+            if(data.message === `${id}의 닉네임 변경 성공`)  {
+              sessionStorage.setItem("name", name);
+              alert('닉네임 변경 성공');
+              setNameModalOpen(false);
+              setName('');
+            }
+          } catch (err) {
+            console.log(`${err} 에러발생`);
+          }
+        }
+      }
 
     useEffect(() => {
       if(pw === rePw) {
@@ -85,7 +126,7 @@ export function Layout() {
       } else {
         setSamePw('비밀번호가 일치하지 않습니다.');
       }
-    })
+    },[pw, rePw])
 
 
     const fetchMyRankingData = async (mode) => {
@@ -166,6 +207,7 @@ export function Layout() {
           <h2>내 정보</h2>
           <p>{username}님</p>
           <div>
+          <button className="all-btn" onClick={nameChange}>닉네임 변경</button>
           <button className="all-btn" onClick={pwChange}>
             비밀번호 변경
           </button>
@@ -242,6 +284,32 @@ export function Layout() {
               setPwModalOpen(false)
               setPw(''); 
               setRePw(''); 
+              }}>
+              취소
+            </button>
+          </div>
+        </div>
+        </div> 
+        }
+        {nameModalOpen && 
+        <div className="modal">
+          <div className="find-form">
+          <input
+            type="text"
+            placeholder={username}
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value); 
+            }}
+          />
+          
+          <div className="login-btn">
+            <button className="all-btn" type="submit" onClick={changeName}>
+              닉네임 변경
+            </button>
+            <button className="all-btn" type="submit" onClick={() => {
+              setNameModalOpen(false);
+              setName(''); 
               }}>
               취소
             </button>
