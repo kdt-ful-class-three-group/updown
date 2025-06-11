@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { urlData } from "../config/urlData";
 
 //* ResultPage 컴포넌트 - 결과 페이지
 //* 성공, 실패 결과에 따라 페이지 이동할 예정 - 지금은 성공일 때만 작동
