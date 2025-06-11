@@ -1,3 +1,5 @@
+import { urlData } from "../../config/urlData";
+
 export const checkedIdName = async ({ field, value, setMessage }) => {
     const load = { [field] : value };
 
@@ -25,7 +27,7 @@ export const checkedIdName = async ({ field, value, setMessage }) => {
 
     // 서버에서 id,name 확인. 
     try {
-      const res = await fetch('http://localhost:8003/checked', {
+      const res = await fetch(`${urlData.url}/checked`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(load),

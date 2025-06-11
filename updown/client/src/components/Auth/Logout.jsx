@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { urlData } from '../../config/urlData';
 
 export const useLogout = () => {
   const navigate = useNavigate();
@@ -6,7 +7,7 @@ export const useLogout = () => {
   const logout = async () => {
 
     try {
-      const res = await fetch("http://localhost:8003/logout", {
+      const res = await fetch(`${urlData.url}/logout`, {
         method: "POST",
         credentials: "include",
         headers: {

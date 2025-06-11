@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { urlData } from "../config/urlData";
 
 export const FindPage = () => {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ export const FindPage = () => {
 
   const findId = async () => {
           try {
-            const res = await fetch("http://localhost:8003/find/id", {
+            const res = await fetch(`${urlData.url}/find/id`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -69,7 +70,7 @@ export const FindPage = () => {
 
   const pwClickBtn = async () => {
           try {
-            const res = await fetch("http://localhost:8003/find/pw", {
+            const res = await fetch(`${urlData.url}/find/pw`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -115,7 +116,7 @@ export const FindPage = () => {
     setSendingCode(true);
 
     try {
-      const res = await fetch("http://localhost:8003/emailCheck/send", {
+      const res = await fetch(`${urlData.url}/emailCheck/send`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -140,7 +141,7 @@ export const FindPage = () => {
   };
 
   const verifyCode = async () => {
-    const res = await fetch("http://localhost:8003/emailCheck/verify", {
+    const res = await fetch(`${urlData.url}/emailCheck/verify"`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, code: emailCode }),
@@ -160,7 +161,7 @@ export const FindPage = () => {
   const changePw = async () => {
     if(pw === rePw) {
           try {
-            const res = await fetch("http://localhost:8003/change/pw", {
+            const res = await fetch(`${urlData.url}/change/pw"`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

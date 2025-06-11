@@ -55,7 +55,7 @@ export function Layout() {
     const changePw = async () => {
     if(pw === rePw) {
           try {
-            const res = await fetch("http://localhost:8003/change/pw", {
+            const res = await fetch(`${urlData.url}/change/pw`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -88,7 +88,7 @@ export function Layout() {
           alert('같은 닉네임으로는 변경이 안됩니다.');
         } else {
           try {
-            const res = await fetch("http://localhost:8003/change/name", {
+            const res = await fetch(`${urlData.url}/change/name`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

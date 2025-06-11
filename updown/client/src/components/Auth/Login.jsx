@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { urlData } from "../../config/urlData";
 
 export const useLogin = () => {
 
@@ -15,7 +16,7 @@ export const useLogin = () => {
     }
     
     try {
-      const res = await fetch("http://localhost:8003/login", {
+      const res = await fetch(`${urlData.url}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

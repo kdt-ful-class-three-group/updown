@@ -107,7 +107,7 @@ export function ResultPage() {
       const validPass = sessionStorage.getItem("passed");
 
       if (validPass) {
-        fetch("http://localhost:8003/record", {
+        fetch(`${urlData.url}/record`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
