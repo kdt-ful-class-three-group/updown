@@ -21,7 +21,7 @@ export function ModePage() {
         <img src="/upDown_logo.png" className="start-logo" />
         <h1>모드선택</h1>
       </div>
-      <div>
+      <div className="modeBtns">
         <button className="all-btn easy" onClick={() => navigate("/easy")}>
           EASY
         </button>

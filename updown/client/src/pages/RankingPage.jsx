@@ -46,7 +46,7 @@ export const RankingPage = () => {
   return (
     <div>
       <h1>랭킹</h1>
-      <div>
+      <div className="rankBtns">
         <button className="all-btn easy" onClick={() => modeClick("easy")}>
           EASY
         </button>
