@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { SignUpValid } from "./SignValid";
 import { checkedIdName } from "../components/Auth/CheckIdName";
 import { useMessage } from "../context/MessageContext";
+import { urlData } from "../config/urlData";
 
 export const SignUpPage = () => {
   // 상태값 관리
@@ -45,7 +46,7 @@ export const SignUpPage = () => {
         // 유효성 통과가 확인되면 실행
         if (validPass) {
           try {
-            const res = await fetch("http://localhost:8003/signup", {
+            const res = await fetch(`${urlData.url}/signup`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -120,7 +121,7 @@ export const SignUpPage = () => {
     setSendingCode(true);
 
     try {
-      const res = await fetch("http://localhost:8003/emailCheck/send", {
+      const res = await fetch(`${urlData.url}/emailCheck/send`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -145,7 +146,7 @@ export const SignUpPage = () => {
   };
 
   const verifyCode = async () => {
-    const res = await fetch("http://localhost:8003/emailCheck/verify", {
+    const res = await fetch(`${urlData.url}/emailCheck/verify"`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, code: emailCode }),
