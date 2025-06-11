@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { urlData } from "../config/urlData";
 
 export const RankingPage = () => {
   const [rankingData, setRankingData] = useState([]);
@@ -9,7 +10,7 @@ export const RankingPage = () => {
   const fetchRankingData = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8003/ranking?mode=${mode}`
+        `${urlData.url}/ranking?mode=${mode}`
       );
       if (!response.ok) {
         throw new Error("랭킹 에러");
