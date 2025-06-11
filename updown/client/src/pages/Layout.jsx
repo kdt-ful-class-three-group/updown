@@ -131,7 +131,7 @@ export function Layout() {
     const fetchMyRankingData = async (mode) => {
     try {
       const response = await fetch(
-        `http://${urlData.url}/ranking/myRank?mode=${mode}&id=${id}`
+        `${urlData.url}/ranking/myRank?mode=${mode}&id=${id}`
       );
       if (!response.ok) {
         throw new Error("랭킹 에러");
